@@ -1,9 +1,7 @@
 package com.guozaiss.news.view.activity;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,6 +16,8 @@ import com.guozaiss.news.common.utils.LogUtils;
 import com.guozaiss.news.common.utils.http.DataUtils;
 import com.guozaiss.news.entities.Data;
 import com.guozaiss.news.entities.HotWord;
+import com.guozaiss.news.view.customer.swipeLayout.SwipeRefreshLayout;
+import com.guozaiss.news.view.customer.swipeLayout.SwipeRefreshLayoutDirection;
 
 import java.util.List;
 
@@ -25,20 +25,19 @@ import retrofit.Callback;
 import retrofit.Response;
 import retrofit.Retrofit;
 
-public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener, Callback<Data>, AdapterView.OnItemClickListener {
+
+public class MainActivity extends BaseActivity implements Callback<Data>, AdapterView.OnItemClickListener, SwipeRefreshLayout.OnRefreshListener {
     List<Data.Result> result;
     private NewsAdapter newsAdapter;
-    private SwipeRefreshLayout swipeRefreshLayout;
     private List<String> hotwords;
     private ListView listView;
+    private boolean refresh = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
-        swipeRefreshLayout.setColorSchemeColors(Color.parseColor("#ff0000"), Color.parseColor("#00ff00"), Color.parseColor("#0000ff"));
         swipeRefreshLayout.setOnRefreshListener(this);
         newsAdapter = new NewsAdapter(this, result, R.layout.item_news);
         listView = (ListView) findViewById(R.id.listView);
@@ -60,10 +59,14 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
         });
     }
 
-
     @Override
-    public void onRefresh() {
+    public void onRefresh(SwipeRefreshLayoutDirection direction) {
         if (hotwords.size() > 0) {
+            if (direction == SwipeRefreshLayoutDirection.TOP) {
+                refresh = true;
+            } else if (direction == SwipeRefreshLayoutDirection.BOTTOM) {
+                refresh = false;
+            }
             DataUtils.getDataService().getData(Constants.AppKey, hotwords.get(0)).enqueue(this);
             hotwords.remove(0);
         }
@@ -73,11 +76,13 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
     @Override
     public void onResponse(Response<Data> response, Retrofit retrofit) {
         LogUtils.e("成功：" + response.body().toString());
-        if (swipeRefreshLayout.isRefreshing()) {
-            swipeRefreshLayout.setRefreshing(false);
-        }
+        swipeRefreshLayout.setRefreshing(false);
         result = response.body().getResult();
-        newsAdapter.changeLists(result);
+        if (refresh) {
+            newsAdapter.changeLists(result);
+        } else {
+            newsAdapter.addLists(result);
+        }
         newsAdapter.notifyDataSetChanged();
     }
 

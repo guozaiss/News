@@ -1,5 +1,8 @@
 <resources>
+    <!--activityName-->
     <string name="app_name">News</string>
+    <string name="html">详情页面</string>
+
     <string name="action_settings">Settings</string>
 
     <string name="drawer_open">open</string>

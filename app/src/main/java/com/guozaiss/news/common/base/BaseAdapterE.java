@@ -29,13 +29,18 @@ public abstract class BaseAdapterE<T> extends BaseAdapter {
         notifyDataSetChanged();
     }
 
+    public void addLists(List<T> lists) {
+        this.lists.addAll(lists);
+        notifyDataSetChanged();
+    }
+
     @Override
     public int getCount() {
         int size = 0;
         if (lists != null) {
             size = lists.size();
         }
-        return   size;
+        return size;
     }
 
     @Override
@@ -53,8 +58,9 @@ public abstract class BaseAdapterE<T> extends BaseAdapter {
         if (convertView == null) {
             convertView = inflater.inflate(xmlID, null);
         }
-        bindView(convertView,position);
+        bindView(convertView, position);
         return convertView;
     }
-   abstract protected void bindView(View convertView,int position);
+
+    abstract protected void bindView(View convertView, int position);
 }

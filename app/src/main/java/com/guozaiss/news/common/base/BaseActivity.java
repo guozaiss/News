@@ -1,6 +1,7 @@
 package com.guozaiss.news.common.base;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.annotation.LayoutRes;
@@ -15,15 +16,21 @@ import android.widget.EditText;
 
 import com.guozaiss.news.R;
 import com.guozaiss.news.common.utils.ActivityManager;
+import com.guozaiss.news.common.utils.LogUtils;
+import com.guozaiss.news.view.customer.swipeLayout.SwipeRefreshLayout;
 
 /**
- * ActivityManager
+ * 1、ActivityManager Activity管理栈
+ * 2、初始化通用控件
+ * 3、输入法统一管理
+ * 4、OptionMenu逻辑抽取
  *
  * Created by guozaiss on 16/2/15.
  */
 public class BaseActivity extends AppCompatActivity {
     protected Toolbar toolbar;
-//    private Map<String, Integer> toolbarAlpha = new HashMap<>();
+    protected SwipeRefreshLayout swipeRefreshLayout;
+    //    private Map<String, Integer> toolbarAlpha = new HashMap<>();
 
 //    protected int activityCloseEnterAnimation;
 //    protected int activityCloseExitAnimation;
@@ -59,9 +66,16 @@ public class BaseActivity extends AppCompatActivity {
      * 初始化toolbar
      */
     protected void initView() {
-        toolbar = (Toolbar) findViewById(R.id.appbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        try {
+            toolbar = (Toolbar) findViewById(R.id.appbar);
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+            swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
+            swipeRefreshLayout.setColorSchemeColors(Color.parseColor("#ff0000"), Color.parseColor("#00ff00"), Color.parseColor("#0000ff"));
+        } catch (Exception e) {
+            LogUtils.e("--无法找到资源ID----无法找到资源ID----无法找到资源ID----无法找到资源ID----无法找到资源ID--");
+        }
     }
 
     @Override

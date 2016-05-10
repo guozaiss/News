@@ -370,6 +370,7 @@ public class SwipeRefreshLayout extends ViewGroup {
             startScaleUpAnimation(mRefreshListener);
         } else {
             setRefreshing(refreshing, false /* notify */);
+            clearAnimation();
         }
     }
 

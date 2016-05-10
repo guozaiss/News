@@ -1,24 +1,30 @@
 package com.guozaiss.news.view.activity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
 import com.guozaiss.news.R;
 import com.guozaiss.news.common.base.BaseActivity;
+import com.guozaiss.news.view.customer.swipeLayout.SwipeRefreshLayout;
+import com.guozaiss.news.view.customer.swipeLayout.SwipeRefreshLayoutDirection;
 
-public class HtmlActivity extends BaseActivity {
+public class HtmlActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
 
     private ProgressBar progress;
+    private WebView webView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_html);
         String url = getIntent().getStringExtra("url");
-        WebView webView = (WebView) findViewById(R.id.webView);
+        webView = (WebView) findViewById(R.id.webView);
         //WebSettings
         WebSettings settings = webView.getSettings();
         settings.setJavaScriptEnabled(false);//支持javascript
@@ -32,16 +38,42 @@ public class HtmlActivity extends BaseActivity {
         webView.loadUrl(url);
         progress = (ProgressBar) findViewById(R.id.progress);
         progress.setMax(100);
+        webView.setWebViewClient(new WebViewClient() {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url){
+                if (url != null) {
+                    /** 拨打电话 */
+                    if (url.startsWith("tel:")) {
+                        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                        startActivity(intent);
+                    } else {
+                        // 如果想继续加载目标页面则调用下面的语句
+                        view.loadUrl(url);
+                        // view.loadDataWithBaseURL(baseUrl, data, mimeType, encoding, historyUrl);
+                        // 如果不想那url就是目标网址，如果想获取目标网页的内容那你可以用HTTP的API把网页扒下来。
+                    }
+                }
+                return true;
+            }
+
+        });
         webView.setWebChromeClient(new WebChromeClient() {
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
                 // TODO Auto-generated method stub
                 if (newProgress == 100) {// 网页加载完成
                     progress.setProgress(newProgress);
+                    swipeRefreshLayout.setRefreshing(false);
                 } else {// 加载中
                     progress.setProgress(newProgress);
                 }
             }
         });
+        swipeRefreshLayout.setOnRefreshListener(this);
+    }
+
+    @Override
+    public void onRefresh(SwipeRefreshLayoutDirection direction) {
+        webView.reload();
     }
 }
