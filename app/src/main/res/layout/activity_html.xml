@@ -4,18 +4,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.guozaiss.news.view.activity.HtmlActivity">
-    <WebView
-        android:id="@+id/webView"
-        android:layout_below="@+id/progress"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+
+    <include
+        android:id="@+id/appbar"
+        layout="@layout/app_bar" />
 
     <ProgressBar
+        android:id="@+id/progress"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/progress"
-        android:progressDrawable="@drawable/progressbar"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_height="2dp"
+        android:layout_below="@+id/appbar"
+        android:layout_centerHorizontal="true"
+        android:progressDrawable="@drawable/progressbar" />
+
+    <WebView
+        android:id="@+id/webView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/progress" />
+
 </RelativeLayout>

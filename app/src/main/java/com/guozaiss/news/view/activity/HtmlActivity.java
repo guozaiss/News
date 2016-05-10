@@ -1,15 +1,15 @@
 package com.guozaiss.news.view.activity;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.ProgressBar;
 
 import com.guozaiss.news.R;
+import com.guozaiss.news.common.base.BaseActivity;
 
-public class HtmlActivity extends AppCompatActivity {
+public class HtmlActivity extends BaseActivity {
 
     private ProgressBar progress;
 
