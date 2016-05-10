@@ -8,11 +8,13 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.guozaiss.news.BuildConfig;
 import com.guozaiss.news.Constants;
 import com.guozaiss.news.R;
 import com.guozaiss.news.adapters.NewsAdapter;
 import com.guozaiss.news.common.base.BaseActivity;
 import com.guozaiss.news.common.utils.LogUtils;
+import com.guozaiss.news.common.utils.ToastUtil;
 import com.guozaiss.news.common.utils.http.DataUtils;
 import com.guozaiss.news.entities.Data;
 import com.guozaiss.news.entities.HotWord;
@@ -57,6 +59,11 @@ public class MainActivity extends BaseActivity implements Callback<Data>, Adapte
 
             }
         });
+        if (BuildConfig.debug) {
+            ToastUtil.showToastOfLong("true");
+        } else {
+            ToastUtil.showToastOfLong("false");
+        }
     }
 
     @Override
