@@ -15,7 +15,7 @@ public abstract class BaseAdapterE<T> extends BaseAdapter {
     protected Activity context;//上下文
     protected List<T> lists;//集合
     private int xmlID;//item资源文件
-    private LayoutInflater inflater = null;
+    private LayoutInflater inflater = null;//填充器
 
     public BaseAdapterE(Activity context, List<T> lists, int xmlID) {
         this.context = context;
@@ -24,11 +24,19 @@ public abstract class BaseAdapterE<T> extends BaseAdapter {
         inflater = LayoutInflater.from(context);
     }
 
+    /**
+     * 改变adapter数据源
+     * @param lists 更换的数据源
+     */
     public void changeLists(List<T> lists) {
         this.lists = lists;
         notifyDataSetChanged();
     }
 
+    /**
+     * 追加adapter数据
+     * @param lists 添加的数据
+     */
     public void addLists(List<T> lists) {
         this.lists.addAll(lists);
         notifyDataSetChanged();
@@ -62,5 +70,10 @@ public abstract class BaseAdapterE<T> extends BaseAdapter {
         return convertView;
     }
 
+    /**
+     * 开放的接口，由继承者定制
+     * @param convertView
+     * @param position
+     */
     abstract protected void bindView(View convertView, int position);
 }

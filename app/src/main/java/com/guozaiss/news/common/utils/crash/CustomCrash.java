@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.TimeZone;
 
 /**
+ * 崩溃处理类
  * Created by guozaiss on 16/2/15.
  */
 public class CustomCrash implements Thread.UncaughtExceptionHandler {
