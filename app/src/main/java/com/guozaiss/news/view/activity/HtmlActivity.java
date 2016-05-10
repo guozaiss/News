@@ -3,6 +3,8 @@ package com.guozaiss.news.view.activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -11,6 +13,7 @@ import android.widget.ProgressBar;
 
 import com.guozaiss.news.R;
 import com.guozaiss.news.common.base.BaseActivity;
+import com.guozaiss.news.common.utils.ShareUtils;
 import com.guozaiss.news.view.customer.swipeLayout.SwipeRefreshLayout;
 import com.guozaiss.news.view.customer.swipeLayout.SwipeRefreshLayoutDirection;
 
@@ -75,5 +78,19 @@ public class HtmlActivity extends BaseActivity implements SwipeRefreshLayout.OnR
     @Override
     public void onRefresh(SwipeRefreshLayoutDirection direction) {
         webView.reload();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.html, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_share) {
+            ShareUtils.shareText(this, "");
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

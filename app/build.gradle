@@ -10,14 +10,11 @@ android {
         minSdkVersion 14
         targetSdkVersion 23
         versionCode 1
-        versionName "1.0"
+        versionName "1.1"
     }
     signingConfigs {
         debug {
-            //storeFile file("debug.keystore")
-            //storePassword "android"
-
-            //老版酒运达keystore
+            //keystore
             storeFile file("guozaiss.jks")
             storePassword "123456"
             keyAlias "guozaiss"
@@ -27,28 +24,32 @@ android {
     buildTypes {
         debug {
             signingConfig signingConfigs.debug
-            buildConfigField "boolean", "debug", "false"
-//            minifyEnabled false
-//            //移除无用的resource文件
-//            shrinkResources false
-//            zipAlignEnabled false
+            buildConfigField "boolean", "debug", "true"
+            minifyEnabled false
+            //移除无用的resource文件
+            shrinkResources false
+            zipAlignEnabled false
         }
         release {
             signingConfig signingConfigs.debug
-            buildConfigField "boolean", "debug", "true"
+            buildConfigField "boolean", "debug", "false"
             minifyEnabled true
             //移除无用的resource文件
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             zipAlignEnabled true
         }
-//        applicationVariants.all { variant ->
-//            variant.outputs.each { output ->
-//                def outputFile = output.outputFile
-//                def fileName = "news_debug_v${defaultConfig.versionName}_${releaseTime()}.apk"
+        applicationVariants.all { variant ->
+            variant.outputs.each { output ->
+                def outputFile = output.outputFile
+                if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                    def fileName = outputFile.name.replace('.apk', "-${versionName}_${releaseTime()}.apk")
+                    output.outputFile = new File(outputFile.parent, fileName)
+                }
+//                def fileName = "news_v${defaultConfig.versionName}_${releaseTime()}.apk"
 //                output.outputFile = new File(outputFile.parent, fileName)
-//            }
-//        }
+            }
+        }
     }
 
     packagingOptions {
