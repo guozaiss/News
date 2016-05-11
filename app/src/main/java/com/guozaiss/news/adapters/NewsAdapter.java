@@ -22,7 +22,7 @@ import java.util.List;
 /**
  * Created by Lenovo on 2016/5/9.
  */
-public class NewsAdapter extends BaseAdapterE<Data.Result> {
+public class NewsAdapter extends BaseAdapterE<Data.Result> implements RequestListener<String, GlideDrawable>{
 
     public NewsAdapter(Activity context, List<Data.Result> lists, int xmlID) {
         super(context, lists, xmlID);
@@ -59,5 +59,15 @@ public class NewsAdapter extends BaseAdapterE<Data.Result> {
                         return false;
                     }
                 });
+    }
+
+    @Override
+    public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+        return false;
+    }
+
+    @Override
+    public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+        return false;
     }
 }
