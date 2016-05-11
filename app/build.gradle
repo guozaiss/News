@@ -62,7 +62,7 @@ android {
 }
 
 def releaseTime() {
-    return new Date().format("yyyy-MM-dd")
+    return new Date().format("yyyy-MM-dd hh:mm:ss")
 }
 
 dependencies {
