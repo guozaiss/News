@@ -145,9 +145,10 @@
 # Application classes that will be serialized/deserialized over Gson
 -keep class com.google.gson.examples.android.model.** { *; }
 
-
-#混淆 retrofit
-
+#混淆 高德地图
+-keep class com.amap.api.location.**{*;}
+-keep class com.amap.api.fence.**{*;}
+-keep class com.autonavi.aps.amapapi.model.**{*;}
 
 # 项目定制混淆
 ## 实体类混淆
