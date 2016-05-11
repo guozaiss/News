@@ -152,7 +152,7 @@ class MaterialProgressDrawable extends Drawable implements Animatable {
     }
 
     /**
-     * @param show Set to true to display the arrowhead on the progress spinner.
+     * @param show Set to true to disPlay the arrowhead on the progress spinner.
      */
     public void showArrow(boolean show) {
         mRing.setShowArrow(show);
@@ -417,7 +417,7 @@ class MaterialProgressDrawable extends Drawable implements Animatable {
 
         private int[] mColors;
         // mColorIndex represents the offset into the available mColors that the
-        // progress circle should currently display. As the progress circle is
+        // progress circle should currently disPlay. As the progress circle is
         // animating, the mColorIndex moves by one to the next available color.
         private int mColorIndex;
         private float mStartingStartTrim;
@@ -529,7 +529,7 @@ class MaterialProgressDrawable extends Drawable implements Animatable {
         }
 
         /**
-         * @param index Index into the color array of the color to display in
+         * @param index Index into the color array of the color to disPlay in
          *            the progress spinner.
          */
         public void setColorIndex(int index) {

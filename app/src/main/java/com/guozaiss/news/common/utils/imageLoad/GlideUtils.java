@@ -16,27 +16,15 @@ import com.guozaiss.news.R;
  * Glide图片加载类
  * Created by guozaiss on 16/5/10.
  */
-public class GlideUtils {
+public class GlideUtils implements ImageLoadUtils<RequestListener> {
 
-    /**
-     * 加载图片Method
-     *
-     * @param object    可以为Context、Activity、Fragment（&V4）、FragmentActivity
-     * @param imageView ImageView
-     * @param URL       加载图片的URL
-     */
-    public static void disPlay(Object object, ImageView imageView, String URL) {
+    @Override
+    public void disPlay(Object object, ImageView imageView, String URL) {
         disPlay(object, imageView, URL, null);
     }
 
-    /**
-     * 加载图片Method
-     *
-     * @param object    可以为Context、Activity、Fragment（&V4）、FragmentActivity
-     * @param imageView ImageView
-     * @param URL       加载图片的URL
-     */
-    public static void disPlay(Object object, ImageView imageView, String URL, RequestListener requestListener) {
+    @Override
+    public void disPlay(Object object, ImageView imageView, String URL, RequestListener requestListener) {
         init(object, URL, requestListener).into(imageView);
     }
 
@@ -90,5 +78,4 @@ public class GlideUtils {
                 .error(R.drawable.load_error)
                 .diskCacheStrategy(DiskCacheStrategy.ALL);
     }
-
 }

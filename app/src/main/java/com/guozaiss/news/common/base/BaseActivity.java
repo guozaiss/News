@@ -40,7 +40,7 @@ public class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 //        LogUtils.e("onCreate" + this.getClass().getSimpleName());
         ActivityManager.getInstance().pushActivity(this);//push Activity
-//        LogUtils.e("回退栈数量" + ActivityManager.getInstance().size() + "");
+//        LogUtils.e("回退栈数量" + ActivityManager.getApplicationInstance().size() + "");
 //        ButterKnife.bind(this);//注解方式
 
 //        initAnimation();
@@ -106,7 +106,7 @@ public class BaseActivity extends AppCompatActivity {
     protected void onDestroy() {
 //        LogUtils.e("onDestroy" + this.getClass().getSimpleName());
         ActivityManager.getInstance().popActivity();//弹出Activity
-//        LogUtils.e("回退栈数量" + ActivityManager.getInstance().size() + "");
+//        LogUtils.e("回退栈数量" + ActivityManager.getApplicationInstance().size() + "");
         super.onDestroy();
     }
 

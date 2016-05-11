@@ -31,7 +31,7 @@ public class ToastUtil {
         if (toast == null) {
             synchronized (ToastUtil.class) {
                 if (toast == null) {
-                    toast = Toast.makeText(NewsApplication.getInstance(), msg, type);
+                    toast = Toast.makeText(NewsApplication.getApplicationInstance(), msg, type);
                     toast.setGravity(Gravity.BOTTOM, 0, 450);
                 }
             }
