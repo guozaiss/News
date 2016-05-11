@@ -28,6 +28,7 @@ android {
             minifyEnabled false
             //移除无用的resource文件
             shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             zipAlignEnabled false
         }
         release {
@@ -42,7 +43,7 @@ android {
         applicationVariants.all { variant ->
             variant.outputs.each { output ->
                 def outputFile = output.outputFile
-                def fileName = "news_v${defaultConfig.versionName}_${releaseTime()}.apk"
+                def fileName = "news_${variant.buildType.name}_v${defaultConfig.versionName}_${releaseTime()}.apk"
                 output.outputFile = new File(outputFile.parent, fileName)
             }
         }
