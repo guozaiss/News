@@ -1,24 +1,17 @@
 package com.guozaiss.news.common.utils;
 
-import android.support.design.widget.Snackbar;
 import android.view.Gravity;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
-import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import com.guozaiss.news.NewsApplication;
-
-import java.util.Timer;
 
 /**
  * Created by guozaiss on 16/2/6.
  */
 public class ToastUtil {
     private static Toast toast;
-    private static PopupWindow popupWindow;
-    private static Timer timer;
-    private static Snackbar snackbar;
 
     /**
      * 获得单例 Toast
