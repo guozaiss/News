@@ -15,12 +15,12 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import com.guozaiss.news.R;
-import com.guozaiss.news.common.utils.ActivityManager;
+import com.guozaiss.news.common.utils.ActivityManagerE;
 import com.guozaiss.news.common.utils.LogUtils;
 import com.guozaiss.news.view.customer.swipeLayout.SwipeRefreshLayout;
 
 /**
- * 1、ActivityManager Activity管理栈
+ * 1、ActivityManagerE Activity管理栈
  * 2、初始化通用控件
  * 3、输入法统一管理
  * 4、OptionMenu逻辑抽取
@@ -39,8 +39,8 @@ public class BaseActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        LogUtils.e("onCreate" + this.getClass().getSimpleName());
-        ActivityManager.getInstance().pushActivity(this);//push Activity
-//        LogUtils.e("回退栈数量" + ActivityManager.getApplicationInstance().size() + "");
+        ActivityManagerE.getInstance().pushActivity(this);//push Activity
+//        LogUtils.e("回退栈数量" + ActivityManagerE.getApplicationInstance().size() + "");
 //        ButterKnife.bind(this);//注解方式
 
 //        initAnimation();
@@ -105,8 +105,8 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
 //        LogUtils.e("onDestroy" + this.getClass().getSimpleName());
-        ActivityManager.getInstance().popActivity();//弹出Activity
-//        LogUtils.e("回退栈数量" + ActivityManager.getApplicationInstance().size() + "");
+        ActivityManagerE.getInstance().popActivity();//弹出Activity
+//        LogUtils.e("回退栈数量" + ActivityManagerE.getApplicationInstance().size() + "");
         super.onDestroy();
     }
 

@@ -6,9 +6,9 @@ import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.guozaiss.news.common.utils.ActivityManager;
+import com.guozaiss.news.common.utils.ActivityManagerE;
+import com.guozaiss.news.common.utils.CommonUtils;
 import com.guozaiss.news.common.utils.LogUtils;
-import com.guozaiss.news.common.utils.StrUtils;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -69,7 +69,7 @@ public class CustomCrash implements Thread.UncaughtExceptionHandler {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        ActivityManager.getInstance().finish();
+        ActivityManagerE.getInstance().finish();
         //完全杀死进程
         android.os.Process.killProcess(android.os.Process.myPid());
     }
@@ -154,7 +154,7 @@ public class CustomCrash implements Thread.UncaughtExceptionHandler {
         stringBuffer.append("---------Crash Log Begin---------\n");
         //在这边可以进行相关设备信息投递--这边就稍微设置几个吧
         //其他设备和用户信息大家可以自己去扩展收集上传投递
-        stringBuffer.append(StrUtils.getPhoneModel(context) + "\n");
+        stringBuffer.append(CommonUtils.getPhoneModel(context) + "\n");
         stringBuffer.append(sw.toString() + "\n");
         stringBuffer.append("---------Crash Log End---------\n");
         return stringBuffer.toString();

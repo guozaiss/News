@@ -7,11 +7,11 @@ import java.util.Stack;
 /**
  * Created by guozaiss on 16/2/15.
  */
-public class ActivityManager {
+public class ActivityManagerE {
     private Stack<Activity> activityStack = new Stack<>();
 
 
-    private ActivityManager() {
+    private ActivityManagerE() {
     }
 
     /**
@@ -19,12 +19,12 @@ public class ActivityManager {
      *
      * @return
      */
-    public static ActivityManager getInstance() {
+    public static ActivityManagerE getInstance() {
         return ManagerActivityHolder.instance;
     }
 
     static class ManagerActivityHolder {
-        private static ActivityManager instance = new ActivityManager();
+        private static ActivityManagerE instance = new ActivityManagerE();
     }
 
     /**
