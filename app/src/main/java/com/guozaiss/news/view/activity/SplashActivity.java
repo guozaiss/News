@@ -1,8 +1,9 @@
 package com.guozaiss.news.view.activity;
 
+import android.Manifest;
 import android.app.AlarmManager;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
@@ -10,9 +11,13 @@ import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.guozaiss.news.R;
 import com.guozaiss.news.common.base.BaseActivity;
+import com.guozaiss.news.common.utils.LogUtils;
+import com.guozaiss.news.common.utils.ToastUtil;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class SplashActivity extends BaseActivity implements AMapLocationListener {
     //声明AMapLocationClient类对象
@@ -28,7 +33,7 @@ public class SplashActivity extends BaseActivity implements AMapLocationListener
         //设置定位回调监听
         mLocationClient.setLocationListener(this);
         //声明mLocationOption对象
-         AMapLocationClientOption mLocationOption = null;
+        AMapLocationClientOption mLocationOption = null;
         //初始化定位参数
         mLocationOption = new AMapLocationClientOption();
         //设置定位模式为高精度模式，Battery_Saving为低功耗模式，Device_Sensors是仅设备模式
@@ -45,10 +50,20 @@ public class SplashActivity extends BaseActivity implements AMapLocationListener
         mLocationOption.setInterval(2000);
         //给定位客户端对象设置定位参数
         mLocationClient.setLocationOption(mLocationOption);
-        //启动定位
-        mLocationClient.startLocation();
+
+        requestPermission(Manifest.permission.ACCESS_FINE_LOCATION);//请求定位权限
 
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+    }
+
+    @Override
+    protected void execute(String permission) {
+        switch (permission) {
+            case Manifest.permission.ACCESS_FINE_LOCATION:
+                //启动定位
+                mLocationClient.startLocation();
+                break;
+        }
     }
 
     @Override
@@ -64,7 +79,7 @@ public class SplashActivity extends BaseActivity implements AMapLocationListener
                 Date date = new Date(aMapLocation.getTime());
                 df.format(date);//定位时间
                 aMapLocation.getAddress();//地址，如果option中设置isNeedAddress为false，则没有此结果，网络定位结果中会有地址信息，GPS定位不返回地址信息。
-                aMapLocation.getCountry();//国家信息
+                String country = aMapLocation.getCountry();//国家信息
                 aMapLocation.getProvince();//省信息
                 aMapLocation.getCity();//城市信息
                 aMapLocation.getDistrict();//城区信息
@@ -73,9 +88,19 @@ public class SplashActivity extends BaseActivity implements AMapLocationListener
                 aMapLocation.getCityCode();//城市编码
                 aMapLocation.getAdCode();//地区编码
                 aMapLocation.getAoiName();//获取当前定位点的AOI信息
+                LogUtils.e(aMapLocation.getCountry() + "");
+                mLocationClient.stopLocation();//停止定位
+                ToastUtil.showToastOfLong("定位成功！");
+                new Timer().schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                        finish();
+                    }
+                },1000);
             } else {
                 //显示错误信息ErrCode是错误码，errInfo是错误信息，详见错误码表。
-                Log.e("AmapError","location Error, ErrCode:"
+                LogUtils.e("location Error, ErrCode:"
                         + aMapLocation.getErrorCode() + ", errInfo:"
                         + aMapLocation.getErrorInfo());
             }
@@ -87,6 +112,6 @@ public class SplashActivity extends BaseActivity implements AMapLocationListener
         super.onDestroy();
         mLocationClient.stopLocation();//停止定位
         mLocationClient.onDestroy();//销毁定位客户端。
-
     }
+
 }

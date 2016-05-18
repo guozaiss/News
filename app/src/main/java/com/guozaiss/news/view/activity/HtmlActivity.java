@@ -14,10 +14,8 @@ import android.widget.ProgressBar;
 import com.guozaiss.news.R;
 import com.guozaiss.news.common.base.BaseActivity;
 import com.guozaiss.news.common.utils.ShareUtils;
-import com.guozaiss.news.view.customer.swipeLayout.SwipeRefreshLayout;
-import com.guozaiss.news.view.customer.swipeLayout.SwipeRefreshLayoutDirection;
 
-public class HtmlActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
+public class HtmlActivity extends BaseActivity implements android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener {
 
     private ProgressBar progress;
     private WebView webView;
@@ -75,10 +73,6 @@ public class HtmlActivity extends BaseActivity implements SwipeRefreshLayout.OnR
         swipeRefreshLayout.setOnRefreshListener(this);
     }
 
-    @Override
-    public void onRefresh(SwipeRefreshLayoutDirection direction) {
-        webView.reload();
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -92,5 +86,10 @@ public class HtmlActivity extends BaseActivity implements SwipeRefreshLayout.OnR
             ShareUtils.shareText(this, "");
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onRefresh() {
+        webView.reload();
     }
 }

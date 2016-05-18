@@ -11,6 +11,7 @@ import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestListener;
 import com.guozaiss.news.R;
+import com.guozaiss.news.common.utils.LogUtils;
 
 /**
  * Glide图片加载类
@@ -25,7 +26,11 @@ public class GlideUtils implements ImageLoadUtils<RequestListener> {
 
     @Override
     public void disPlay(Object object, ImageView imageView, String URL, RequestListener requestListener) {
-        init(object, URL, requestListener).into(imageView);
+        try {
+            init(object, URL, requestListener).into(imageView);
+        } catch (Exception e) {
+            LogUtils.e("-----图片加载失败-----");
+        }
     }
 
     /**
@@ -38,7 +43,6 @@ public class GlideUtils implements ImageLoadUtils<RequestListener> {
                 .listener(requestListener);
     }
 
-
     /**
      * loadGlide
      *
@@ -48,29 +52,17 @@ public class GlideUtils implements ImageLoadUtils<RequestListener> {
      */
     private static DrawableRequestBuilder<String> load(Object object, String URL) {
         RequestManager requestManager = null;
-
-        if (object instanceof Context) {
-
-            requestManager = Glide.with((Context) object);
-
-        } else if (object instanceof Activity) {
-
-            requestManager = Glide.with((Activity) object);
-
-        } else if (object instanceof FragmentActivity) {
-
+        if (object instanceof FragmentActivity) {
             requestManager = Glide.with((FragmentActivity) object);
-
         } else if (object instanceof android.app.Fragment) {
-
             requestManager = Glide.with((android.app.Fragment) object);
-
         } else if (object instanceof android.support.v4.app.Fragment) {
-
             requestManager = Glide.with((android.support.v4.app.Fragment) object);
-
+        } else if (object instanceof Context) {
+            requestManager = Glide.with((Context) object);
+        } else if (object instanceof Activity) {
+            requestManager = Glide.with((Activity) object);
         } else {
-
             throw new NullPointerException("Glide do not with object");
         }
         return requestManager

@@ -2,24 +2,22 @@ package com.guozaiss.news.view.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.guozaiss.news.BuildConfig;
 import com.guozaiss.news.Constants;
 import com.guozaiss.news.R;
 import com.guozaiss.news.adapters.NewsAdapter;
 import com.guozaiss.news.common.base.BaseActivity;
 import com.guozaiss.news.common.utils.LogUtils;
-import com.guozaiss.news.common.utils.ToastUtil;
 import com.guozaiss.news.common.utils.http.DataUtils;
 import com.guozaiss.news.entities.Data;
 import com.guozaiss.news.entities.HotWord;
-import com.guozaiss.news.view.customer.swipeLayout.SwipeRefreshLayout;
-import com.guozaiss.news.view.customer.swipeLayout.SwipeRefreshLayoutDirection;
 
 import java.util.List;
 
@@ -34,6 +32,7 @@ public class MainActivity extends BaseActivity implements Callback<Data>, Adapte
     private List<String> hotwords;
     private ListView listView;
     private boolean refresh = true;
+    private boolean refreshing = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +43,23 @@ public class MainActivity extends BaseActivity implements Callback<Data>, Adapte
         newsAdapter = new NewsAdapter(this, result, R.layout.item_news);
         listView = (ListView) findViewById(R.id.listView);
         listView.setOnItemClickListener(this);
+        listView.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                if (firstVisibleItem + visibleItemCount == totalItemCount) {
+                    getData(false);
+                }
+            }
+        });
         listView.setAdapter(newsAdapter);
+        View empty = findViewById(R.id.load_empty);
+        View loading = findViewById(R.id.loading);
+        listView.setEmptyView(loading);
         DataUtils.getDataService().getHotWord(Constants.AppKey).enqueue(new Callback<HotWord>() {
 
             @Override
@@ -56,40 +71,43 @@ public class MainActivity extends BaseActivity implements Callback<Data>, Adapte
 
             @Override
             public void onFailure(Throwable t) {
-
+                LogUtils.e("获取数据失败");
             }
         });
-        if (BuildConfig.debug) {
-            ToastUtil.showToastOfLong("true");
-        } else {
-            ToastUtil.showToastOfLong("false");
-        }
     }
 
     @Override
-    public void onRefresh(SwipeRefreshLayoutDirection direction) {
-        if (hotwords.size() > 0) {
-            if (direction == SwipeRefreshLayoutDirection.TOP) {
-                refresh = true;
-            } else if (direction == SwipeRefreshLayoutDirection.BOTTOM) {
-                refresh = false;
-            }
-            DataUtils.getDataService().getData(Constants.AppKey, hotwords.get(0)).enqueue(this);
-            hotwords.remove(0);
-        }
+    public void onRefresh() {
+        getData(true);
     }
 
+    public void getData(boolean refresh) {
+        if (null != hotwords && hotwords.size() > 0) {
+            if (!refreshing) {
+                this.refresh = refresh;
+                DataUtils.getDataService().getData(Constants.AppKey, hotwords.get(0)).enqueue(this);
+                hotwords.remove(0);
+                refreshing = true;
+                LogUtils.e("请求数据中。。。。。。。");
+            }
+        }
+    }
 
     @Override
     public void onResponse(Response<Data> response, Retrofit retrofit) {
         LogUtils.e("成功：" + response.body().toString());
         swipeRefreshLayout.setRefreshing(false);
         result = response.body().getResult();
-        if (refresh) {
-            newsAdapter.changeLists(result);
+        if (result != null && result.size() > 0) {
+            if (refresh) {
+                newsAdapter.changeLists(result);
+            } else {
+                newsAdapter.addLists(result);
+            }
         } else {
-            newsAdapter.addLists(result);
+            onRefresh();
         }
+        refreshing = false;
         newsAdapter.notifyDataSetChanged();
     }
 
@@ -120,4 +138,5 @@ public class MainActivity extends BaseActivity implements Callback<Data>, Adapte
         intent.putExtra("url", item.getUrl());
         startActivity(intent);
     }
+
 }

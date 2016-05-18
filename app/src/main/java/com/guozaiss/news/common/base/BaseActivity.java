@@ -1,11 +1,17 @@
 package com.guozaiss.news.common.base;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.annotation.LayoutRes;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -13,23 +19,27 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.guozaiss.news.R;
 import com.guozaiss.news.common.utils.ActivityManagerE;
 import com.guozaiss.news.common.utils.LogUtils;
-import com.guozaiss.news.view.customer.swipeLayout.SwipeRefreshLayout;
 
 /**
  * 1、ActivityManagerE Activity管理栈
  * 2、初始化通用控件
  * 3、输入法统一管理
  * 4、OptionMenu逻辑抽取
- *
+ * 5、权限请求统一管理
+ * <p/>
  * Created by guozaiss on 16/2/15.
  */
 public class BaseActivity extends AppCompatActivity {
     protected Toolbar toolbar;
     protected SwipeRefreshLayout swipeRefreshLayout;
+    final private int REQUEST_CODE_ASK_PERMISSIONS = 123;//权限请求码
+
+
     //    private Map<String, Integer> toolbarAlpha = new HashMap<>();
 
 //    protected int activityCloseEnterAnimation;
@@ -116,29 +126,151 @@ public class BaseActivity extends AppCompatActivity {
 //        overridePendingTransition(activityCloseEnterAnimation, activityCloseExitAnimation);
     }
 
+    /**
+     * 请求权限  Manifest.permission.XXX
+     * group:android.permission-group.CONTACTS 联系人权限
+     *      permission:android.permission.WRITE_CONTACTS
+     *      permission:android.permission.GET_ACCOUNTS
+     *      permission:android.permission.READ_CONTACTS
+     *
+     * group:android.permission-group.PHONE 电话权限
+     *      permission:android.permission.READ_CALL_LOG
+     *      permission:android.permission.READ_PHONE_STATE
+     *      permission:android.permission.CALL_PHONE
+     *      permission:android.permission.WRITE_CALL_LOG
+     *      permission:android.permission.USE_SIP
+     *      permission:android.permission.PROCESS_OUTGOING_CALLS
+     *      permission:com.android.voicemail.permission.ADD_VOICEMAIL
+     *
+     *      group:android.permission-group.CALENDAR 日历权限
+     *      permission:android.permission.READ_CALENDAR
+     *      permission:android.permission.WRITE_CALENDAR
+     *
+     * group:android.permission-group.CAMERA 照相机权限
+     *      permission:android.permission.CAMERA
+     *
+     * group:android.permission-group.SENSORS 传感器权限
+     *      permission:android.permission.BODY_SENSORS
+     *
+     * group:android.permission-group.LOCATION 定位权限
+     *      permission:android.permission.ACCESS_FINE_LOCATION
+     *      permission:android.permission.ACCESS_COARSE_LOCATION
+     *
+     * group:android.permission-group.STORAGE 存储权限
+     *      permission:android.permission.READ_EXTERNAL_STORAGE
+     *      permission:android.permission.WRITE_EXTERNAL_STORAGE
+     *
+     * group:android.permission-group.MICROPHONE 麦克风权限
+     *      permission:android.permission.RECORD_AUDIO
+     *
+     * group:android.permission-group.SMS  短信权限
+     *      permission:android.permission.READ_SMS
+     *      permission:android.permission.RECEIVE_WAP_PUSH
+     *      permission:android.permission.RECEIVE_MMS
+     *      permission:android.permission.RECEIVE_SMS
+     *      permission:android.permission.SEND_SMS
+     *      permission:android.permission.READ_CELL_BROADCASTS
+     *
+     * @param permission 权限名称
+     */
+    protected void requestPermission(final String permission) {
+        int hasWriteContactsPermission = ActivityCompat.checkSelfPermission(this, permission);
+        if (hasWriteContactsPermission != PackageManager.PERMISSION_GRANTED) {
+//            if (!ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
+//                showMessageOKCancel("你需要请求以下权限\n" + permission.substring(permission.lastIndexOf(".") + 1),
+//                        new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                ActivityCompat.requestPermissions(BaseActivity.this, new String[]{permission},
+//                                        REQUEST_CODE_ASK_PERMISSIONS);
+//                            }
+//                        });
+//                return;
+//            }
+            ActivityCompat.requestPermissions(this, new String[]{permission}, REQUEST_CODE_ASK_PERMISSIONS);
+            return;
+        } else {
+            execute(permission);
+        }
+    }
+
+    /**
+     * 请求权限后执行的操作
+     *
+     * @param permission
+     */
+    protected void execute(String permission) {
+
+    }
+
+    /**
+     * 显示请求权限对话框
+     * @param message
+     * @param okListener
+     */
+    private void showMessageOKCancel(String message, DialogInterface.OnClickListener okListener) {
+        new AlertDialog.Builder(this)
+                .setMessage(message)
+                .setPositiveButton("OK", okListener)
+                .setNegativeButton("Cancel", null)
+                .create()
+                .show();
+    }
+
+    /**
+     * 请求权限回调
+     * @param requestCode
+     * @param permissions
+     * @param grantResults
+     */
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_CODE_ASK_PERMISSIONS:
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // Permission Granted
+                    execute(permissions[0]);
+                } else {
+                    // Permission Denied
+                    Toast.makeText(this, "权限：" + permissions[0].substring(permissions[0].lastIndexOf(".") + 1) + " 被拒绝！\n操作已限制。", Toast.LENGTH_SHORT)
+                            .show();
+                }
+                break;
+            default:
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+    }
+
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        if (ev.getAction() == MotionEvent.ACTION_DOWN){
+        if (ev.getAction() == MotionEvent.ACTION_DOWN) {
             View v = getCurrentFocus();
-            if (isShouldHideKeyboard(v,ev)){
+            if (isShouldHideKeyboard(v, ev)) {
                 hideKeyboard(v.getWindowToken());
             }
         }
         return super.dispatchTouchEvent(ev);
     }
-    private boolean isShouldHideKeyboard(View v, MotionEvent event){
-        if (v != null && (v instanceof EditText)){
-            int[] l = {0,0};
+
+    /**
+     * 判断是否隐藏软键盘
+     * @param v
+     * @param event
+     * @return
+     */
+    private boolean isShouldHideKeyboard(View v, MotionEvent event) {
+        if (v != null && (v instanceof EditText)) {
+            int[] l = {0, 0};
             v.getLocationInWindow(l);
             int left = l[0],
                     top = l[1],
                     bottom = top + v.getHeight(),
                     right = left + v.getWidth();
             if (event.getX() > left && event.getX() < right
-                    && event.getY() > top && event.getY() < bottom){
+                    && event.getY() > top && event.getY() < bottom) {
                 //点击EditText的事件，忽略它
                 return false;
-            }else {
+            } else {
                 v.clearFocus();
                 return true;
             }
@@ -149,9 +281,9 @@ public class BaseActivity extends AppCompatActivity {
 
     //获取InputMethodManager，隐藏软键盘
     private void hideKeyboard(IBinder token) {
-        if (token != null){
+        if (token != null) {
             InputMethodManager im = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-            im.hideSoftInputFromWindow(token,InputMethodManager.HIDE_NOT_ALWAYS);
+            im.hideSoftInputFromWindow(token, InputMethodManager.HIDE_NOT_ALWAYS);
         }
     }
 }
