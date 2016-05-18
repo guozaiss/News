@@ -3,6 +3,7 @@ package com.guozaiss.news.view.activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.WebChromeClient;
@@ -15,16 +16,17 @@ import com.guozaiss.news.R;
 import com.guozaiss.news.common.base.BaseActivity;
 import com.guozaiss.news.common.utils.ShareUtils;
 
-public class HtmlActivity extends BaseActivity implements android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener {
+public class HtmlActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
 
     private ProgressBar progress;
     private WebView webView;
+    private String url;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_html);
-        String url = getIntent().getStringExtra("url");
+        url = getIntent().getStringExtra("url");
         webView = (WebView) findViewById(R.id.webView);
         //WebSettings
         WebSettings settings = webView.getSettings();
@@ -41,7 +43,7 @@ public class HtmlActivity extends BaseActivity implements android.support.v4.wid
         progress.setMax(100);
         webView.setWebViewClient(new WebViewClient() {
             @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url){
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 if (url != null) {
                     /** 拨打电话 */
                     if (url.startsWith("tel:")) {
@@ -82,10 +84,18 @@ public class HtmlActivity extends BaseActivity implements android.support.v4.wid
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.action_share) {
-            ShareUtils.shareText(this, "");
+        switch (item.getItemId()) {
+            case R.id.action_share:
+                ShareUtils.shareMsg(this, "我是标题", "标题", url, "/sdcard/Pictures/Screenshots/Screenshot_2016-05-17-17-09-47.png");
+                return true;
+            case R.id.action_openbrow:
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(url));
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
     }
 
     @Override

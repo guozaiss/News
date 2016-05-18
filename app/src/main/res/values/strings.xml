@@ -5,6 +5,7 @@
 
     <string name="action_settings">设置</string>
     <string name="action_share">分享</string>
+    <string name="action_openbrow">在浏览器打开</string>
 
     <string name="drawer_open">open</string>
     <string name="drawer_close">close</string>
