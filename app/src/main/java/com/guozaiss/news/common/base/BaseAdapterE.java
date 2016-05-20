@@ -26,6 +26,7 @@ public abstract class BaseAdapterE<T> extends BaseAdapter {
 
     /**
      * 改变adapter数据源
+     *
      * @param lists 更换的数据源
      */
     public void changeLists(List<T> lists) {
@@ -35,17 +36,20 @@ public abstract class BaseAdapterE<T> extends BaseAdapter {
 
     /**
      * 追加adapter数据
+     *
      * @param lists 添加的数据
      */
     public void addLists(List<T> lists) {
-        this.lists.addAll(lists);
-        notifyDataSetChanged();
+        if (null != this.lists) {
+            this.lists.addAll(lists);
+            notifyDataSetChanged();
+        }
     }
 
     @Override
     public int getCount() {
         int size = 0;
-        if (lists != null) {
+        if (null != lists) {
             size = lists.size();
         }
         return size;
@@ -72,6 +76,7 @@ public abstract class BaseAdapterE<T> extends BaseAdapter {
 
     /**
      * 开放的接口，由继承者定制
+     *
      * @param convertView
      * @param position
      */

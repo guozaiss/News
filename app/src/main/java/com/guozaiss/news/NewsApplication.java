@@ -40,4 +40,5 @@ public class NewsApplication extends Application {
             LogUtils.e("当前处于debug模式。。。");
         }
     }
+
 }

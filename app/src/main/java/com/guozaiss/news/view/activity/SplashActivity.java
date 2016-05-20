@@ -53,6 +53,7 @@ public class SplashActivity extends BaseActivity implements AMapLocationListener
 
         requestPermission(Manifest.permission.ACCESS_FINE_LOCATION);//请求定位权限
 
+
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
     }
 

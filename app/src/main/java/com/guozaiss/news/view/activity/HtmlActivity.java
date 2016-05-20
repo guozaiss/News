@@ -102,4 +102,11 @@ public class HtmlActivity extends BaseActivity implements SwipeRefreshLayout.OnR
     public void onRefresh() {
         webView.reload();
     }
+
+    @Override
+    public void finish() {
+        webView.getSettings().setDisplayZoomControls(false);
+        webView.getSettings().setSupportZoom(false);
+        super.finish();
+    }
 }
