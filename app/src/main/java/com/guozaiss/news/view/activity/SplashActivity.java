@@ -104,6 +104,8 @@ public class SplashActivity extends BaseActivity implements AMapLocationListener
                 LogUtils.e("location Error, ErrCode:"
                         + aMapLocation.getErrorCode() + ", errInfo:"
                         + aMapLocation.getErrorInfo());
+                startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                finish();
             }
         }
     }

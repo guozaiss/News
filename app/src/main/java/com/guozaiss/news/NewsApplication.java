@@ -7,7 +7,6 @@ import com.guozaiss.news.common.utils.LogUtils;
 import com.guozaiss.news.common.utils.crash.CustomCrash;
 import com.guozaiss.news.common.utils.imageLoad.GlideUtils;
 import com.guozaiss.news.common.utils.imageLoad.ImageLoadUtils;
-import com.wandoujia.ads.sdk.Ads;
 
 /**
  * Created by Lenovo on 2016/5/8.
@@ -41,12 +40,6 @@ public class NewsApplication extends Application {
             LogUtils.e("当前处于debug模式。。。");
         }
 
-        try {
-            Ads.init(this,"100040112","d184542ace05b7cabe0d050aff74a143");
-            Ads.preLoad("d93ce8dfdf9f65b17cb568ab21798714", Ads.AdFormat.appwall);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
 }

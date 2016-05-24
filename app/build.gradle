@@ -11,6 +11,7 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.1"
+        multiDexEnabled true
     }
     signingConfigs {
         debug {
@@ -61,22 +62,28 @@ android {
     }
 
 }
+def releaseTime() {
+    return new Date().format("yyyy-MM-dd ")
+}
 repositories {
     flatDir {
         dirs 'libs'
     }
 }
-def releaseTime() {
-    return new Date().format("yyyy-MM-dd ")
-}
-
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile(name: 'WandoujiaSDK', ext: 'aar')
     testCompile 'junit:junit:4.12'
+    compile(name: 'WandoujiaSDK', ext: 'aar')
+
     /**
-     * 引用WandoujiaSDK.aar
+     * 下面是sdk的依赖包
      */
+    compile 'com.google.code.gson:gson:2.3.1'
+    compile 'com.squareup.okhttp:okhttp:2.2.0'
+    compile 'com.squareup.okhttp:okhttp-urlconnection:2.2.0'
+    compile 'com.squareup:otto:1.3.6'
+    compile 'com.squareup.picasso:picasso:2.4.0'
+
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.android.support:design:23.1.1'
     compile 'com.github.bumptech.glide:glide:3.7.0'

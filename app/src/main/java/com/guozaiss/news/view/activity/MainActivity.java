@@ -56,7 +56,7 @@ public class MainActivity extends BaseActivity implements Callback<Data>, Adapte
 
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                if (firstVisibleItem + visibleItemCount == totalItemCount) {
+                if (firstVisibleItem + visibleItemCount == totalItemCount - 1) {
                     getData(false);
                 }
             }

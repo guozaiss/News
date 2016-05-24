@@ -12,11 +12,11 @@
         layout="@layout/app_bar" />
 
     <LinearLayout
-        android:layout_below="@+id/appbar"
         android:id="@+id/banner_container"
         android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_height="250dp" />
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/appbar"
+        android:orientation="vertical" />
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefreshLayout"
