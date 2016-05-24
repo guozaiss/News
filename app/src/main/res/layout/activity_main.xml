@@ -11,11 +11,18 @@
         android:id="@+id/appbar"
         layout="@layout/app_bar" />
 
+    <LinearLayout
+        android:layout_below="@+id/appbar"
+        android:id="@+id/banner_container"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="250dp" />
+
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/appbar"
+        android:layout_below="@+id/banner_container"
         app:direction="both">
 
         <ListView

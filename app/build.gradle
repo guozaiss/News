@@ -59,15 +59,24 @@ android {
             jniLibs.srcDirs = ['libs']
         }
     }
-}
 
+}
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
 def releaseTime() {
     return new Date().format("yyyy-MM-dd ")
 }
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile(name: 'WandoujiaSDK', ext: 'aar')
     testCompile 'junit:junit:4.12'
+    /**
+     * 引用WandoujiaSDK.aar
+     */
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.android.support:design:23.1.1'
     compile 'com.github.bumptech.glide:glide:3.7.0'
