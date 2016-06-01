@@ -1,18 +1,14 @@
 package com.guozaiss.news.view.activity;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.guozaiss.news.Constants;
 import com.guozaiss.news.R;
@@ -22,7 +18,6 @@ import com.guozaiss.news.common.utils.LogUtils;
 import com.guozaiss.news.common.utils.http.DataUtils;
 import com.guozaiss.news.entities.Data;
 import com.guozaiss.news.entities.HotWord;
-import com.wandoujia.ads.sdk.Ads;
 
 import java.util.List;
 
@@ -79,65 +74,6 @@ public class MainActivity extends BaseActivity implements Callback<Data>, Adapte
                 LogUtils.e("获取数据失败");
             }
         });
-        new AsyncTask<Void, Void, Boolean>() {
-            @Override
-            protected Boolean doInBackground(Void... params) {
-                try {
-                    Ads.init(MainActivity.this, Constants.APP_ID, Constants.SECRET_KEY);
-                    return true;
-                } catch (Exception e) {
-                    Log.e("ads-sample", "error", e);
-                    return false;
-                }
-            }
-
-            @Override
-            protected void onPostExecute(Boolean success) {
-                final ViewGroup container = (ViewGroup) findViewById(R.id.banner_container);
-
-                if (success) {
-                    /**
-                     * pre load
-                     */
-                    Ads.preLoad(Constants.BANNER, Ads.AdFormat.banner);
-//                    Ads.preLoad(INTERSTITIAL, Ads.AdFormat.interstitial);
-//                    Ads.preLoad(APP_WALL, Ads.AdFormat.appwall);
-
-                    /**
-                     * add ad views
-                     */
-                    View bannerView = Ads.createBannerView(MainActivity.this, Constants.BANNER);
-                    container.addView(bannerView, new ViewGroup.LayoutParams(
-                            ViewGroup.LayoutParams.MATCH_PARENT,
-                            ViewGroup.LayoutParams.WRAP_CONTENT
-                    ));
-
-//                    Button btI = new Button(MainActivity.this);
-//                    btI.setText("interstitial");
-//                    btI.setOnClickListener(new View.OnClickListener() {
-//                        @Override
-//                        public void onClick(View v) {
-//                            Ads.showInterstitial(MainActivity.this, INTERSTITIAL);
-//                        }
-//                    });
-//                    container.addView(btI);
-//
-//                    Button btW = new Button(MainActivity.this);
-//                    btW.setText("app wall");
-//                    btW.setOnClickListener(new View.OnClickListener() {
-//                        @Override
-//                        public void onClick(View v) {
-//                            Ads.showAppWall(MainActivity.this, APP_WALL);
-//                        }
-//                    });
-//                    container.addView(btW);
-                } else {
-                    TextView errorMsg = new TextView(MainActivity.this);
-                    errorMsg.setText("init failed");
-                    container.addView(errorMsg);
-                }
-            }
-        }.execute();
     }
 
     @Override
