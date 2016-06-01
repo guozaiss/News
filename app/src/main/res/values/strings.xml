@@ -3,6 +3,8 @@
     <string name="app_name">新闻小站</string>
     <string name="html">详情页面</string>
 
+    <string name="banner_ad_unit_id">ca-app-pub-9589772526999585/5158246353</string>
+
     <string name="action_settings">设置</string>
     <string name="action_share">分享</string>
     <string name="action_openbrow">在浏览器打开</string>

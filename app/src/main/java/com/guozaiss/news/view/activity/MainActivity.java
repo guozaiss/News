@@ -10,6 +10,9 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.guozaiss.news.Constants;
 import com.guozaiss.news.R;
 import com.guozaiss.news.adapters.NewsAdapter;
@@ -24,7 +27,6 @@ import java.util.List;
 import retrofit.Callback;
 import retrofit.Response;
 import retrofit.Retrofit;
-
 
 public class MainActivity extends BaseActivity implements Callback<Data>, AdapterView.OnItemClickListener, SwipeRefreshLayout.OnRefreshListener {
     List<Data.Result> result;
@@ -74,6 +76,10 @@ public class MainActivity extends BaseActivity implements Callback<Data>, Adapte
                 LogUtils.e("获取数据失败");
             }
         });
+        AdView mAdView = (AdView) findViewById(R.id.adView);
+        MobileAds.initialize(getApplicationContext(), "ca-app-pub-9589772526999585~3821113954");
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
     }
 
     @Override
