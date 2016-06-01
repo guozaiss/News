@@ -1,6 +1,6 @@
 <resources>
     <!--activityName-->
-    <string name="app_name">News</string>
+    <string name="app_name">新闻小站</string>
     <string name="html">详情页面</string>
 
     <string name="action_settings">设置</string>

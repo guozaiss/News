@@ -150,11 +150,6 @@
 -keep class com.amap.api.fence.**{*;}
 -keep class com.autonavi.aps.amapapi.model.**{*;}
 
-#混淆 豌豆荚
--keepattributes Signature
--keep class com.wandoujia.ads.sdk.** { *; }
--dontwarn com.wandoujia.ads.sdk.**
-
 # 项目定制混淆
 ## 实体类混淆
 -keep class com.guozaiss.news.entities.** { *; }
