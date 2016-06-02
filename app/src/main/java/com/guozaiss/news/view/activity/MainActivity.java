@@ -3,6 +3,7 @@ package com.guozaiss.news.view.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,6 +19,7 @@ import com.guozaiss.news.R;
 import com.guozaiss.news.adapters.NewsAdapter;
 import com.guozaiss.news.common.base.BaseActivity;
 import com.guozaiss.news.common.utils.LogUtils;
+import com.guozaiss.news.common.utils.SPUtils;
 import com.guozaiss.news.common.utils.http.DataUtils;
 import com.guozaiss.news.entities.Data;
 import com.guozaiss.news.entities.HotWord;
@@ -41,6 +43,17 @@ public class MainActivity extends BaseActivity implements Callback<Data>, Adapte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+
+        boolean isFirst = SPUtils.getBoolean(this, "isFirst", false);
+        if (!isFirst) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setIcon(R.mipmap.ic_launcher);
+            builder.setTitle("致亲爱的用户：");
+            builder.setMessage("        您好，本app集成了广告单元，如若影响您的使用,请手动关闭。");
+            builder.setNegativeButton("关闭", null);
+            builder.create().show();
+            SPUtils.putBoolean(this, "isFirst", true);
+        }
         swipeRefreshLayout.setOnRefreshListener(this);
         newsAdapter = new NewsAdapter(this, result, R.layout.item_news);
         listView = (ListView) findViewById(R.id.listView);
