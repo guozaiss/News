@@ -1,13 +1,11 @@
 package com.guozaiss.news.adapters;
 
 import android.app.Activity;
-import android.graphics.Bitmap;
 import android.text.Html;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.load.resource.bitmap.GlideBitmapDrawable;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
@@ -22,7 +20,7 @@ import java.util.List;
 /**
  * Created by Lenovo on 2016/5/9.
  */
-public class NewsAdapter extends BaseAdapterE<Data.Result> implements RequestListener<String, GlideDrawable>{
+public class NewsAdapter extends BaseAdapterE<Data.Result>{
 
     public NewsAdapter(Activity context, List<Data.Result> lists, int xmlID) {
         super(context, lists, xmlID);
@@ -35,7 +33,7 @@ public class NewsAdapter extends BaseAdapterE<Data.Result> implements RequestLis
         TextView source = BaseViewHolder.get(convertView, R.id.source);
         TextView date = BaseViewHolder.get(convertView, R.id.date);
         TextView distance = BaseViewHolder.get(convertView, R.id.distance);
-        final ImageView imageView = BaseViewHolder.get(convertView, R.id.imageView);
+         final ImageView imageView = BaseViewHolder.get(convertView, R.id.imageView);
 
         Data.Result result = lists.get(position);
         title.setText(result.getTitle() + "");
@@ -53,21 +51,10 @@ public class NewsAdapter extends BaseAdapterE<Data.Result> implements RequestLis
 
                     @Override
                     public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
-                        GlideBitmapDrawable current = (GlideBitmapDrawable) resource.getCurrent();
-                        Bitmap bitmap = current.getBitmap();
                         imageView.setVisibility(View.VISIBLE);
                         return false;
                     }
                 });
     }
 
-    @Override
-    public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
-        return false;
-    }
-
-    @Override
-    public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
-        return false;
-    }
 }

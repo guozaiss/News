@@ -40,6 +40,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/progress"
         ads:adSize="BANNER"
-        ads:adUnitId="@string/banner_ad_unit_id"/>
+        ads:adUnitId="@string/banner_ad_unit_id2"/>
 
 </RelativeLayout>

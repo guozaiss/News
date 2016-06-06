@@ -82,7 +82,6 @@ public class HtmlActivity extends BaseActivity implements SwipeRefreshLayout.OnR
         mAdView.loadAd(adRequest);
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.html, menu);
