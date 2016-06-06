@@ -46,13 +46,13 @@ public class NewsAdapter extends BaseAdapterE<Data.Result>{
                     @Override
                     public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
                         imageView.setVisibility(View.GONE);
-                        return false;
+                        return true;
                     }
 
                     @Override
                     public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
                         imageView.setVisibility(View.VISIBLE);
-                        return false;
+                        return true;
                     }
                 });
     }

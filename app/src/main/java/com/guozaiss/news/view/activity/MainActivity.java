@@ -14,6 +14,7 @@ import android.widget.ListView;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
+import com.guozaiss.news.BuildConfig;
 import com.guozaiss.news.Constants;
 import com.guozaiss.news.R;
 import com.guozaiss.news.adapters.NewsAdapter;
@@ -45,7 +46,7 @@ public class MainActivity extends BaseActivity implements Callback<Data>, Adapte
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
         boolean isFirst = SPUtils.getBoolean(this, "isFirst", false);
-        if (!isFirst) {
+        if (BuildConfig.debug && !isFirst) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setIcon(R.mipmap.ic_launcher);
             builder.setTitle("致亲爱的用户：");
