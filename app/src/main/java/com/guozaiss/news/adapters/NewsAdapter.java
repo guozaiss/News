@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * Created by Lenovo on 2016/5/9.
  */
-public class NewsAdapter extends BaseAdapterE<Data.Result>{
+public class NewsAdapter extends BaseAdapterE<Data.Result> {
 
     public NewsAdapter(Activity context, List<Data.Result> lists, int xmlID) {
         super(context, lists, xmlID);
@@ -33,7 +33,7 @@ public class NewsAdapter extends BaseAdapterE<Data.Result>{
         TextView source = BaseViewHolder.get(convertView, R.id.source);
         TextView date = BaseViewHolder.get(convertView, R.id.date);
         TextView distance = BaseViewHolder.get(convertView, R.id.distance);
-         final ImageView imageView = BaseViewHolder.get(convertView, R.id.imageView);
+        final ImageView imageView = BaseViewHolder.get(convertView, R.id.imageView);
 
         Data.Result result = lists.get(position);
         title.setText(result.getTitle() + "");
@@ -52,7 +52,7 @@ public class NewsAdapter extends BaseAdapterE<Data.Result>{
                     @Override
                     public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
                         imageView.setVisibility(View.VISIBLE);
-                        return true;
+                        return false;
                     }
                 });
     }

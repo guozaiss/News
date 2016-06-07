@@ -12,10 +12,9 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
-import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.MobileAds;
 import com.guozaiss.news.R;
+import com.guozaiss.news.common.AdUtils;
 import com.guozaiss.news.common.base.BaseActivity;
 import com.guozaiss.news.common.utils.ShareUtils;
 
@@ -77,9 +76,7 @@ public class HtmlActivity extends BaseActivity implements SwipeRefreshLayout.OnR
         });
         swipeRefreshLayout.setOnRefreshListener(this);
         AdView mAdView = (AdView) findViewById(R.id.adView);
-        MobileAds.initialize(getApplicationContext(), "ca-app-pub-9589772526999585~3821113954");
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
+        AdUtils.init(mAdView, getApplicationContext());
     }
 
     @Override
