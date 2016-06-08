@@ -16,7 +16,7 @@ import com.guozaiss.news.BuildConfig;
 import com.guozaiss.news.Constants;
 import com.guozaiss.news.R;
 import com.guozaiss.news.adapters.NewsAdapter;
-import com.guozaiss.news.common.AdUtils;
+import com.guozaiss.news.common.utils.AdUtils;
 import com.guozaiss.news.common.base.BaseActivity;
 import com.guozaiss.news.common.utils.LogUtils;
 import com.guozaiss.news.common.utils.SPUtils;

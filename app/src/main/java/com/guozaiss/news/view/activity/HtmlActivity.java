@@ -14,7 +14,7 @@ import android.widget.ProgressBar;
 
 import com.google.android.gms.ads.AdView;
 import com.guozaiss.news.R;
-import com.guozaiss.news.common.AdUtils;
+import com.guozaiss.news.common.utils.AdUtils;
 import com.guozaiss.news.common.base.BaseActivity;
 import com.guozaiss.news.common.utils.ShareUtils;
 

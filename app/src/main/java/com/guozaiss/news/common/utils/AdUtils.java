@@ -1,4 +1,4 @@
-package com.guozaiss.news.common;
+package com.guozaiss.news.common.utils;
 
 import android.content.Context;
 
