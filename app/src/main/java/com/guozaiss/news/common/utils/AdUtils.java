@@ -13,7 +13,7 @@ import com.guozaiss.news.BuildConfig;
 public class AdUtils {
     public static void init(AdView mAdView, Context context) {
         if (!BuildConfig.DEBUG) {
-            MobileAds.initialize(context, "ca-app-pub-8344749878863782~6355897358");
+            MobileAds.initialize(context, "ca-app-pub-3157595213810745~5268757115");
             AdRequest adRequest = new AdRequest.Builder().build();
             mAdView.loadAd(adRequest);
         }

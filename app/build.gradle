@@ -16,10 +16,10 @@ android {
     signingConfigs {
         debug {
             //keystore
-            storeFile file("guozaiss.jks")
+            storeFile file("guozaiqq.jks")
             storePassword "123456"
-            keyAlias "guozaiss"
-            keyPassword "ppoim6458"
+            keyAlias "guo"
+            keyPassword "guozaiqqqq"
         }
     }
     buildTypes {
