@@ -29,6 +29,8 @@
             android:name="com.amap.api.v2.apikey"
             android:value="b6559d61985a4392534dc74aa830aabb" />
 
+        <service android:name="com.amap.api.location.APSService"/>
+
         <!--腾讯集成-->
         <data android:scheme="tencent222222" />
 
@@ -67,7 +69,6 @@
             android:name=".view.activity.HtmlActivity"
             android:label="@string/html" />
 
-        <service android:name="com.amap.api.location.APSService"></service>
 
 
     </application>

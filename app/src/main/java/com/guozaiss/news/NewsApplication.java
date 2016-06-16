@@ -8,6 +8,7 @@ import com.guozaiss.news.common.utils.LogUtils;
 import com.guozaiss.news.common.utils.crash.CustomCrash;
 import com.guozaiss.news.common.utils.imageLoad.GlideUtils;
 import com.guozaiss.news.common.utils.imageLoad.ImageLoadUtils;
+import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
 
 /**
@@ -44,11 +45,10 @@ public class NewsApplication extends Application {
         CustomCrash mCustomCrash = CustomCrash.getInstance();//初始化崩溃日志收集器
 //        mCustomCrash.setCustomCrashInfo(this);//启动崩溃日志收集程序，开发模式不开放
 
-        //leak
-        refWatcher=LeakCanary.install(this);
-
         if (BuildConfig.debug) {
             LogUtils.e("当前处于debug模式。。。");
+            //leak
+            refWatcher= LeakCanary.install(this);
         }
 
     }

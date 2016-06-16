@@ -65,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
                     if (v < 1) {
                         v = 0;
                     }
+                    //动态改变标题栏透明度
                     toolbar.getBackground().setAlpha((int) (255*v));
                 }
             }

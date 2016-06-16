@@ -16,8 +16,8 @@ import com.guozaiss.news.BuildConfig;
 import com.guozaiss.news.Constants;
 import com.guozaiss.news.R;
 import com.guozaiss.news.adapters.NewsAdapter;
+import com.guozaiss.news.common.base.view.BaseActivity;
 import com.guozaiss.news.common.utils.AdUtils;
-import com.guozaiss.news.common.base.BaseActivity;
 import com.guozaiss.news.common.utils.LogUtils;
 import com.guozaiss.news.common.utils.SPUtils;
 import com.guozaiss.news.common.utils.http.DataUtils;
@@ -26,9 +26,10 @@ import com.guozaiss.news.entities.HotWord;
 
 import java.util.List;
 
-import retrofit.Callback;
-import retrofit.Response;
-import retrofit.Retrofit;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 
 public class MainActivity extends BaseActivity implements Callback<Data>, AdapterView.OnItemClickListener, SwipeRefreshLayout.OnRefreshListener {
     List<Data.Result> result;
@@ -78,16 +79,17 @@ public class MainActivity extends BaseActivity implements Callback<Data>, Adapte
         DataUtils.getDataService().getHotWord(Constants.AppKey).enqueue(new Callback<HotWord>() {
 
             @Override
-            public void onResponse(Response<HotWord> response, Retrofit retrofit) {
+            public void onResponse(Call<HotWord> call, Response<HotWord> response) {
                 hotwords = response.body().getResult();
                 DataUtils.getDataService().getData(Constants.AppKey, hotwords.get(0)).enqueue(MainActivity.this);
                 hotwords.remove(0);
             }
 
             @Override
-            public void onFailure(Throwable t) {
+            public void onFailure(Call<HotWord> call, Throwable t) {
                 LogUtils.e("获取数据失败");
             }
+
         });
         AdView mAdView = (AdView) findViewById(R.id.adView);
         AdUtils.init(mAdView, getApplicationContext());
@@ -110,8 +112,9 @@ public class MainActivity extends BaseActivity implements Callback<Data>, Adapte
         }
     }
 
+
     @Override
-    public void onResponse(Response<Data> response, Retrofit retrofit) {
+    public void onResponse(Call<Data> call, Response<Data> response) {
         LogUtils.e("成功：" + response.body().toString());
         swipeRefreshLayout.setRefreshing(false);
         result = response.body().getResult();
@@ -129,9 +132,10 @@ public class MainActivity extends BaseActivity implements Callback<Data>, Adapte
     }
 
     @Override
-    public void onFailure(Throwable t) {
+    public void onFailure(Call<Data> call, Throwable t) {
         LogUtils.e(t.getMessage() + "");
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -37,6 +37,16 @@ public class ActivityManagerE {
     }
 
     /**
+     * 弹出确定Activity
+     *
+     * @param activity
+     * @return
+     */
+    public void removeActivity(Activity activity) {
+        activityStack.remove(activity);
+    }
+
+    /**
      * 去除栈顶元素
      *
      * @return
