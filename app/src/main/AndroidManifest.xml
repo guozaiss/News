@@ -24,12 +24,13 @@
         <meta-data
             android:name="com.guozaiss.news.common.utils.imageLoad.CustomCachingGlideModule"
             android:value="GlideModule" />
+
         <!--高德地图key-->
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="b6559d61985a4392534dc74aa830aabb" />
 
-        <service android:name="com.amap.api.location.APSService"/>
+        <service android:name="com.amap.api.location.APSService" />
 
         <!--腾讯集成-->
         <data android:scheme="tencent222222" />
@@ -62,14 +63,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".view.activity.MainActivity"
             android:label="@string/app_name" />
         <activity
             android:name=".view.activity.HtmlActivity"
             android:label="@string/html" />
-
-
 
     </application>
 
