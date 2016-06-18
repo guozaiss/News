@@ -15,6 +15,9 @@ import com.bumptech.glide.module.GlideModule;
 
 /**
  * Created by guozaiss on 16/6/14.
+ * <meta-data
+ * android:name="com.guozaiss.news.common.utils.imageLoad.CustomCachingGlideModule"
+ * android:value="GlideModule" />
  */
 public class CustomCachingGlideModule implements GlideModule {
 
