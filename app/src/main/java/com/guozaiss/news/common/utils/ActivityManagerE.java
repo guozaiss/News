@@ -8,7 +8,7 @@ import java.util.Stack;
  * Created by guozaiss on 16/2/15.
  */
 public class ActivityManagerE {
-    private Stack<Activity> activityStack = new Stack<>();
+    private static Stack<Activity> activityStack = new Stack<>();
 
 
     private ActivityManagerE() {
@@ -32,8 +32,8 @@ public class ActivityManagerE {
      *
      * @return
      */
-    public Activity popActivity() {
-        return activityStack.pop();
+    public void remove(Activity activity) {
+         activityStack.remove(activity);
     }
 
     /**
@@ -71,7 +71,7 @@ public class ActivityManagerE {
      *
      * @return
      */
-    public int size() {
+    public static int size() {
         return activityStack.size();
     }
 

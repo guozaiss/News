@@ -101,11 +101,11 @@ public class SplashActivity extends BaseActivity implements AMapLocationListener
                 },1000);
             } else {
                 //显示错误信息ErrCode是错误码，errInfo是错误信息，详见错误码表。
-                LogUtils.e("location Error, ErrCode:"
-                        + aMapLocation.getErrorCode() + ", errInfo:"
-                        + aMapLocation.getErrorInfo());
-                startActivity(new Intent(SplashActivity.this, MainActivity.class));
-                finish();
+//                LogUtils.e("location Error, ErrCode:"
+//                        + aMapLocation.getErrorCode() + ", errInfo:"
+//                        + aMapLocation.getErrorInfo());
+//                startActivity(new Intent(SplashActivity.this, MainActivity.class));
+//                finish();
             }
         }
     }

@@ -17,7 +17,6 @@ import com.guozaiss.news.R;
  */
 public class GlideUtils implements ImageLoadUtils<RequestListener> {
 
-
     @Override
     public void disPlay(Context context, ImageView imageView, String URL) {
         disPlay(context, imageView, URL, null);

@@ -115,8 +115,8 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
 //        LogUtils.e("onDestroy" + this.getClass().getSimpleName());
-        ActivityManagerE.getInstance().popActivity();//弹出Activity
-//        LogUtils.e("回退栈数量" + ActivityManagerE.getApplicationInstance().size() + "");
+        ActivityManagerE.getInstance().remove(this);//弹出Activity
+        LogUtils.e("回退栈数量" + ActivityManagerE.size() + "");
         super.onDestroy();
     }
 

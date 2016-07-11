@@ -1,51 +1,58 @@
 package com.guozaiss.news.view.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AbsListView;
-import android.widget.AdapterView;
-import android.widget.ListView;
+import android.widget.Toast;
 
-import com.google.android.gms.ads.AdView;
 import com.guozaiss.news.BuildConfig;
 import com.guozaiss.news.Constants;
+import com.guozaiss.news.NewsApplication;
 import com.guozaiss.news.R;
-import com.guozaiss.news.adapters.NewsAdapter;
-import com.guozaiss.news.common.utils.AdUtils;
+import com.guozaiss.news.adapters.ViewPagerAdapter;
 import com.guozaiss.news.common.base.BaseActivity;
 import com.guozaiss.news.common.utils.LogUtils;
 import com.guozaiss.news.common.utils.SPUtils;
-import com.guozaiss.news.common.utils.http.DataUtils;
-import com.guozaiss.news.entities.Data;
-import com.guozaiss.news.entities.HotWord;
+import com.guozaiss.news.common.utils.ToastUtil;
+import com.guozaiss.news.view.fragment.NewsFragment;
+import com.keymob.networks.AdManager;
+import com.keymob.networks.core.IAdEventListener;
+import com.keymob.networks.core.IInterstitialPlatform;
+import com.keymob.networks.core.PlatformAdapter;
+import com.keymob.sdk.core.AdTypes;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
-import retrofit.Callback;
-import retrofit.Response;
-import retrofit.Retrofit;
-
-public class MainActivity extends BaseActivity implements Callback<Data>, AdapterView.OnItemClickListener, SwipeRefreshLayout.OnRefreshListener {
-    List<Data.Result> result;
-    private NewsAdapter newsAdapter;
-    private List<String> hotwords;
-    private ListView listView;
-    private boolean refresh = true;
-    private boolean refreshing = false;
+public class MainActivity extends BaseActivity  {
+    private TabLayout tab_layout;
+    private ViewPager view_pager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (NewsApplication.isNight()) {
+            setTheme(R.style.AppTheme_night);
+        } else {
+            setTheme(R.style.AppTheme);
+        }
         setContentView(R.layout.activity_main);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
+        AdManager.getInstance().pluginFile.put("gdt", "GDTAdapter.pl");
+        AdManager.getInstance().pluginFile.put("baidu", "BaiduAdapter.jar");
+        AdManager.getInstance().initFromKeymobService(this, "10667", new AdEventListener(), BuildConfig.DEBUG);
+        AdManager.getInstance().showInterstitial(this);
+
         boolean isFirst = SPUtils.getBoolean(this, "isFirst", false);
-        if (BuildConfig.debug && !isFirst) {
+        //当是release版本并且是第一次运行时弹出对话框
+        if (!BuildConfig.debug && !isFirst) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setIcon(R.mipmap.ic_launcher);
             builder.setTitle("致亲爱的用户：");
@@ -54,83 +61,22 @@ public class MainActivity extends BaseActivity implements Callback<Data>, Adapte
             builder.create().show();
             SPUtils.putBoolean(this, "isFirst", true);
         }
-        swipeRefreshLayout.setOnRefreshListener(this);
-        newsAdapter = new NewsAdapter(this, result, R.layout.item_news);
-        listView = (ListView) findViewById(R.id.listView);
-        listView.setOnItemClickListener(this);
-        listView.setOnScrollListener(new AbsListView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(AbsListView view, int scrollState) {
-
-            }
-
-            @Override
-            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                if (firstVisibleItem + visibleItemCount == totalItemCount - 1) {
-                    getData(false);
-                }
-            }
-        });
-        listView.setAdapter(newsAdapter);
-        View empty = findViewById(R.id.load_empty);
-        View loading = findViewById(R.id.loading);
-        listView.setEmptyView(loading);
-        DataUtils.getDataService().getHotWord(Constants.AppKey).enqueue(new Callback<HotWord>() {
-
-            @Override
-            public void onResponse(Response<HotWord> response, Retrofit retrofit) {
-                hotwords = response.body().getResult();
-                DataUtils.getDataService().getData(Constants.AppKey, hotwords.get(0)).enqueue(MainActivity.this);
-                hotwords.remove(0);
-            }
-
-            @Override
-            public void onFailure(Throwable t) {
-                LogUtils.e("获取数据失败");
-            }
-        });
-        AdView mAdView = (AdView) findViewById(R.id.adView);
-        AdUtils.init(mAdView, getApplicationContext());
-    }
-
-    @Override
-    public void onRefresh() {
-        getData(true);
-    }
-
-    public void getData(boolean refresh) {
-        if (null != hotwords && hotwords.size() > 0) {
-            if (!refreshing) {
-                this.refresh = refresh;
-                DataUtils.getDataService().getData(Constants.AppKey, hotwords.get(0)).enqueue(this);
-                hotwords.remove(0);
-                refreshing = true;
-                LogUtils.e("请求数据中。。。。。。。");
-            }
+        tab_layout = (TabLayout) findViewById(R.id.tab_layout);
+        view_pager = (ViewPager) findViewById(R.id.view_pager);
+        List<NewsFragment> newsFragments = new ArrayList<>();
+        for (int i = 0; i < Constants.type.length; i++) {
+            NewsFragment newsFragment = new NewsFragment();
+            Bundle bundle = new Bundle();
+            bundle.putString("type",Constants.type[i]);
+            newsFragment.setArguments(bundle);
+            newsFragments.add(newsFragment);
         }
-    }
-
-    @Override
-    public void onResponse(Response<Data> response, Retrofit retrofit) {
-        LogUtils.e("成功：" + response.body().toString());
-        swipeRefreshLayout.setRefreshing(false);
-        result = response.body().getResult();
-        if (result != null && result.size() > 0) {
-            if (refresh) {
-                newsAdapter.changeLists(result);
-            } else {
-                newsAdapter.addLists(result);
-            }
-        } else {
-            onRefresh();
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager(), this, newsFragments);
+        view_pager.setAdapter(adapter);
+        tab_layout.setupWithViewPager(view_pager);
+        if (BuildConfig.DEBUG) {
+            ToastUtil.showToastOfLong("当前处于DEBUG模式，请谨慎操作！");
         }
-        refreshing = false;
-        newsAdapter.notifyDataSetChanged();
-    }
-
-    @Override
-    public void onFailure(Throwable t) {
-        LogUtils.e(t.getMessage() + "");
     }
 
     @Override
@@ -143,18 +89,89 @@ public class MainActivity extends BaseActivity implements Callback<Data>, Adapte
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_settings) {
-
+            if (NewsApplication.isNight()) {
+                NewsApplication.setNight(false);
+            } else {
+                NewsApplication.setNight(true);
+            }
+//            recreate();
+//            AdManager.getInstance().showRelationBanner(BannerSizeType.BANNER, BannerPositions.BOTTOM_CENTER,88,this);
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Data.Result item = ((NewsAdapter) parent.getAdapter()).getItem(position);
-        Intent intent = new Intent(this, HtmlActivity.class);
-        intent.putExtra("url", item.getUrl());
-        startActivity(intent);
+
+    private class AdEventListener implements IAdEventListener {
+        @Override
+        public void onLoadedSuccess(int arg0, Object arg1,
+                                    PlatformAdapter arg2) {
+            LogUtils.d( arg2 + " onLoadedSuccess for type " + arg0 + " withdata " + arg1);
+            if (arg0 == AdTypes.INTERSTITIAL) {
+                ((IInterstitialPlatform) arg2).showInterstitial();
+            }
+        }
+
+        @Override
+        public void onLoadedFail(int arg0, Object arg1, PlatformAdapter arg2) {
+            LogUtils.d(arg2 + " onLoadedFail for type " + arg0 + " withdata " + arg1);
+        }
+
+        @Override
+        public void onAdOpened(int arg0, Object arg1, PlatformAdapter arg2) {
+            LogUtils.d(arg2 + " onAdOpened for type " + arg0 + " withdata " + arg1);
+        }
+
+        @Override
+        public void onAdClosed(int arg0, Object arg1, PlatformAdapter arg2) {
+            LogUtils.d(arg2 + " onAdClosed for type " + arg0 + " withdata " + arg1);
+        }
+
+        @Override
+        public void onAdClicked(int arg0, Object arg1, PlatformAdapter arg2) {
+            LogUtils.d(arg2 + " onAdClicked for type " + arg0 + " withdata " + arg1);
+        }
+
+        @Override
+        public void onOtherEvent(String eventName, int adtype, Object data,
+                                 PlatformAdapter adapter) {
+            LogUtils.d(adapter + " onOtherEvent for type" + adtype + " withEvent " + eventName);
+        }
     }
 
+    /**
+     * 菜单、返回键响应
+     */
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        // TODO Auto-generated method stub
+        if(keyCode == KeyEvent.KEYCODE_BACK)
+        {
+            exitBy2Click(); //调用双击退出函数
+        }
+        return false;
+    }
+    /**
+     * 双击退出函数
+     */
+    private static Boolean isExit = false;
+
+    private void exitBy2Click() {
+        Timer tExit = null;
+        if (isExit == false) {
+            isExit = true; // 准备退出
+            Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
+            tExit = new Timer();
+            tExit.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    isExit = false; // 取消退出
+                }
+            }, 2000); // 如果2秒钟内没有按下返回键，则启动定时器取消掉刚才执行的任务
+
+        } else {
+            finish();
+            System.exit(0);
+        }
+    }
 }

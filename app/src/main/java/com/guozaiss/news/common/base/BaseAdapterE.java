@@ -35,6 +35,14 @@ public abstract class BaseAdapterE<T> extends BaseAdapter {
     }
 
     /**
+     * 获取数据源
+     * @return
+     */
+    public List<T> getLists() {
+        return lists;
+    }
+
+    /**
      * 追加adapter数据
      *
      * @param lists 添加的数据

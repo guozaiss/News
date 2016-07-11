@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.WebChromeClient;
@@ -12,11 +13,10 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
-import com.google.android.gms.ads.AdView;
 import com.guozaiss.news.R;
-import com.guozaiss.news.common.utils.AdUtils;
 import com.guozaiss.news.common.base.BaseActivity;
 import com.guozaiss.news.common.utils.ShareUtils;
+import com.keymob.networks.AdManager;
 
 public class HtmlActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
 
@@ -30,6 +30,9 @@ public class HtmlActivity extends BaseActivity implements SwipeRefreshLayout.OnR
         setContentView(R.layout.activity_html);
         url = getIntent().getStringExtra("url");
         webView = (WebView) findViewById(R.id.webView);
+
+        AdManager.getInstance().showInterstitial(this);
+
         //WebSettings
         WebSettings settings = webView.getSettings();
         settings.setJavaScriptEnabled(false);//支持javascript
@@ -75,10 +78,19 @@ public class HtmlActivity extends BaseActivity implements SwipeRefreshLayout.OnR
             }
         });
         swipeRefreshLayout.setOnRefreshListener(this);
-        AdView mAdView = (AdView) findViewById(R.id.adView);
-        AdUtils.init(mAdView, getApplicationContext());
+//        AdView mAdView = (AdView) findViewById(R.id.adView);
+//        AdUtils.init(mAdView, getApplicationContext());
     }
-
+    @Override
+    // 设置回退
+    // 覆盖Activity类的onKeyDown(int keyCoder,KeyEvent event)方法
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK) && webView.canGoBack()) {
+            webView.goBack(); // goBack()表示返回WebView的上一页面
+            return true;
+        }
+        return super.onKeyDown(keyCode,event);
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.html, menu);

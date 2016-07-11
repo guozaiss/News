@@ -153,3 +153,4 @@
 # 项目定制混淆
 ## 实体类混淆
 -keep class com.guozaiss.news.entities.** { *; }
+-keep class com.guozaiss.news.common.utils.imageLoad.** { *; }

@@ -1,13 +1,31 @@
 <resources>
+
     <!-- Base application theme. -->
     <style name="AppTheme.base" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <!--<item name="android:navigationBarColor">@color/navigationBarColor</item>-->
-    </style>
 
+        <!--customer-->
+        <item name="customer_background">#FFFFFF</item>
+        <item name="customer_textcolor">#777777</item>
+        <item name="customer_textcolor_selected">#000011</item>
+    </style>
+    <style name="AppTheme.base.night" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="colorPrimary">#444444</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">#999999</item>
+        <!--<item name="android:navigationBarColor">@color/navigationBarColor</item>-->
+        <!--customer-->
+        <item name="customer_background">#444444</item>
+        <item name="customer_textcolor">#999999</item>
+        <item name="customer_textcolor_selected">#FFFFEE</item>
+    </style>
     <style name="AppTheme" parent="AppTheme.base">
+        <!-- Customize your theme here. -->
+    </style>
+    <style name="AppTheme.night" parent="AppTheme.base.night">
         <!-- Customize your theme here. -->
     </style>
     <style name="Theme.AppStartLoadTranslucent" parent="AppTheme">

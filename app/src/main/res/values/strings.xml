@@ -3,8 +3,8 @@
     <string name="app_name">新闻小站</string>
     <string name="html">详情页面</string>
 
-    <string name="banner_ad_unit_id">ca-app-pub-3157595213810745/6745490312</string>
-    <string name="banner_ad_unit_id2">ca-app-pub-3157595213810745/8222223516</string>
+    <string name="banner_ad_unit_id"> ca-app-pub-4152148937239755/3166309625</string>
+    <string name="banner_ad_unit_id2">ca-app-pub-4152148937239755/4643042824</string>
 
     <string name="action_settings">设置</string>
     <string name="action_share">分享</string>
@@ -12,4 +12,7 @@
 
     <string name="drawer_open">open</string>
     <string name="drawer_close">close</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

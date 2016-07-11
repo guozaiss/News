@@ -1,5 +1,7 @@
 package com.guozaiss.news.common.utils.http;
 
+import com.guozaiss.news.Constants;
+
 import retrofit.GsonConverterFactory;
 import retrofit.Retrofit;
 import retrofit.RxJavaCallAdapterFactory;
@@ -10,7 +12,7 @@ import retrofit.RxJavaCallAdapterFactory;
 public class DataUtils {
     static class RetrofitInstanceHolder {
         private static Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://op.juhe.cn/onebox/news/")
+                .baseUrl(Constants.topBase)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();

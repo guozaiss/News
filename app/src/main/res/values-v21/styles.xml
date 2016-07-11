@@ -6,4 +6,10 @@
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:colorControlHighlight">@color/colorControlHighlight</item>
     </style>
+    <!-- Base application theme. -->
+    <style name="AppTheme.night" parent="AppTheme.base.night">
+        <!-- Customize your theme here. -->
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:colorControlHighlight">@color/colorControlHighlight</item>
+    </style>
 </resources>
