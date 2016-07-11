@@ -1,4 +1,4 @@
-package com.guozaiss.news.common.utils;
+package com.example.test;
 
 import android.app.Activity;
 import android.app.ActivityManager;
@@ -13,16 +13,12 @@ import android.graphics.Rect;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Vibrator;
 import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
-
-import com.guozaiss.news.R;
-import com.guozaiss.news.view.activity.SplashActivity;
 
 import java.io.File;
 import java.util.List;
@@ -33,25 +29,6 @@ import java.util.UUID;
  */
 public class CommonUtils {
 
-    /**
-     * 获取手机信息
-     *
-     * @return
-     */
-    public static String getPhoneModel(Context context) {
-        StringBuilder msg = new StringBuilder();
-        TelephonyManager phoneMgr = (TelephonyManager) ActivityManagerE.getInstance().peekActivity().getSystemService(Context.TELEPHONY_SERVICE);
-        return msg
-                .append("手机型号：" + Build.MODEL + "\n")
-                .append("SystemVersion：" + Build.VERSION.RELEASE + "\n")
-                .append("SDK版本号：" + Build.VERSION.SDK + "\n")
-                .append("品牌：" + Build.BRAND + "\n")
-                .append("设备：" + Build.DEVICE + "\n")
-                .append("CPU：" + Build.CPU_ABI + "\n")
-                .append("手机号：" + phoneMgr.getLine1Number() + "\n")
-                .append("设备ID：" + phoneMgr.getDeviceId() + "\n")
-                .toString();
-    }
 
     /**
      * 得到手机IMEI
@@ -240,43 +217,6 @@ public class CommonUtils {
     }
 
     /**
-     * 得到状态栏高度信息
-     *
-     * @param
-     * @return > 0 success; <= 0 fail
-     */
-    public static int getStatusHeight(Context context) {
-        int statusHeight = 0;
-        Rect localRect = new Rect();
-        ((Activity) context).getWindow().getDecorView().getWindowVisibleDisplayFrame(localRect);
-        statusHeight = localRect.top;
-        if (0 == statusHeight) {
-            Class<?> localClass;
-            try {
-                localClass = Class.forName("com.android.internal.R$dimen");
-                Object localObject = localClass.newInstance();
-                int i5 = Integer.parseInt(localClass.getField("status_bar_height").get(localObject).toString());
-                statusHeight = context.getResources().getDimensionPixelSize(i5);
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (InstantiationException e) {
-                e.printStackTrace();
-            } catch (NumberFormatException e) {
-                e.printStackTrace();
-            } catch (IllegalArgumentException e) {
-                e.printStackTrace();
-            } catch (SecurityException e) {
-                e.printStackTrace();
-            } catch (NoSuchFieldException e) {
-                e.printStackTrace();
-            }
-        }
-        return statusHeight;
-    }
-
-    /**
      * 获取应用版本名
      *
      * @param context
@@ -411,23 +351,39 @@ public class CommonUtils {
     }
 
     /**
-     * 创建快捷方式
+     * 得到状态栏高度信息
+     *
+     * @param
+     * @return > 0 success; <= 0 fail
      */
-    public static void addShortCut(Context context) {
-        Intent shortcut = new Intent("com.android.launcher.action.INSTALL_SHORTCUT");
-        // 设置属性
-        shortcut.putExtra(Intent.EXTRA_SHORTCUT_NAME, context.getString(R.string.app_name));
-        Intent.ShortcutIconResource resource = Intent.ShortcutIconResource.fromContext(context, R.mipmap.ic_launcher);
-        shortcut.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE, resource);
-        // 是否允许重复创建
-        shortcut.putExtra("duplicate", false);
-        Intent intent = new Intent(Intent.ACTION_MAIN);// 标识Activity为一个程序的开始
-        intent.setFlags(Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
-        intent.addFlags(Intent.FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY);
-        intent.addCategory(Intent.CATEGORY_LAUNCHER);
-        intent.setClass(context, SplashActivity.class);
-        shortcut.putExtra(Intent.EXTRA_SHORTCUT_INTENT, intent);
-        context.sendBroadcast(shortcut);
+    public static int getStatusHeight(Context context) {
+        int statusHeight = 0;
+        Rect localRect = new Rect();
+        ((Activity) context).getWindow().getDecorView().getWindowVisibleDisplayFrame(localRect);
+        statusHeight = localRect.top;
+        if (0 == statusHeight) {
+            Class<?> localClass;
+            try {
+                localClass = Class.forName("com.android.internal.R$dimen");
+                Object localObject = localClass.newInstance();
+                int i5 = Integer.parseInt(localClass.getField("status_bar_height").get(localObject).toString());
+                statusHeight = context.getResources().getDimensionPixelSize(i5);
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (InstantiationException e) {
+                e.printStackTrace();
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            } catch (IllegalArgumentException e) {
+                e.printStackTrace();
+            } catch (SecurityException e) {
+                e.printStackTrace();
+            } catch (NoSuchFieldException e) {
+                e.printStackTrace();
+            }
+        }
+        return statusHeight;
     }
-
 }

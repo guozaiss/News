@@ -1,7 +1,5 @@
 package com.guozaiss.news.common.utils.http;
 
-import com.guozaiss.news.Constants;
-
 import retrofit.GsonConverterFactory;
 import retrofit.Retrofit;
 import retrofit.RxJavaCallAdapterFactory;

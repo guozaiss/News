@@ -15,25 +15,12 @@ import com.squareup.leakcanary.RefWatcher;
  */
 public class NewsApplication extends Application {
     private static NewsApplication instance;//上下文
-    private static boolean night;
-
-    public static boolean isNight() {
-        return night;
-    }
-
-    public static void setNight(boolean night) {
-        NewsApplication.night = night;
-    }
 
     //图片加载工具类
     static class ImageLoadUtilsHolder {
         private static ImageLoadUtils<RequestListener> imageLoadUtils = new GlideUtils();
     }
 
-    /**
-     * 获得上下文实例
-     * @return
-     */
     public static NewsApplication getApplicationInstance() {
         return instance;
     }
@@ -49,6 +36,7 @@ public class NewsApplication extends Application {
     }
 
     private RefWatcher refWatcher;
+
     @Override
     public void onCreate() {
         super.onCreate();
