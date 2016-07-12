@@ -10,7 +10,7 @@ import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.guozaiss.news.R;
-import com.guozaiss.news.common.base.view.BaseActivity;
+import com.guozaiss.news.common.base.BaseActivity;
 import com.guozaiss.news.common.utils.LogUtils;
 import com.guozaiss.news.common.utils.ToastUtil;
 

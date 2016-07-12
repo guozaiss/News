@@ -15,6 +15,15 @@ import com.squareup.leakcanary.RefWatcher;
  */
 public class NewsApplication extends Application {
     private static NewsApplication instance;//上下文
+    private static boolean night;
+
+    public static boolean isNight() {
+        return night;
+    }
+
+    public static void setNight(boolean night) {
+        NewsApplication.night = night;
+    }
 
     //图片加载工具类
     static class ImageLoadUtilsHolder {

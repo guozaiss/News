@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.WebChromeClient;
@@ -12,11 +13,10 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
-import com.google.android.gms.ads.AdView;
 import com.guozaiss.news.R;
-import com.guozaiss.news.common.utils.AdUtils;
 import com.guozaiss.news.common.base.BaseActivity;
 import com.guozaiss.news.common.utils.ShareUtils;
+import com.keymob.networks.AdManager;
 
 public class HtmlActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
 

@@ -1,7 +1,9 @@
 package com.guozaiss.news.common.utils.http;
 
+import com.guozaiss.news.Constants;
 import com.guozaiss.news.entities.Data;
 import com.guozaiss.news.entities.HotWord;
+import com.guozaiss.news.entities.News;
 
 import retrofit.Call;
 import retrofit.http.GET;
@@ -24,7 +26,7 @@ public interface DataService {
      * @return
      */
     @GET(Constants.top)
-    Call<News> getNews(@Query("type")String type,@Query("key")String key);
+    Call<News> getNews(@Query("type")String type, @Query("key")String key);
 }
 
 //    @GET("query")
