@@ -13,15 +13,6 @@ android {
         versionName "1.2"
         multiDexEnabled true
     }
-    signingConfigs {
-        debug {
-            //keystore
-            storeFile file("guozaiss.jks")
-            storePassword "123456"
-            keyAlias "guozaiss"
-            keyPassword "ppoim6458"
-        }
-    }
     buildTypes {
         debug {
             signingConfig signingConfigs.debug
