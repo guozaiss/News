@@ -7,6 +7,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -14,9 +15,8 @@ import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
 import com.guozaiss.news.R;
-import com.guozaiss.news.common.base.BaseActivity;
+import com.guozaiss.news.common.base.view.BaseActivity;
 import com.guozaiss.news.common.utils.ShareUtils;
-import com.keymob.networks.AdManager;
 
 public class HtmlActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
 
@@ -30,8 +30,6 @@ public class HtmlActivity extends BaseActivity implements SwipeRefreshLayout.OnR
         setContentView(R.layout.activity_html);
         url = getIntent().getStringExtra("url");
         webView = (WebView) findViewById(R.id.webView);
-
-        AdManager.getInstance().showInterstitial(this);
 
         //WebSettings
         WebSettings settings = webView.getSettings();
@@ -65,6 +63,8 @@ public class HtmlActivity extends BaseActivity implements SwipeRefreshLayout.OnR
             }
 
         });
+        String title = webView.getTitle();
+        toolbar.setTitle(title);
         webView.setWebChromeClient(new WebChromeClient() {
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
@@ -122,6 +122,8 @@ public class HtmlActivity extends BaseActivity implements SwipeRefreshLayout.OnR
     public void finish() {
         webView.getSettings().setDisplayZoomControls(false);
         webView.getSettings().setSupportZoom(false);
+            ViewGroup view = (ViewGroup) getWindow().getDecorView();
+            view.removeAllViews();
         super.finish();
     }
 }

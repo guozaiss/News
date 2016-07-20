@@ -2,14 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.guozaiss.news">
 
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.GET_TASKS" />
     <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
     <!-- base permission -->
@@ -28,15 +21,11 @@
         android:name="android.hardware.microphone"
         android:required="false" />
 
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_UPDATES" />
-
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <permission android:name="android.permission.BLUETOOTH" android:label="BLUETOOTH" />
+    <permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <application
         android:name=".NewsApplication"
         android:allowBackup="true"
@@ -76,44 +65,6 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
         <!--keymob-->
-        <!-- Admob -->
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="8115000" />
-
-        <activity
-            android:name="com.gg.e.abs.AaActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
-            android:theme="@android:style/Theme.Translucent" />
-
-        <!-- Amazon Mobile Ads -->
-        <activity
-            android:name="com.amazon.device.ads.AdActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize" />
-
-        <!-- InMobi -->
-        <activity
-            android:name="com.inmobi.rendering.InMobiAdActivity"
-            android:configChanges="keyboardHidden|orientation|keyboard|smallestScreenSize|screenSize"
-            android:hardwareAccelerated="true"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            />
-
-        <!-- Millennial Media -->
-        <activity
-            android:name="com.millennialmedia.internal.MMActivity"
-
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-        <activity
-            android:name="com.millennialmedia.internal.MMIntentWrapperActivity"
-            android:label="sdk" />
-
-
-        <!-- Keymob -->
-        <activity
-            android:name="com.keymob.sdk.core.KeymobActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
-            android:theme="@android:style/Theme.Dialog" />
         <!-- baidu -->
         <activity
             android:name="com.baidu.mobads.AppActivity"

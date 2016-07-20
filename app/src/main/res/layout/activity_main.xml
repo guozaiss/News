@@ -16,14 +16,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/appbar"
-        app:tabTextColor="?attr/customer_textcolor"
         android:background="?attr/customer_background"
+        app:tabMode="scrollable"
         app:tabSelectedTextColor="?attr/customer_textcolor_selected"
-        app:tabMode="scrollable" />
+        app:tabTextColor="?attr/customer_textcolor" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/tab_layout" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:visibility="gone" />
 </RelativeLayout>

@@ -9,10 +9,13 @@ import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
+import com.guozaiss.news.BuildConfig;
 import com.guozaiss.news.R;
-import com.guozaiss.news.common.base.BaseActivity;
+import com.guozaiss.news.common.base.view.BaseActivity;
+import com.guozaiss.news.common.utils.AdEventListener;
 import com.guozaiss.news.common.utils.LogUtils;
 import com.guozaiss.news.common.utils.ToastUtil;
+import com.keymob.networks.AdManager;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -27,6 +30,11 @@ public class SplashActivity extends BaseActivity implements AMapLocationListener
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+
+//        AdManager.getInstance().pluginFile.put("qq", "GDTAdapter.pl");
+//        AdManager.getInstance().pluginFile.put("baidu", "BaiduAdapter.jar");
+//        AdManager.getInstance().pluginFile.put("Adcolony", "AdcolonyAdapter.jar");
+        AdManager.getInstance().initFromKeymobService(this, "10667", new AdEventListener(), BuildConfig.DEBUG);
 
         //初始化定位
         mLocationClient = new AMapLocationClient(getApplicationContext());

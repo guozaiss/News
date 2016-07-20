@@ -7,48 +7,41 @@ import android.support.v7.app.AlertDialog;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.guozaiss.news.BuildConfig;
 import com.guozaiss.news.Constants;
-import com.guozaiss.news.NewsApplication;
 import com.guozaiss.news.R;
 import com.guozaiss.news.adapters.ViewPagerAdapter;
-import com.guozaiss.news.common.base.BaseActivity;
-import com.guozaiss.news.common.utils.LogUtils;
+import com.guozaiss.news.common.base.view.BaseActivity;
+import com.guozaiss.news.common.utils.AdUtils;
 import com.guozaiss.news.common.utils.SPUtils;
 import com.guozaiss.news.common.utils.ToastUtil;
 import com.guozaiss.news.view.fragment.NewsFragment;
-import com.keymob.networks.AdManager;
-import com.keymob.networks.core.IAdEventListener;
-import com.keymob.networks.core.IInterstitialPlatform;
-import com.keymob.networks.core.PlatformAdapter;
-import com.keymob.sdk.core.AdTypes;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class MainActivity extends BaseActivity  {
+public class MainActivity extends BaseActivity {
     private TabLayout tab_layout;
     private ViewPager view_pager;
+    private ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (NewsApplication.isNight()) {
+        if (SPUtils.getBoolean(this, "night", false)) {
             setTheme(R.style.AppTheme_night);
         } else {
             setTheme(R.style.AppTheme);
         }
         setContentView(R.layout.activity_main);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-
-        AdManager.getInstance().pluginFile.put("gdt", "GDTAdapter.pl");
-        AdManager.getInstance().pluginFile.put("baidu", "BaiduAdapter.jar");
-        AdManager.getInstance().initFromKeymobService(this, "10667", new AdEventListener(), BuildConfig.DEBUG);
-        AdManager.getInstance().showInterstitial(this);
 
         boolean isFirst = SPUtils.getBoolean(this, "isFirst", false);
         //当是release版本并且是第一次运行时弹出对话框
@@ -63,11 +56,12 @@ public class MainActivity extends BaseActivity  {
         }
         tab_layout = (TabLayout) findViewById(R.id.tab_layout);
         view_pager = (ViewPager) findViewById(R.id.view_pager);
+        imageView = (ImageView) findViewById(R.id.imageView);
         List<NewsFragment> newsFragments = new ArrayList<>();
         for (int i = 0; i < Constants.type.length; i++) {
             NewsFragment newsFragment = new NewsFragment();
             Bundle bundle = new Bundle();
-            bundle.putString("type",Constants.type[i]);
+            bundle.putString("type", Constants.type[i]);
             newsFragment.setArguments(bundle);
             newsFragments.add(newsFragment);
         }
@@ -77,6 +71,7 @@ public class MainActivity extends BaseActivity  {
         if (BuildConfig.DEBUG) {
             ToastUtil.showToastOfLong("当前处于DEBUG模式，请谨慎操作！");
         }
+
     }
 
     @Override
@@ -89,54 +84,25 @@ public class MainActivity extends BaseActivity  {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_settings) {
-            if (NewsApplication.isNight()) {
-                NewsApplication.setNight(false);
-            } else {
-                NewsApplication.setNight(true);
-            }
+//            boolean night = SPUtils.getBoolean(this, "night", false);
+//            SPUtils.putBoolean(this, "night", !night);
+//            Bitmap shot = CommonUtils.getShot(this);
+//            imageView.setImageBitmap(shot);
+//            imageView.setVisibility(View.VISIBLE);
+//            startAnim(imageView);
 //            recreate();
-//            AdManager.getInstance().showRelationBanner(BannerSizeType.BANNER, BannerPositions.BOTTOM_CENTER,88,this);
+            AdUtils.showInterstitial(this);
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
-
-    private class AdEventListener implements IAdEventListener {
-        @Override
-        public void onLoadedSuccess(int arg0, Object arg1,
-                                    PlatformAdapter arg2) {
-            LogUtils.d( arg2 + " onLoadedSuccess for type " + arg0 + " withdata " + arg1);
-            if (arg0 == AdTypes.INTERSTITIAL) {
-                ((IInterstitialPlatform) arg2).showInterstitial();
-            }
-        }
-
-        @Override
-        public void onLoadedFail(int arg0, Object arg1, PlatformAdapter arg2) {
-            LogUtils.d(arg2 + " onLoadedFail for type " + arg0 + " withdata " + arg1);
-        }
-
-        @Override
-        public void onAdOpened(int arg0, Object arg1, PlatformAdapter arg2) {
-            LogUtils.d(arg2 + " onAdOpened for type " + arg0 + " withdata " + arg1);
-        }
-
-        @Override
-        public void onAdClosed(int arg0, Object arg1, PlatformAdapter arg2) {
-            LogUtils.d(arg2 + " onAdClosed for type " + arg0 + " withdata " + arg1);
-        }
-
-        @Override
-        public void onAdClicked(int arg0, Object arg1, PlatformAdapter arg2) {
-            LogUtils.d(arg2 + " onAdClicked for type " + arg0 + " withdata " + arg1);
-        }
-
-        @Override
-        public void onOtherEvent(String eventName, int adtype, Object data,
-                                 PlatformAdapter adapter) {
-            LogUtils.d(adapter + " onOtherEvent for type" + adtype + " withEvent " + eventName);
-        }
+    private void startAnim(View view) {
+        AlphaAnimation animation = new AlphaAnimation(1, 0);
+        animation.setDuration(4000);//设置动画持续时间
+        animation.setFillAfter(true);//动画执行完后是否停留在执行完的状态
+        view.setAnimation(animation);
+        animation.start();
     }
 
     /**
@@ -145,12 +111,12 @@ public class MainActivity extends BaseActivity  {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         // TODO Auto-generated method stub
-        if(keyCode == KeyEvent.KEYCODE_BACK)
-        {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
             exitBy2Click(); //调用双击退出函数
         }
         return false;
     }
+
     /**
      * 双击退出函数
      */

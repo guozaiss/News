@@ -1,4 +1,4 @@
-package com.guozaiss.news.common.base;
+package com.guozaiss.news.common.base.view;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.guozaiss.news.R;
 import com.guozaiss.news.common.utils.ActivityManagerE;
+import com.guozaiss.news.common.utils.AdUtils;
 import com.guozaiss.news.common.utils.LogUtils;
 
 /**
@@ -93,6 +94,8 @@ public class BaseActivity extends AppCompatActivity {
         super.onResume();
 //        Integer integer = toolbarAlpha.get(this.getClass().getSimpleName());
 //        toolbar.getBackground().setAlpha(integer == null ? 255 : integer);//保存标题栏属性
+
+        AdUtils.showBanner(this);
     }
 
     @Override
@@ -110,6 +113,12 @@ public class BaseActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        AdUtils.hide();
     }
 
     @Override
