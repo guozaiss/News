@@ -12,7 +12,7 @@ public interface Constants {
     String topBase = "http://v.juhe.cn/";
     String topAppKey = "741516247da6b3718aa208778dad14c8";
     String top = "toutiao/index";
-    String[] type = {"top","shehui","guonei","guoji","yule","tiyu","junshi","keji","caijing","shishang"};
-    String[] nameOfType = {"头条","社会","国内","国际","娱乐","体育","军事","科技","财经","时尚"};
+    String[] type = {"shehui","top","guonei","guoji","yule","tiyu","junshi","keji","caijing","shishang"};
+    String[] nameOfType = {"社会","头条","国内","国际","娱乐","体育","军事","科技","财经","时尚"};
 
 }
