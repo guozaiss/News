@@ -14,8 +14,8 @@ import android.widget.ListView;
 import com.guozaiss.news.Constants;
 import com.guozaiss.news.R;
 import com.guozaiss.news.adapters.NewTopAdapter;
-import com.guozaiss.news.common.utils.LogUtils;
-import com.guozaiss.news.common.utils.http.DataUtils;
+import com.guozaiss.news.core.utils.LogUtils;
+import com.guozaiss.news.core.utils.http.DataUtils;
 import com.guozaiss.news.entities.News;
 import com.guozaiss.news.view.activity.HtmlActivity;
 

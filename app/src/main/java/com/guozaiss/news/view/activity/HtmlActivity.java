@@ -15,8 +15,8 @@ import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
 import com.guozaiss.news.R;
-import com.guozaiss.news.common.base.view.BaseActivity;
-import com.guozaiss.news.common.utils.ShareUtils;
+import com.guozaiss.news.core.base.view.BaseActivity;
+import com.guozaiss.news.core.utils.ShareUtils;
 
 public class HtmlActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
 

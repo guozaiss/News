@@ -8,10 +8,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.guozaiss.news.R;
-import com.guozaiss.news.common.base.BaseAdapterE;
-import com.guozaiss.news.common.base.BaseViewHolder;
-import com.guozaiss.news.common.utils.CommonUtils;
-import com.guozaiss.news.common.utils.imageLoad.PicassoUtils;
+import com.guozaiss.news.core.base.BaseAdapterE;
+import com.guozaiss.news.core.base.BaseViewHolder;
+import com.guozaiss.news.core.utils.CommonUtils;
+import com.guozaiss.news.core.utils.imageLoad.PicassoUtils;
 import com.guozaiss.news.entities.News;
 
 import java.util.List;

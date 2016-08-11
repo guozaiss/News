@@ -16,10 +16,10 @@ import com.guozaiss.news.BuildConfig;
 import com.guozaiss.news.Constants;
 import com.guozaiss.news.R;
 import com.guozaiss.news.adapters.ViewPagerAdapter;
-import com.guozaiss.news.common.base.view.BaseActivity;
-import com.guozaiss.news.common.utils.AdUtils;
-import com.guozaiss.news.common.utils.SPUtils;
-import com.guozaiss.news.common.utils.ToastUtil;
+import com.guozaiss.news.core.base.view.BaseActivity;
+import com.guozaiss.news.core.utils.AdUtils;
+import com.guozaiss.news.core.utils.SPUtils;
+import com.guozaiss.news.core.utils.ToastUtil;
 import com.guozaiss.news.view.fragment.NewsFragment;
 
 import java.util.ArrayList;

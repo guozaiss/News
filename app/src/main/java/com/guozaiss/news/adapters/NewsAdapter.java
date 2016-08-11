@@ -5,8 +5,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.guozaiss.news.R;
-import com.guozaiss.news.common.base.BaseAdapterE;
-import com.guozaiss.news.common.base.BaseViewHolder;
+import com.guozaiss.news.core.base.BaseAdapterE;
+import com.guozaiss.news.core.base.BaseViewHolder;
 import com.guozaiss.news.entities.Data;
 
 import java.util.List;

@@ -11,10 +11,10 @@ import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.guozaiss.news.BuildConfig;
 import com.guozaiss.news.R;
-import com.guozaiss.news.common.base.view.BaseActivity;
-import com.guozaiss.news.common.utils.AdEventListener;
-import com.guozaiss.news.common.utils.LogUtils;
-import com.guozaiss.news.common.utils.ToastUtil;
+import com.guozaiss.news.core.base.view.BaseActivity;
+import com.guozaiss.news.core.utils.AdEventListener;
+import com.guozaiss.news.core.utils.LogUtils;
+import com.guozaiss.news.core.utils.ToastUtil;
 import com.keymob.networks.AdManager;
 
 import java.text.SimpleDateFormat;
