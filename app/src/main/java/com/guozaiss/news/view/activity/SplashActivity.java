@@ -31,7 +31,7 @@ public class SplashActivity extends BaseActivity implements AMapLocationListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-//        AdManager.getInstance().pluginFile.put("qq", "GDTAdapter.pl");
+        AdManager.getInstance().pluginFile.put("qq", "GDTAdapter.pl");
 //        AdManager.getInstance().pluginFile.put("baidu", "BaiduAdapter.jar");
 //        AdManager.getInstance().pluginFile.put("Adcolony", "AdcolonyAdapter.jar");
         AdManager.getInstance().initFromKeymobService(this, "10667", new AdEventListener(), BuildConfig.DEBUG);
@@ -60,7 +60,8 @@ public class SplashActivity extends BaseActivity implements AMapLocationListener
         mLocationClient.setLocationOption(mLocationOption);
 
         requestPermission(Manifest.permission.ACCESS_FINE_LOCATION);//请求定位权限
-
+        requestPermission(Manifest.permission.READ_EXTERNAL_STORAGE);
+        requestPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE);
 
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
     }
