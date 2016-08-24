@@ -22,9 +22,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.guozaiss.news.R;
-import com.guozaiss.news.core.utils.ActivityManagerE;
-import com.guozaiss.news.core.utils.AdUtils;
-import com.guozaiss.news.core.utils.LogUtils;
+import com.guozaiss.news.utils.ActivityManagerE;
+import com.guozaiss.news.utils.AdUtils;
+import com.guozaiss.news.utils.LogUtils;
 
 /**
  * 1、ActivityManagerE Activity管理栈

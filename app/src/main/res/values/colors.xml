@@ -12,4 +12,7 @@
     <color name="windowBackground">#FFFFFF</color>
     <color name="windowBackgroundTran">#9000</color>
     <color name="colorControlHighlight">#868686</color>
+
+
+    <color name="grey_c5c5c5">#c5c5c5</color>
 </resources>

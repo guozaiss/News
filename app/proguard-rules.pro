@@ -150,6 +150,12 @@
 -keep class com.amap.api.fence.**{*;}
 -keep class com.autonavi.aps.amapapi.model.**{*;}
 
+#混淆 retrofit
+-dontwarn retrofit2.**
+-keep class retrofit2.** { *; }
+-keepattributes Signature
+-keepattributes Exceptions
+-keep class rx.** { *; }
 #混淆 Glide
 -keep public class * implements com.bumptech.glide.module.GlideModule
 -keep public enum com.bumptech.glide.load.resource.bitmap.ImageHeaderParser$** {
@@ -159,5 +165,5 @@
 
 # 项目定制混淆
 ## 实体类混淆
--keep class com.guozaiss.news.entities.** { *; }
+-keep class com.guozaiss.news.beans.** { *; }
 -keep class com.guozaiss.news.common.utils.imageLoad.** { *; }

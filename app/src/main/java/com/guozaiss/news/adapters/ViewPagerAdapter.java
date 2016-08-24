@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.guozaiss.news.Constants;
-import com.guozaiss.news.view.fragment.NewsFragment;
+import com.guozaiss.news.fragment.NewsFragment;
 
 import java.util.List;
 

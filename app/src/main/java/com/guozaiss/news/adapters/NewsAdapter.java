@@ -5,9 +5,9 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.guozaiss.news.R;
+import com.guozaiss.news.beans.Data;
 import com.guozaiss.news.core.base.BaseAdapterE;
 import com.guozaiss.news.core.base.BaseViewHolder;
-import com.guozaiss.news.entities.Data;
 
 import java.util.List;
 
