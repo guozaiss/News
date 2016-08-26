@@ -1,14 +1,12 @@
 package com.guozaiss.news.utils;
 
-import com.readyidu.market.R;
-import com.readyidu.market.fragments.JokeListFragment;
 
 /**
  * Created by bruce on 16/4/22.
  */
 public enum SimpleBackPage {
-
-    jokeListAction(0, R.string.title_joke_list, JokeListFragment.class);
+        ;
+//    jokeListAction(0, R.string.title_joke_list, JokeListFragment.class);
 
     private int title;
     private Class<?> clz;

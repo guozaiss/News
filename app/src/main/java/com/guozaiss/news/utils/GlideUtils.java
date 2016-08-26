@@ -23,7 +23,7 @@ public class GlideUtils {
     public static void loadImage(Context context, String imageUrl, ImageView imageView) {
         Glide.with(context)
                 .load(imageUrl)
-                .placeholder(R.color.grey_c5c5c5)
+//                .placeholder(R.color.grey_c5c5c5)
                 .error(R.color.grey_c5c5c5)
                 .dontAnimate()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
@@ -41,7 +41,7 @@ public class GlideUtils {
     public static void loadRoundedImage(Context context, String imageUrl, int radius, ImageView imageView) {
         Glide.with(context)
                 .load(imageUrl)
-                .placeholder(R.color.grey_c5c5c5)
+//                .placeholder(R.color.grey_c5c5c5)
                 .error(R.color.grey_c5c5c5)
                 .bitmapTransform(new CenterCrop(context), new RoundedCornersTransformation(context, radius, 0, RoundedCornersTransformation.CornerType.ALL))
                 .dontAnimate()

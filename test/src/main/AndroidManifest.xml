@@ -16,9 +16,10 @@
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity" />
         <activity android:name=".CameraActivity" />
-        <activity android:name=".UberActivity"></activity>
-        <activity android:name=".PopuWebViewActivity"></activity>
-        <activity android:name=".HelloChartsActivity">
+        <activity android:name=".UberActivity" />
+        <activity android:name=".PopuWebViewActivity" />
+        <activity android:name=".HelloChartsActivity"></activity>
+        <activity android:name=".VideoActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

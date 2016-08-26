@@ -16,6 +16,7 @@ import com.guozaiss.news.R;
 import com.guozaiss.news.core.annotations.OrdersActionTag;
 import com.guozaiss.news.core.annotations.OrdersModuleTag;
 import com.guozaiss.news.core.base.view.BaseActivity;
+import com.guozaiss.news.utils.ActivityManagerE;
 import com.guozaiss.news.utils.SimpleBackPage;
 
 
@@ -36,18 +37,13 @@ public class SimpleBackActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        setContentView(R.layout.activity_simple_back);
         if (mPageValue == -1) {
             mPageValue = getIntent().getIntExtra(BUNDLE_KEY_PAGE, 0);
         }
 
         //加载内容模块
         initFragment();
-    }
-
-    @Override
-    public int getLayoutId() {
-        return R.layout.activity_simple_back;
     }
 
     @Override
@@ -80,7 +76,7 @@ public class SimpleBackActivity extends BaseActivity {
 
     @OrdersActionTag(actionName = "close")
     void doBackAction() {
-        AppManager.getInstance().finishActivity(this);
+        ActivityManagerE.getInstance().remove(this);
     }
 
     @Override

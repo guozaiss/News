@@ -1,15 +1,14 @@
 package com.guozaiss.news.activity;
 
 import android.Manifest;
-import android.app.AlarmManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
-import com.guozaiss.news.BuildConfig;
 import com.guozaiss.news.R;
 import com.guozaiss.news.core.base.view.BaseActivity;
 import com.guozaiss.news.utils.AdEventListener;
@@ -31,10 +30,10 @@ public class SplashActivity extends BaseActivity implements AMapLocationListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        AdManager.getInstance().pluginFile.put("qq", "GDTAdapter.pl");
+//        AdManager.getInstance().pluginFile.put("qq", "GDTAdapter.pl");
 //        AdManager.getInstance().pluginFile.put("baidu", "BaiduAdapter.jar");
 //        AdManager.getInstance().pluginFile.put("Adcolony", "AdcolonyAdapter.jar");
-        AdManager.getInstance().initFromKeymobService(this, "10667", new AdEventListener(), BuildConfig.DEBUG);
+        AdManager.getInstance().initFromKeymobService(this, "10667", new AdEventListener(), true);
 
         //初始化定位
         mLocationClient = new AMapLocationClient(getApplicationContext());
@@ -62,8 +61,11 @@ public class SplashActivity extends BaseActivity implements AMapLocationListener
         requestPermission(Manifest.permission.ACCESS_FINE_LOCATION);//请求定位权限
         requestPermission(Manifest.permission.READ_EXTERNAL_STORAGE);
         requestPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+    }
 
-        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+    @Override
+    public void onNoFastClick(View view) {
+
     }
 
     @Override
@@ -107,7 +109,7 @@ public class SplashActivity extends BaseActivity implements AMapLocationListener
                         startActivity(new Intent(SplashActivity.this, MainActivity.class));
                         finish();
                     }
-                },1000);
+                }, 1000);
             } else {
                 //显示错误信息ErrCode是错误码，errInfo是错误信息，详见错误码表。
 //                LogUtils.e("location Error, ErrCode:"

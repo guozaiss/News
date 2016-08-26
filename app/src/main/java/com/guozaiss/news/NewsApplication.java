@@ -4,14 +4,11 @@ import android.app.Application;
 import android.content.Context;
 import android.util.Log;
 
-import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.ViewTarget;
 import com.guozaiss.news.APIService.HttpHelper;
 import com.guozaiss.news.core.FakeCrashLibrary;
 import com.guozaiss.news.utils.LogUtils;
 import com.guozaiss.news.utils.crash.CustomCrash;
-import com.guozaiss.news.utils.imageLoad.GlideUtils;
-import com.guozaiss.news.utils.imageLoad.ImageLoadUtils;
 import com.squareup.leakcanary.RefWatcher;
 
 import timber.log.Timber;
@@ -22,19 +19,9 @@ import timber.log.Timber;
 public class NewsApplication extends Application {
     private static NewsApplication instance;//上下文
 
-    //图片加载工具类
-    static class ImageLoadUtilsHolder {
-        private static ImageLoadUtils<RequestListener> imageLoadUtils = new GlideUtils();
-    }
-
     public static NewsApplication getApplicationInstance() {
         return instance;
     }
-
-    public static ImageLoadUtils<RequestListener> getImageLoadUtils() {
-        return ImageLoadUtilsHolder.imageLoadUtils;
-    }
-
 
     public static RefWatcher getRefWatcher(Context context) {
         NewsApplication application = (NewsApplication) context.getApplicationContext();

@@ -5,8 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.readyidu.market.activities.RobotActivity;
-import com.readyidu.market.activities.SimpleBackActivity;
+import com.guozaiss.news.activity.SimpleBackActivity;
+
 
 /**
  * Created by bruce on 16/8/20.
@@ -14,14 +14,14 @@ import com.readyidu.market.activities.SimpleBackActivity;
 public class UIHelper {
 
 
-    /**
-     * 打开段子列表
-     *
-     * @param context
-     */
-    public static void showJokeList(Context context) {
-        showSimpleBackPage(context, SimpleBackPage.jokeListAction);
-    }
+//    /**
+//     * 打开段子列表
+//     *
+//     * @param context
+//     */
+//    public static void showJokeList(Context context) {
+//        showSimpleBackPage(context, SimpleBackPage.jokeListAction);
+//    }
 
     /**
      * TODO:打开页面基础方法

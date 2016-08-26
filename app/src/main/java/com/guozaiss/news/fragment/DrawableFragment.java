@@ -14,11 +14,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.guozaiss.news.R;
+import com.guozaiss.news.core.base.view.BaseFragment;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class DrawableFragment extends Fragment implements View.OnClickListener {
+public class DrawableFragment extends BaseFragment {
     public static final String PREF_FILE_NAME = "testPREF";
     public static final String KAY_USER_LEARN_DRAWER = "use_learn_drawer";
 
@@ -55,8 +56,8 @@ public class DrawableFragment extends Fragment implements View.OnClickListener {
     }
 
     @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
+    public void onNoFastClick(View view) {
+        switch (view.getId()) {
         }
     }
 

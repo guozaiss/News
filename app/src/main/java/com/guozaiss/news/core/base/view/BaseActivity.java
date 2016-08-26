@@ -24,6 +24,7 @@ import android.widget.Toast;
 import com.guozaiss.news.R;
 import com.guozaiss.news.utils.ActivityManagerE;
 import com.guozaiss.news.utils.AdUtils;
+import com.guozaiss.news.utils.EventUtils;
 import com.guozaiss.news.utils.LogUtils;
 
 /**
@@ -35,7 +36,7 @@ import com.guozaiss.news.utils.LogUtils;
  * <p/>
  * Created by guozaiss on 16/2/15.
  */
-public class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity implements View.OnClickListener {
     protected Toolbar toolbar;
     protected SwipeRefreshLayout swipeRefreshLayout;
     final private int REQUEST_CODE_ASK_PERMISSIONS = 123;//权限请求码
@@ -66,6 +67,16 @@ public class BaseActivity extends AppCompatActivity {
 //        activityCloseExitAnimation = activityStyle.getResourceId(1, 0);
 //        activityStyle.recycle();
 //    }
+
+
+    @Override
+    public void onClick(View view) {
+        if (!EventUtils.isFastDoubleClick(view.getId())) {
+            onNoFastClick(view);
+        }
+    }
+
+    public abstract void onNoFastClick(View view);
 
     @Override
     public void setContentView(@LayoutRes int layoutResID) {

@@ -15,10 +15,11 @@ import com.guozaiss.news.APIService.NetworkSubscriber;
 import com.guozaiss.news.APIService.impl.DataServiceImpl;
 import com.guozaiss.news.Constants;
 import com.guozaiss.news.R;
+import com.guozaiss.news.activity.HtmlActivity;
 import com.guozaiss.news.adapters.NewTopAdapter;
 import com.guozaiss.news.beans.News;
+import com.guozaiss.news.core.base.view.BaseFragment;
 import com.guozaiss.news.utils.LogUtils;
-import com.guozaiss.news.activity.HtmlActivity;
 
 import java.util.List;
 
@@ -26,7 +27,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class NewsFragment extends Fragment {
+public class NewsFragment extends BaseFragment {
     private View inflate;
     private SwipeRefreshLayout swipeRefreshLayout;
     private ListView listView;
@@ -67,10 +68,10 @@ public class NewsFragment extends Fragment {
             loaded();
             if (data != null && data.getResult().getData().size() > 0) {
                 if (adapter == null) {
-                    adapter = new NewTopAdapter(getActivity(), data.getResult().getData(), R.layout.item_news);
+                    adapter = new NewTopAdapter(getActivity(), data.getResult().getData());
                     listView.setAdapter(adapter);
                 } else {
-                    adapter.changeLists(data.getResult().getData());
+                    adapter.setData(data.getResult().getData());
                     adapter.notifyDataSetChanged();
                 }
             } else {
@@ -124,4 +125,8 @@ public class NewsFragment extends Fragment {
         swipeRefreshLayout.setRefreshing(false);
     }
 
+    @Override
+    public void onNoFastClick(View view) {
+
+    }
 }

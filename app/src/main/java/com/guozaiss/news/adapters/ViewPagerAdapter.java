@@ -1,6 +1,5 @@
 package com.guozaiss.news.adapters;
 
-import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -14,11 +13,10 @@ import java.util.List;
  * Created by Lenovo on 2016/7/10.
  */
 public class ViewPagerAdapter extends FragmentPagerAdapter {
-    private Context context;
     private List<NewsFragment> newsFragments;
-    public ViewPagerAdapter(FragmentManager fm,Context context,List<NewsFragment> newsFragments) {
+
+    public ViewPagerAdapter(FragmentManager fm, List<NewsFragment> newsFragments) {
         super(fm);
-        this.context = context;
         this.newsFragments = newsFragments;
     }
 

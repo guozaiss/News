@@ -36,10 +36,9 @@
         android:supportsRtl="true"
         tools:replace="android:label"
         android:theme="@style/AppTheme">
-
-        <!--<meta-data-->
-        <!--android:name="com.guozaiss.news.common.utils.imageLoad.CustomCachingGlideModule"-->
-        <!--android:value="GlideModule" />-->
+        <meta-data
+            android:name="com.guozaiss.news.utils.GlideConfiguration"
+            android:value="GlideModule" />
         <!--高德地图key-->
         <meta-data
             android:name="com.amap.api.v2.apikey"

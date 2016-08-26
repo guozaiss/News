@@ -30,4 +30,8 @@ dependencies {
     compile 'jp.co.cyberagent.android.gpuimage:gpuimage-library:1.4.1'
     compile 'com.uber.sdk:rides-android:0.5.3'
     compile 'com.github.lecho:hellocharts-library:1.5.8@aar'
+    compile 'fm.jiecao:jiecaovideoplayer:4.6.1'
+    compile 'tv.danmaku.ijk.media:ijkplayer-java:0.6.1'
+    compile 'tv.danmaku.ijk.media:ijkplayer-armv7a:0.6.1'
+    compile 'com.google.android.exoplayer:exoplayer:r1.5.10'
 }

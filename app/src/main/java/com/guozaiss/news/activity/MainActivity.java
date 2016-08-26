@@ -65,12 +65,17 @@ public class MainActivity extends BaseActivity {
             newsFragment.setArguments(bundle);
             newsFragments.add(newsFragment);
         }
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager(), this, newsFragments);
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager(), newsFragments);
         view_pager.setAdapter(adapter);
         tab_layout.setupWithViewPager(view_pager);
         if (BuildConfig.DEBUG) {
             ToastUtil.showToast("当前处于DEBUG模式，请谨慎操作！");
         }
+
+    }
+
+    @Override
+    public void onNoFastClick(View view) {
 
     }
 
