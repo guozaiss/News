@@ -17,10 +17,10 @@ import com.guozaiss.news.Constants;
 import com.guozaiss.news.R;
 import com.guozaiss.news.adapters.ViewPagerAdapter;
 import com.guozaiss.news.core.base.view.BaseActivity;
+import com.guozaiss.news.fragment.NewsFragment;
 import com.guozaiss.news.utils.AdUtils;
 import com.guozaiss.news.utils.SPUtils;
 import com.guozaiss.news.utils.ToastUtil;
-import com.guozaiss.news.fragment.NewsFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,7 +71,6 @@ public class MainActivity extends BaseActivity {
         if (BuildConfig.DEBUG) {
             ToastUtil.showToast("当前处于DEBUG模式，请谨慎操作！");
         }
-
     }
 
     @Override

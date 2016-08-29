@@ -12,13 +12,14 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <!-- base permission for location-->
+    <!-- base permission for location -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <!-- base permission  required by chartboost and baidu-->
+    <!-- base permission  required by chartboost and baidu -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <!-- permission required by mmedia -->
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
     <uses-feature
         android:name="android.hardware.microphone"
         android:required="false" />
@@ -26,52 +27,38 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_UPDATES" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
-    <permission android:name="android.permission.BLUETOOTH" android:label="BLUETOOTH" />
+
+    <permission
+        android:name="android.permission.BLUETOOTH"
+        android:label="BLUETOOTH" />
     <permission android:name="android.permission.BLUETOOTH_ADMIN" />
+
     <application
         android:name=".NewsApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="${APP_NAME}"
         android:supportsRtl="true"
-        tools:replace="android:label"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:replace="android:label">
         <meta-data
             android:name="com.guozaiss.news.utils.GlideConfiguration"
             android:value="GlideModule" />
-        <!--高德地图key-->
+        <!-- 高德地图key -->
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="b6559d61985a4392534dc74aa830aabb" />
-
-        <!--腾讯集成-->
-        <data android:scheme="tencent222222" />
-
-        <activity
-            android:name="com.tencent.tauth.AuthActivity"
-            android:launchMode="singleTask"
-            android:noHistory="true">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data android:scheme="tencent你的AppId" />
-            </intent-filter>
-        </activity>
-
-        <activity
-            android:name="com.tencent.connect.common.AssistActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
         <activity
             android:name=".activity.SimpleBackActivity"
             android:screenOrientation="landscape"
             android:theme="@style/TranslucentTheme" />
 
-        <!--keymob-->
+        <!-- keymob -->
+        <activity
+            android:name="com.keymob.sdk.core.KeymobActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+            android:theme="@android:style/Theme.Dialog" />
         <!-- baidu -->
         <activity
             android:name="com.baidu.mobads.AppActivity"
@@ -95,29 +82,33 @@
         <service
             android:name="com.gg.e.abs.GownloadService"
             android:exported="false" />
+
         <activity
             android:name="com.gg.e.abs.GDActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
 
         <!-- chartboost -->
-        <activity android:name="com.chartboost.sdk.CBImpressionActivity"
+        <activity
+            android:name="com.chartboost.sdk.CBImpressionActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:excludeFromRecents="true"
             android:hardwareAccelerated="true"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
-            android:configChanges="keyboardHidden|orientation|screenSize"/>
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
         <!-- 广点通广告平台配置信息 -->
         <service
             android:name="com.qq.e.comm.DownloadService"
             android:exported="false" />
+
         <activity
             android:name="com.qq.e.ads.ADActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
-        <!--自带配置-->
+        <!-- 自带配置 -->
         <activity
             android:name=".activity.SplashActivity"
             android:theme="@style/Theme.AppStartLoadTranslucent">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -128,7 +119,7 @@
             android:name=".activity.HtmlActivity"
             android:label="@string/html" />
 
-        <service android:name="com.amap.api.location.APSService"></service>
+        <service android:name="com.amap.api.location.APSService" />
 
     </application>
 

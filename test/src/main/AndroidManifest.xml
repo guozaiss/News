@@ -18,8 +18,11 @@
         <activity android:name=".CameraActivity" />
         <activity android:name=".UberActivity" />
         <activity android:name=".PopuWebViewActivity" />
-        <activity android:name=".HelloChartsActivity"></activity>
-        <activity android:name=".VideoActivity">
+        <activity android:name=".HelloChartsActivity" />
+        <activity android:name=".VideoActivity" />
+        <activity android:name=".AnimActivity">
+        </activity>
+        <activity android:name=".BezierActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
