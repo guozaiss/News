@@ -21,7 +21,6 @@ import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.Enumeration;
 import java.util.zip.ZipEntry;
-import java.util.zip.ZipException;
 import java.util.zip.ZipFile;
 
 /**
@@ -199,7 +198,7 @@ public class FileUtils {
      * @throws Exception
      */
     public static int upZipFile(File zipFile, String folderPath)
-            throws ZipException, IOException {
+            throws IOException {
         ZipFile zfile = new ZipFile(zipFile);
         Enumeration<?> zList = zfile.entries();
         ZipEntry ze = null;

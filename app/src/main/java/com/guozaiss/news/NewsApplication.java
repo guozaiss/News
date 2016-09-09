@@ -2,13 +2,15 @@ package com.guozaiss.news;
 
 import android.app.Application;
 import android.content.Context;
+import android.os.StrictMode;
+import android.support.v7.app.AppCompatDelegate;
 import android.util.Log;
 
 import com.bumptech.glide.request.target.ViewTarget;
 import com.guozaiss.news.APIService.HttpHelper;
 import com.guozaiss.news.core.FakeCrashLibrary;
-import com.guozaiss.news.utils.LogUtils;
 import com.guozaiss.news.utils.crash.CustomCrash;
+import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
 
 import timber.log.Timber;
@@ -33,11 +35,10 @@ public class NewsApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        this.instance = this;
+        instance = this;
         //崩溃处理
         CustomCrash mCustomCrash = CustomCrash.getInstance();//初始化崩溃日志收集器
-
-        //init
+        //init Http
         HttpHelper.initialize();
         //Glide BUG 修复
         ViewTarget.setTagId(R.id.glide_tag);
@@ -54,22 +55,24 @@ public class NewsApplication extends Application {
         }
 
         if (BuildConfig.DEBUG) {
-            LogUtils.e("当前处于debug模式。。。");
-//            StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()//严苟模式--线程
-//                    .detectDiskReads()
-//                    .detectDiskWrites()
-//                    .detectNetwork()
-//                    .penaltyLog()
-//                    .build());
-//            StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()//严苟模式--虚拟机
-//                    .detectLeakedSqlLiteObjects()
-//                    .penaltyLog()
-//                    .penaltyDeath()
-//                    .build());
-//            refWatcher = LeakCanary.install(this);//内存泄漏检测
+            Timber.d("当前处于debug模式。。。");
+            StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()//严苟模式--线程
+                    .detectDiskReads()
+                    .detectDiskWrites()
+                    .detectNetwork()
+                    .penaltyLog()
+                    .build());
+            StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()//严苟模式--虚拟机
+                    .detectLeakedSqlLiteObjects()
+                    .penaltyLog()
+                    .penaltyDeath()
+                    .build());
+            refWatcher = LeakCanary.install(this);//内存泄漏检测
         } else {
             mCustomCrash.setCustomCrashInfo(this);//启动崩溃日志收集程序，开发模式不开放
         }
+        //自动匹配主题
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_AUTO);
     }
 
     private static class CrashReportingTree extends Timber.Tree {

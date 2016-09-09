@@ -1,6 +1,5 @@
 package com.guozaiss.news.fragment;
 
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -30,10 +29,6 @@ public class DrawableFragment extends BaseFragment {
     private boolean mFromSaveInstance;
 
     private View conventView;
-
-    public DrawableFragment() {
-        // Required empty public constructor
-    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

@@ -37,10 +37,7 @@ public class StrUtils {
         if (null == string) {
             return true;
         }
-        if (string.trim().length() == 0) {
-            return true;
-        }
-        return false;
+        return string.trim().length() == 0;
     }
 
     //判断手机格式是否正确

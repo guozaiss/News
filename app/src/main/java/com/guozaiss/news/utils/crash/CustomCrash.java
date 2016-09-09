@@ -8,7 +8,6 @@ import android.widget.Toast;
 
 import com.guozaiss.news.utils.ActivityManagerE;
 import com.guozaiss.news.utils.CommonUtils;
-import com.guozaiss.news.utils.LogUtils;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -18,6 +17,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.TimeZone;
+
+import timber.log.Timber;
 
 /**
  * 崩溃处理类
@@ -63,7 +64,7 @@ public class CustomCrash implements Thread.UncaughtExceptionHandler {
         // 3,应用准备退出
         showToast(mContext, "很抱歉,程序发生异常,即将退出.");
         // 4,打印日志
-        LogUtils.e(ex.getMessage());
+        Timber.e(ex.getMessage());
         try {
             Thread.sleep(3500);
         } catch (InterruptedException e) {

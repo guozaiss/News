@@ -4,6 +4,8 @@ import android.app.Activity;
 
 import java.util.Stack;
 
+import timber.log.Timber;
+
 /**
  * Created by guozaiss on 16/2/15.
  */
@@ -73,7 +75,7 @@ public class ActivityManagerE {
                 activityStack) {
             buffer.append("Activity:" + activity.getClass().getSimpleName() + "\n");
         }
-        LogUtils.e(buffer.toString());
+        Timber.e(buffer.toString());
     }
 
     /**
@@ -90,7 +92,7 @@ public class ActivityManagerE {
      */
     public void finish() {
         for (Activity activity : activityStack) {
-            LogUtils.e(activity.getClass().getSimpleName() + "退出了");
+            Timber.e(activity.getClass().getSimpleName() + "退出了");
             activity.finish();
         }
         System.exit(0);

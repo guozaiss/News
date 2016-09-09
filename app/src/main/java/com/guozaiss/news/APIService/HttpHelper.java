@@ -1,6 +1,5 @@
 package com.guozaiss.news.APIService;
 
-
 import com.guozaiss.news.APIService.impl.DataServiceImpl;
 import com.guozaiss.news.Constants;
 
@@ -17,12 +16,10 @@ import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import timber.log.Timber;
 
-
 /**
  * Created by bruce on 16/4/22.
  */
 public class HttpHelper {
-
     public static final String END_POINT = Constants.topBase;
 
     public static void initialize() {

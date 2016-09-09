@@ -1,7 +1,6 @@
 package com.guozaiss.news.core.base.view;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -11,7 +10,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -25,7 +23,8 @@ import com.guozaiss.news.R;
 import com.guozaiss.news.utils.ActivityManagerE;
 import com.guozaiss.news.utils.AdUtils;
 import com.guozaiss.news.utils.EventUtils;
-import com.guozaiss.news.utils.LogUtils;
+
+import timber.log.Timber;
 
 /**
  * 1、ActivityManagerE Activity管理栈
@@ -41,32 +40,14 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     protected SwipeRefreshLayout swipeRefreshLayout;
     final private int REQUEST_CODE_ASK_PERMISSIONS = 123;//权限请求码
 
-
-    //    private Map<String, Integer> toolbarAlpha = new HashMap<>();
-
-//    protected int activityCloseEnterAnimation;
-//    protected int activityCloseExitAnimation;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        LogUtils.e("onCreate" + this.getClass().getSimpleName());
         ActivityManagerE.getInstance().pushActivity(this);//push Activity
 //        LogUtils.e("回退栈数量" + ActivityManagerE.getApplicationInstance().size() + "");
 //        ButterKnife.bind(this);//注解方式
-
-//        initAnimation();
     }
 
-//    protected void initAnimation() {
-//        TypedArray activityStyle = getTheme().obtainStyledAttributes(new int[]{android.R.attr.windowAnimationStyle});
-//        int windowAnimationStyleResId = activityStyle.getResourceId(0, 0);
-//        activityStyle.recycle();
-//        activityStyle = getTheme().obtainStyledAttributes(windowAnimationStyleResId, new int[]{android.R.attr.activityCloseEnterAnimation, android.R.attr.activityCloseExitAnimation});
-//        activityCloseEnterAnimation = activityStyle.getResourceId(0, 0);
-//        activityCloseExitAnimation = activityStyle.getResourceId(1, 0);
-//        activityStyle.recycle();
-//    }
 
 
     @Override
@@ -96,23 +77,14 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
             swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
             swipeRefreshLayout.setColorSchemeColors(Color.parseColor("#ff0000"), Color.parseColor("#00ff00"), Color.parseColor("#0000ff"));
         } catch (Exception e) {
-            LogUtils.e("--无法找到资源ID----无法找到资源ID----无法找到资源ID----无法找到资源ID----无法找到资源ID--");
+            Timber.e("--无法找到资源ID----无法找到资源ID----无法找到资源ID----无法找到资源ID----无法找到资源ID--");
         }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-//        Integer integer = toolbarAlpha.get(this.getClass().getSimpleName());
-//        toolbar.getBackground().setAlpha(integer == null ? 255 : integer);//保存标题栏属性
-
         AdUtils.showBanner(this);
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-//        toolbarAlpha.put(this.getClass().getSimpleName(), toolbar.getBackground().getAlpha());//恢复标题栏属性
     }
 
     @Override
@@ -134,16 +106,14 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
 
     @Override
     protected void onDestroy() {
-//        LogUtils.e("onDestroy" + this.getClass().getSimpleName());
         ActivityManagerE.getInstance().remove(this);//弹出Activity
-        LogUtils.e("回退栈数量" + ActivityManagerE.size() + "");
+        Timber.d("回退栈数量" + ActivityManagerE.size() + "");
         super.onDestroy();
     }
 
     @Override
     public void finish() {
         super.finish();
-//        overridePendingTransition(activityCloseEnterAnimation, activityCloseExitAnimation);
     }
 
     /**
@@ -196,17 +166,6 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     protected void requestPermission(final String permission) {
         int hasWriteContactsPermission = ActivityCompat.checkSelfPermission(this, permission);
         if (hasWriteContactsPermission != PackageManager.PERMISSION_GRANTED) {
-//            if (!ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
-//                showMessageOKCancel("你需要请求以下权限\n" + permission.substring(permission.lastIndexOf(".") + 1),
-//                        new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialog, int which) {
-//                                ActivityCompat.requestPermissions(BaseActivity.this, new String[]{permission},
-//                                        REQUEST_CODE_ASK_PERMISSIONS);
-//                            }
-//                        });
-//                return;
-//            }
             ActivityCompat.requestPermissions(this, new String[]{permission}, REQUEST_CODE_ASK_PERMISSIONS);
             return;
         } else {
@@ -221,20 +180,6 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
      */
     protected void execute(String permission) {
 
-    }
-
-    /**
-     * 显示请求权限对话框
-     * @param message
-     * @param okListener
-     */
-    private void showMessageOKCancel(String message, DialogInterface.OnClickListener okListener) {
-        new AlertDialog.Builder(this)
-                .setMessage(message)
-                .setPositiveButton("OK", okListener)
-                .setNegativeButton("Cancel", null)
-                .create()
-                .show();
     }
 
     /**

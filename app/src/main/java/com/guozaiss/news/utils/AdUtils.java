@@ -33,11 +33,4 @@ public class AdUtils {
         AdManager.getInstance().removeBanner();
     }
 
-//    public static void init(AdView mAdView, Context context) {
-//        if (!BuildConfig.DEBUG) {
-//            MobileAds.initialize(context, " ca-app-pub-4152148937239755~1689576429");
-//            AdRequest adRequest = new AdRequest.Builder().build();
-//            mAdView.loadAd(adRequest);
-//        }
-//    }
 }

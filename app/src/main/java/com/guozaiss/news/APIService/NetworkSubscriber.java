@@ -20,7 +20,7 @@ public class NetworkSubscriber<T> extends Subscriber<T> {
 
     @Override
     public void onNext(T t) {
-                onSuccess((T) t);
+                onSuccess(t);
     }
 
     public void onSuccess(T data) {

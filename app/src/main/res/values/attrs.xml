@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <attr name="customer_background" format="color" />
-    <attr name="customer_textcolor" format="color" />
-    <attr name="customer_textcolor_selected" format="color" />
+    <attr name="customer_text_color" format="color" />
+    <attr name="customer_text_color_selected" format="color" />
+    <attr name="customer_text_color_title" format="color" />
 </resources>

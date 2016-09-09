@@ -12,7 +12,7 @@ import com.amap.api.location.AMapLocationListener;
 import com.guozaiss.news.R;
 import com.guozaiss.news.core.base.view.BaseActivity;
 import com.guozaiss.news.utils.AdEventListener;
-import com.guozaiss.news.utils.LogUtils;
+import com.guozaiss.news.utils.SPUtils;
 import com.guozaiss.news.utils.ToastUtil;
 import com.keymob.networks.AdManager;
 
@@ -20,6 +20,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import timber.log.Timber;
 
 public class SplashActivity extends BaseActivity implements AMapLocationListener {
     //声明AMapLocationClient类对象
@@ -56,11 +58,18 @@ public class SplashActivity extends BaseActivity implements AMapLocationListener
         requestPermission(Manifest.permission.ACCESS_FINE_LOCATION);//请求定位权限
         requestPermission(Manifest.permission.READ_EXTERNAL_STORAGE);
         requestPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE);
-
-        AdManager.getInstance().pluginFile.put("qq", "GDTAdapter.pl");
-        AdManager.getInstance().pluginFile.put("baidu", "BaiduAdapter.jar");
-        AdManager.getInstance().pluginFile.put("Adcolony", "AdcolonyAdapter.jar");
-        AdManager.getInstance().initFromKeymobService(this, "10667", new AdEventListener(), true);
+        boolean open = SPUtils.getBoolean(this, "open", false);
+        if (!open) {
+            try {
+                AdManager.getInstance().pluginFile.put("qq", "GDTAdapter.pl");
+                AdManager.getInstance().pluginFile.put("baidu", "BaiduAdapter.jar");
+                AdManager.getInstance().pluginFile.put("Adcolony", "AdcolonyAdapter.jar");
+            } catch (Exception e) {
+                Timber.e(e.getMessage() + "");
+            } finally {
+                AdManager.getInstance().initFromKeymobService(this, "10667", new AdEventListener(), true);
+            }
+        }
     }
 
     @Override
@@ -100,7 +109,7 @@ public class SplashActivity extends BaseActivity implements AMapLocationListener
                 aMapLocation.getCityCode();//城市编码
                 aMapLocation.getAdCode();//地区编码
                 aMapLocation.getAoiName();//获取当前定位点的AOI信息
-                LogUtils.e(aMapLocation.getCountry() + "");
+                Timber.e(aMapLocation.getCountry() + "");
                 mLocationClient.stopLocation();//停止定位
                 ToastUtil.showToast("定位成功！");
                 new Timer().schedule(new TimerTask() {

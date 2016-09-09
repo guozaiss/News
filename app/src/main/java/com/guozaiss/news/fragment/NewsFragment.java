@@ -1,6 +1,5 @@
 package com.guozaiss.news.fragment;
 
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -19,10 +18,10 @@ import com.guozaiss.news.activity.HtmlActivity;
 import com.guozaiss.news.adapters.NewTopAdapter;
 import com.guozaiss.news.beans.News;
 import com.guozaiss.news.core.base.view.BaseFragment;
-import com.guozaiss.news.utils.LogUtils;
 
 import java.util.List;
 
+import timber.log.Timber;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -36,15 +35,9 @@ public class NewsFragment extends BaseFragment {
     private View load_empty;
     private View loading;
 
-    public NewsFragment() {
-        // Required empty public constructor
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        // create ContextThemeWrapper from the original Activity Context with the custom theme r);
         if (this.inflate != null) {
             container.removeView(inflate);
             return inflate;
@@ -75,7 +68,7 @@ public class NewsFragment extends BaseFragment {
                     adapter.notifyDataSetChanged();
                 }
             } else {
-                List<News.ResultBean.DataBean> lists = adapter.getLists();
+                List<News.ResultBean.DataBean> lists = adapter.getData();
                 if (lists != null) {
                     lists.clear();
                 }
@@ -87,7 +80,7 @@ public class NewsFragment extends BaseFragment {
         public void onError(Throwable e) {
             super.onError(e);
             loaded();
-            LogUtils.e(e.getMessage() + "");
+            Timber.e(e.getMessage() + "");
         }
     };
 

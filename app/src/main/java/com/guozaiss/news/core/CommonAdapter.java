@@ -54,7 +54,7 @@ public abstract class CommonAdapter<T> extends BaseAdapter {
         this.lists = mDatas;
     }
 
-    public List<T> getLists() {
+    public List<T> getData() {
         return lists;
     }
 }

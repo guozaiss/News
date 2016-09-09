@@ -4,12 +4,11 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatDelegate;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.AlphaAnimation;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.guozaiss.news.BuildConfig;
@@ -30,16 +29,10 @@ import java.util.TimerTask;
 public class MainActivity extends BaseActivity {
     private TabLayout tab_layout;
     private ViewPager view_pager;
-    private ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (SPUtils.getBoolean(this, "night", false)) {
-            setTheme(R.style.AppTheme_night);
-        } else {
-            setTheme(R.style.AppTheme);
-        }
         setContentView(R.layout.activity_main);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
@@ -56,7 +49,6 @@ public class MainActivity extends BaseActivity {
         }
         tab_layout = (TabLayout) findViewById(R.id.tab_layout);
         view_pager = (ViewPager) findViewById(R.id.view_pager);
-        imageView = (ImageView) findViewById(R.id.imageView);
         List<NewsFragment> newsFragments = new ArrayList<>();
         for (int i = 0; i < Constants.type.length; i++) {
             NewsFragment newsFragment = new NewsFragment();
@@ -86,27 +78,32 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-//            boolean night = SPUtils.getBoolean(this, "night", false);
-//            SPUtils.putBoolean(this, "night", !night);
-//            Bitmap shot = CommonUtils.getShot(this);
-//            imageView.setImageBitmap(shot);
-//            imageView.setVisibility(View.VISIBLE);
-//            startAnim(imageView);
-//            recreate();
-            AdUtils.showInterstitial(this);
-            return true;
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                AdUtils.showInterstitial(this);
+                return true;
+            case R.id.action_switch:
+                boolean night = SPUtils.getBoolean(this, "night", false);
+                if (night) {
+                    getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                } else {
+                    getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                }
+                SPUtils.putBoolean(this, "night", !night);
+                recreate();
+                return true;
+            case R.id.action_open_or_close:
+                boolean open = SPUtils.getBoolean(this, "open", false);
+                if (open) {
+                    ToastUtil.showToast("已关闭");
+                } else {
+                    ToastUtil.showToast("已开启");
+                }
+                SPUtils.putBoolean(this, "open", !open);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
-    }
-
-    private void startAnim(View view) {
-        AlphaAnimation animation = new AlphaAnimation(1, 0);
-        animation.setDuration(4000);//设置动画持续时间
-        animation.setFillAfter(true);//动画执行完后是否停留在执行完的状态
-        view.setAnimation(animation);
-        animation.start();
     }
 
     /**

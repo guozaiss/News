@@ -7,6 +7,8 @@
     <string name="banner_ad_unit_id2">ca-app-pub-4152148937239755/4643042824</string>
 
     <string name="action_settings">设置</string>
+    <string name="action_switch">切换主题</string>
+    <string name="action_open_or_close">打开或关闭广告</string>
     <string name="action_share">分享</string>
     <string name="action_openbrow">在浏览器打开</string>
 

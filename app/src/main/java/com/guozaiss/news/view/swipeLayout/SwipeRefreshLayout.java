@@ -861,7 +861,7 @@ public class SwipeRefreshLayout extends ViewGroup {
                             // Animate the alpha
                             startProgressAlphaStartAnimation();
                         }
-                        float strokeStart = (float) (adjustedPercent * .8f);
+                        float strokeStart = adjustedPercent * .8f;
                         mProgress.setStartEndTrim(0f, Math.min(MAX_PROGRESS_ANGLE, strokeStart));
                         mProgress.setArrowScale(Math.min(1f, adjustedPercent));
                     } else {
@@ -1063,7 +1063,7 @@ public class SwipeRefreshLayout extends ViewGroup {
      * triggers a refresh should implement this interface.
      */
     public interface OnRefreshListener {
-        public void onRefresh(SwipeRefreshLayoutDirection direction);
+        void onRefresh(SwipeRefreshLayoutDirection direction);
     }
 
     public SwipeRefreshLayoutDirection getDirection() {
