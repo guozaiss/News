@@ -20,9 +20,14 @@
         <activity android:name=".PopuWebViewActivity" />
         <activity android:name=".HelloChartsActivity" />
         <activity android:name=".VideoActivity" />
-        <activity android:name=".AnimActivity">
-        </activity>
-        <activity android:name=".BezierActivity">
+        <activity android:name=".AnimActivity" />
+        <activity android:name=".BezierActivity" />
+        <activity android:name=".NormalActivity" />
+        <activity android:name=".SlideDeleteActivity" />
+        <activity android:name=".WaveLineActivity"></activity>
+        <activity
+            android:name=".SurfaceActivity"
+            android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

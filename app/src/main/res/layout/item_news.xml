@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.zhy.android.percent.support.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:background="?attr/customer_background"
     android:layout_height="match_parent">
 
     <TextView
@@ -12,7 +11,7 @@
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginBottom="5dp"
-        android:textColor="?attr/customer_text_color_title"
+        android:textColor="?android:attr/textColorPrimary"
         android:maxLines="2"
         android:text="普京露面破外媒失踪谣言"
         android:textSize="20sp" />
@@ -39,7 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="作者:光明网"
-            android:textColor="?attr/customer_text_color"
+            android:textColor="?android:attr/textColorSecondary"
             android:textSize="14sp" />
 
         <TextView
@@ -47,7 +46,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:textColor="?attr/customer_text_color"
+            android:textColor="?android:attr/textColorSecondary"
             android:text="更新时间:2015-03-17 10:55:00"
             android:textSize="14sp" />
     </RelativeLayout>

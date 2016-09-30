@@ -3,8 +3,8 @@
     <color name="colorPrimary">#1B1B1B</color>
     <color name="colorPrimaryDark">#1976D2</color>
     <color name="colorAccent">#E8Bf6A</color>
-    <color name="customer_background">#2B2B2B</color>
-    <color name="customer_text_color">#BBBBBB</color>
-    <color name="customer_text_color_title">#EEEEEE</color>
+    <color name="textColorPrimary">#EEEEEE</color>
+    <color name="textColorSecondary">#BBBBBB</color>
+    <color name="windowBackground">#2B2B2B</color>
     <color name="customer_text_color_selected">#FFFFFF</color>
 </resources>

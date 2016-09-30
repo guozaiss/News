@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="titleBar" type="id">false</item>
+    <item name="imgLeft" type="id">false</item>
+    <item name="tvLeft" type="id">false</item>
+    <item name="tvTitle" type="id">false</item>
+    <item name="imgRight1" type="id">false</item>
+    <item name="imgRight2" type="id">false</item>
+    <item name="tvRight1" type="id">false</item>
+    <item name="tvRight2" type="id">false</item>
+
+    <item name="gridview" type="id" />
+    <item name="webview" type="id" />
+    <item name="scrollview" type="id" />
+
+    <item name="mStartButton" type="id" />
+    <item name="mVideoView" type="id" />
+    <item name="mSizeButton" type="id" />
+    <item name="mPlayButton" type="id" />
+
+    <item name="mPauseButton" type="id"/>
+    <item name="mZoomButton" type="id"/>
+
+    <item type="id" name="glide_tag" />
+
+    <item name="refresh_listview" type="id"/>
+</resources>

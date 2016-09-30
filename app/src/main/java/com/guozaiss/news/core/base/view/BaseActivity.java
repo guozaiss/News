@@ -11,6 +11,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -23,6 +24,7 @@ import com.guozaiss.news.R;
 import com.guozaiss.news.utils.ActivityManagerE;
 import com.guozaiss.news.utils.AdUtils;
 import com.guozaiss.news.utils.EventUtils;
+import com.guozaiss.news.utils.SPUtils;
 
 import timber.log.Timber;
 
@@ -44,6 +46,13 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActivityManagerE.getInstance().pushActivity(this);//push Activity
+        //改变主题
+        boolean night = SPUtils.getBoolean(this, "night", true);
+        if (night) {
+            getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
 //        LogUtils.e("回退栈数量" + ActivityManagerE.getApplicationInstance().size() + "");
 //        ButterKnife.bind(this);//注解方式
     }

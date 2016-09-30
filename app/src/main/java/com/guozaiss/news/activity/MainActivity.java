@@ -26,6 +26,8 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import timber.log.Timber;
+
 public class MainActivity extends BaseActivity {
     private TabLayout tab_layout;
     private ViewPager view_pager;
@@ -83,7 +85,8 @@ public class MainActivity extends BaseActivity {
                 AdUtils.showInterstitial(this);
                 return true;
             case R.id.action_switch:
-                boolean night = SPUtils.getBoolean(this, "night", false);
+                boolean night = SPUtils.getBoolean(this, "night", true);
+                Timber.e( getDelegate().getDefaultNightMode()+"");
                 if (night) {
                     getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                 } else {
@@ -135,7 +138,6 @@ public class MainActivity extends BaseActivity {
                     isExit = false; // 取消退出
                 }
             }, 2000); // 如果2秒钟内没有按下返回键，则启动定时器取消掉刚才执行的任务
-
         } else {
             finish();
             System.exit(0);

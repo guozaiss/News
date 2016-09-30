@@ -5,13 +5,13 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColorPrimary">@color/textColorPrimary</item>
+        <item name="android:textColorSecondary">@color/textColorSecondary</item>
+        <item name="android:windowBackground">@color/windowBackground</item>
         <!--<item name="android:navigationBarColor">@color/navigationBarColor</item>-->
 
         <!--customer-->
-        <item name="customer_background">@color/customer_background</item>
-        <item name="customer_text_color">@color/customer_text_color</item>
         <item name="customer_text_color_selected">@color/customer_text_color_selected</item>
-        <item name="customer_text_color_title">@color/customer_text_color_title</item>
     </style>
     <style name="AppTheme" parent="AppTheme.base">
         <!-- Customize your theme here. -->
@@ -26,11 +26,7 @@
         <item name="android:windowIsTranslucent">true</item>
     </style>
 
-    <style name="base">
-        <item name="android:background">?attr/customer_background</item>
-    </style>
-
-    <style name="match_match" parent="base">
+    <style name="match_match" >
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
     </style>
