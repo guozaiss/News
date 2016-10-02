@@ -61,9 +61,9 @@ public class SplashActivity extends BaseActivity implements AMapLocationListener
         boolean open = SPUtils.getBoolean(this, "open", false);
         if (!open) {
             try {
-                AdManager.getInstance().pluginFile.put("qq", "GDTAdapter.pl");
-                AdManager.getInstance().pluginFile.put("baidu", "BaiduAdapter.jar");
-                AdManager.getInstance().pluginFile.put("Adcolony", "AdcolonyAdapter.jar");
+                AdManager.setEnableLog(true);
+                AdManager.getInstance().pluginFile.put("qq", "qq.jpng");
+                AdManager.getInstance().pluginFile.put("baidu", "baidu.jpng");
             } catch (Exception e) {
                 Timber.e(e.getMessage() + "");
             } finally {

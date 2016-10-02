@@ -26,8 +26,6 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import timber.log.Timber;
-
 public class MainActivity extends BaseActivity {
     private TabLayout tab_layout;
     private ViewPager view_pager;
@@ -86,7 +84,7 @@ public class MainActivity extends BaseActivity {
                 return true;
             case R.id.action_switch:
                 boolean night = SPUtils.getBoolean(this, "night", true);
-                Timber.e( getDelegate().getDefaultNightMode()+"");
+//                Timber.e( getDelegate().getDefaultNightMode()+"");
                 if (night) {
                     getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                 } else {
@@ -97,10 +95,10 @@ public class MainActivity extends BaseActivity {
                 return true;
             case R.id.action_open_or_close:
                 boolean open = SPUtils.getBoolean(this, "open", false);
-                if (open) {
-                    ToastUtil.showToast("已关闭");
+                if (!open) {
+                    ToastUtil.showToast("已关闭，将在下次启动生效！");
                 } else {
-                    ToastUtil.showToast("已开启");
+                    ToastUtil.showToast("已开启，将在下次启动生效!");
                 }
                 SPUtils.putBoolean(this, "open", !open);
                 return true;

@@ -4,36 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.test.SurfaceActivity">
-    <VideoView
+    <io.vov.vitamio.widget.VideoView
         android:id="@+id/videoView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-    <LinearLayout
-        android:layout_alignParentBottom="true"
-        android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_height="wrap_content">
-        <Button
-            android:id="@+id/start"
-            android:layout_width="wrap_content"
-            android:text="开始"
-            android:layout_height="wrap_content" />
-        <Button
-            android:id="@+id/pause"
-            android:layout_width="wrap_content"
-            android:text="暂停"
-            android:layout_height="wrap_content" />
-        <Button
-            android:id="@+id/go"
-            android:layout_width="wrap_content"
-            android:text="快进"
-            android:layout_height="wrap_content" />
-        <Button
-            android:id="@+id/stop"
-            android:layout_width="wrap_content"
-            android:text="快进"
-            android:layout_height="wrap_content" />
-
-    </LinearLayout>
 </RelativeLayout>

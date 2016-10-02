@@ -2,6 +2,7 @@ package com.guozaiss.news;
 
 import android.app.Application;
 import android.content.Context;
+import android.support.v7.app.AppCompatDelegate;
 import android.util.Log;
 
 import com.bumptech.glide.request.target.ViewTarget;
@@ -69,7 +70,7 @@ public class NewsApplication extends Application {
             mCustomCrash.setCustomCrashInfo(this);//启动崩溃日志收集程序，开发模式不开放
         }
         //自动匹配主题
-//        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_AUTO);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_AUTO);
     }
 
     private static class CrashReportingTree extends Timber.Tree {

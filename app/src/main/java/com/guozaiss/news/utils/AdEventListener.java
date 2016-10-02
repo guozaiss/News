@@ -1,9 +1,7 @@
 package com.guozaiss.news.utils;
 
 import com.keymob.networks.core.IAdEventListener;
-import com.keymob.networks.core.IInterstitialPlatform;
 import com.keymob.networks.core.PlatformAdapter;
-import com.keymob.sdk.core.AdTypes;
 
 import timber.log.Timber;
 
@@ -15,9 +13,9 @@ public class AdEventListener implements IAdEventListener {
     public void onLoadedSuccess(int arg0, Object arg1,
                                 PlatformAdapter arg2) {
         Timber.d(arg2 + " onLoadedSuccess for type " + arg0 + " withdata " + arg1);
-        if (arg0 == AdTypes.INTERSTITIAL) {
-            ((IInterstitialPlatform) arg2).showInterstitial();
-        }
+//        if (arg0 == AdTypes.INTERSTITIAL) {
+//            ((IInterstitialPlatform) arg2).showInterstitial();
+//        }
     }
 
     @Override
