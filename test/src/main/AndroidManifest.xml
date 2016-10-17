@@ -34,7 +34,8 @@
             android:launchMode="singleTop"
             android:theme="@android:style/Theme.NoTitleBar"
             android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity android:name=".HtmlActivity">
+        <activity android:name=".HtmlActivity"></activity>
+        <activity android:name=".NDKActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

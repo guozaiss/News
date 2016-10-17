@@ -95,6 +95,7 @@ public class NewsFragment extends BaseFragment {
             @Override
             public void onRefresh() {
                 DataServiceImpl.getNews(type, Constants.topAppKey, newsSubscriber);
+                swipeRefreshLayout.setRefreshing(true);
             }
         });
 
