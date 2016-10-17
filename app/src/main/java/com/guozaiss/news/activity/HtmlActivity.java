@@ -19,6 +19,7 @@ import android.widget.ProgressBar;
 
 import com.guozaiss.news.R;
 import com.guozaiss.news.core.base.view.BaseActivity;
+import com.guozaiss.news.utils.SPUtils;
 import com.guozaiss.news.utils.ShareUtils;
 
 public class HtmlActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
@@ -36,18 +37,21 @@ public class HtmlActivity extends BaseActivity implements SwipeRefreshLayout.OnR
         webView.setBackgroundColor(Color.TRANSPARENT);
         //WebSettings
         WebSettings settings = webView.getSettings();
-        settings.setJavaScriptEnabled(false);//支持javascript
+        settings.setJavaScriptEnabled(true);//支持javascript
         settings.setSupportZoom(true);// 设置可以支持缩放
         settings.setBuiltInZoomControls(true);// 设置出现缩放工具
         settings.setUseWideViewPort(true);//扩大比例的缩放
         //自适应屏幕
         settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         settings.setLoadWithOverviewMode(true);
-//        settings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);//优先使用缓存
+        settings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);//优先使用缓存
         webView.loadUrl(url);
-        webView.loadUrl("javascript:(document.body.style.backgroundColor ='red');");
-        webView.loadUrl("javascript:(document.body.style.fontSize ='20pt');");
-        webView.loadUrl("javascript:(document.body.style.color ='yellow');");
+        String js = "";
+        js += " function myFunction(){";
+        js += "document.body.style.backgroundColor=\"#2B2B2B\";";
+        js += "document.body.style.color=\"#EEEEEE\";";
+        js += "}";
+        webView.loadUrl("javascript:" + js);
         progress = (ProgressBar) findViewById(R.id.progress);
         progress.setMax(100);
         webView.setWebViewClient(new WebViewClient() {
@@ -70,13 +74,7 @@ public class HtmlActivity extends BaseActivity implements SwipeRefreshLayout.OnR
 
             @Override
             public void onPageFinished(WebView view, String url) {
-                super.onPageFinished(view, url);String js = "";
-                js += " function myFunction(){";
-                js += "document.getElementById('ass').innerHTML=\"New text!\";";
-                js += "document.body.style.backgroundColor=\"#000000\";";
-                js += "}";
-                webView.loadUrl("javascript:" + js);
-                webView.loadUrl("javascript:myFunction()");
+                super.onPageFinished(view, url);
             }
 
         });
@@ -91,12 +89,15 @@ public class HtmlActivity extends BaseActivity implements SwipeRefreshLayout.OnR
                     swipeRefreshLayout.setRefreshing(false);
                 } else {// 加载中
                     progress.setProgress(newProgress);
+                    if (!SPUtils.getBoolean(HtmlActivity.this, "night", true)) {
+                        webView.loadUrl("javascript:myFunction()");
+                    }
                 }
             }
+
             @Override
             public boolean onJsAlert(WebView view, String url, String message,
-                                     JsResult result)
-            {
+                                     JsResult result) {
                 // TODO Auto-generated method stub
                 return super.onJsAlert(view, url, message, result);
             }
@@ -113,15 +114,14 @@ public class HtmlActivity extends BaseActivity implements SwipeRefreshLayout.OnR
     }
 
     @Override
-    // 设置回退
-    // 覆盖Activity类的onKeyDown(int keyCoder,KeyEvent event)方法
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if ((keyCode == KeyEvent.KEYCODE_BACK) && webView.canGoBack()) {
             webView.goBack(); // goBack()表示返回WebView的上一页面
             return true;
         }
-        return super.onKeyDown(keyCode,event);
+        return super.onKeyDown(keyCode, event);
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.html, menu);
@@ -153,8 +153,8 @@ public class HtmlActivity extends BaseActivity implements SwipeRefreshLayout.OnR
     public void finish() {
         webView.getSettings().setDisplayZoomControls(false);
         webView.getSettings().setSupportZoom(false);
-            ViewGroup view = (ViewGroup) getWindow().getDecorView();
-            view.removeAllViews();
+        ViewGroup view = (ViewGroup) getWindow().getDecorView();
+        view.removeAllViews();
         super.finish();
     }
 }
