@@ -26,10 +26,10 @@ android {
     buildTypes {
         debug {
 //            applicationIdSuffix ".debug"
-            manifestPlaceholders = [APP_NAME: "新闻小站-\ndebug"]
+            manifestPlaceholders = [APP_NAME: "新闻小站-\r\ndebug"]
             signingConfig signingConfigs.debug
             buildConfigField "boolean", "debug", "true"
-            minifyEnabled false
+            minifyEnabled true
             //移除无用的resource文件
             shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
