@@ -20,7 +20,7 @@ public class HtmlActivity extends AppCompatActivity {
         webView = (WebView) findViewById(R.id.webView);
         webView.getSettings().setJavaScriptEnabled(true);
         //后面 “android” 相当于一个标志符
-        webView.addJavascriptInterface(new JavaScriptInterface(), "android");
+//        webView.addJavascriptInterface(new JavaScriptInterface(), "android");
         webView.setWebViewClient(new WebViewClient() {
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 view.loadUrl(url);
@@ -31,23 +31,14 @@ public class HtmlActivity extends AppCompatActivity {
             @Override
             public void onPageFinished(WebView webView, String url) {
                 super.onPageFinished(webView, url);
-                //此处windows.android.getTagVal中android是第3步中设置的标记，getTagVal是第2步中的接口中的方法名
-                //回调的参数中传的就是js代码，自行根据实际html标签脑补或百度
-//                String js = "window.android.getTagVal(document.getElementsByName('tag')[0].content))";
-//                String js = "var btn=document.getElementById('ass');"+
-//                        "document.write('kkkkk');";
-//                        webView.loadUrl("javascript:" + js);
-//                webView.loadDataWithBaseURL(null,"<script>document.getElementById('ass').[0].innerHTML='sdddddd';</script>","text/html","utf-8",null);
-
 
                 String js = "";
                 js += " function myFunction(){";
-                js += "document.getElementById('ass').innerHTML=\"New text!\";";
-                js += "document.body.style.backgroundColor=\"#ff9999\";";
+//                js += "document.getElementById('ass').innerHTML=\"New text!\";";
+                js += "document.body.style.backgroundColor=\"#000000\";";
                 js += "}";
                 webView.loadUrl("javascript:" + js);
                 webView.loadUrl("javascript:myFunction()");
-//                webView.loadDataWithBaseURL(null,"<script>"+js+"   </script>","text/html","utf-8",null);
             }
         });
         webView.loadUrl("file:///android_asset/aa.html");
