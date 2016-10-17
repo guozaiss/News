@@ -85,7 +85,7 @@ public class MainActivity extends BaseActivity {
             case R.id.action_switch:
                 boolean night = SPUtils.getBoolean(this, "night", true);
 //                Timber.e( getDelegate().getDefaultNightMode()+"");
-                if (night) {
+                if (!night) {
                     getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                 } else {
                     getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);

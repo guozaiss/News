@@ -267,8 +267,8 @@ public class GPUImageFilterTools {
                 return new GPUImageVignetteFilter(centerPoint, new float[] {0.0f, 0.0f, 0.0f}, 0.3f, 0.75f);
             case TONE_CURVE:
                 GPUImageToneCurveFilter toneCurveFilter = new GPUImageToneCurveFilter();
-                toneCurveFilter.setFromCurveFileInputStream(
-                        context.getResources().openRawResource(R.raw.tone_cuver_sample));
+//                toneCurveFilter.setFromCurveFileInputStream(
+//                        context.getResources().openRawResource(R.raw.tone_cuver_sample));
                 return toneCurveFilter;
             case BLEND_DIFFERENCE:
                 return createBlendFilter(context, GPUImageDifferenceBlendFilter.class);

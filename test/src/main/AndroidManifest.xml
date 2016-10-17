@@ -24,22 +24,23 @@
         <activity android:name=".BezierActivity" />
         <activity android:name=".NormalActivity" />
         <activity android:name=".SlideDeleteActivity" />
-        <activity android:name=".WaveLineActivity"></activity>
+        <activity android:name=".WaveLineActivity" />
         <activity
             android:name=".SurfaceActivity"
-            android:screenOrientation="landscape">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:screenOrientation="landscape" />
         <activity
             android:name="io.vov.vitamio.activity.InitActivity"
             android:configChanges="orientation|screenSize|smallestScreenSize|keyboard|keyboardHidden|navigation"
             android:launchMode="singleTop"
             android:theme="@android:style/Theme.NoTitleBar"
             android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity android:name=".HtmlActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

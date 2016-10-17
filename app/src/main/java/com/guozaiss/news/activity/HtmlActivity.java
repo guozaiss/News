@@ -1,6 +1,7 @@
 package com.guozaiss.news.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -9,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.JsResult;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -31,7 +33,7 @@ public class HtmlActivity extends BaseActivity implements SwipeRefreshLayout.OnR
         setContentView(R.layout.activity_html);
         url = getIntent().getStringExtra("url");
         webView = (WebView) findViewById(R.id.webView);
-
+        webView.setBackgroundColor(Color.TRANSPARENT);
         //WebSettings
         WebSettings settings = webView.getSettings();
         settings.setJavaScriptEnabled(false);//支持javascript
@@ -43,6 +45,9 @@ public class HtmlActivity extends BaseActivity implements SwipeRefreshLayout.OnR
         settings.setLoadWithOverviewMode(true);
 //        settings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);//优先使用缓存
         webView.loadUrl(url);
+        webView.loadUrl("javascript:(document.body.style.backgroundColor ='red');");
+        webView.loadUrl("javascript:(document.body.style.fontSize ='20pt');");
+        webView.loadUrl("javascript:(document.body.style.color ='yellow');");
         progress = (ProgressBar) findViewById(R.id.progress);
         progress.setMax(100);
         webView.setWebViewClient(new WebViewClient() {
@@ -63,6 +68,17 @@ public class HtmlActivity extends BaseActivity implements SwipeRefreshLayout.OnR
                 return true;
             }
 
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);String js = "";
+                js += " function myFunction(){";
+                js += "document.getElementById('ass').innerHTML=\"New text!\";";
+                js += "document.body.style.backgroundColor=\"#000000\";";
+                js += "}";
+                webView.loadUrl("javascript:" + js);
+                webView.loadUrl("javascript:myFunction()");
+            }
+
         });
         String title = webView.getTitle();
         toolbar.setTitle(title);
@@ -77,6 +93,14 @@ public class HtmlActivity extends BaseActivity implements SwipeRefreshLayout.OnR
                     progress.setProgress(newProgress);
                 }
             }
+            @Override
+            public boolean onJsAlert(WebView view, String url, String message,
+                                     JsResult result)
+            {
+                // TODO Auto-generated method stub
+                return super.onJsAlert(view, url, message, result);
+            }
+
         });
         swipeRefreshLayout.setOnRefreshListener(this);
 //        AdView mAdView = (AdView) findViewById(R.id.adView);
