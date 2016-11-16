@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     tools:context="com.example.test.WaveLineActivity">
 
-    <com.example.test.weight.WavyLineView
+    <com.example.test.anim.weight.WavyLineView
         android:id="@+id/wavyLineView"
         android:layout_width="match_parent"
         android:layout_height="200dp" />

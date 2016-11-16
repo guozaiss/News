@@ -1,4 +1,4 @@
-package com.example.test;
+package com.example.test.ndk;
 
 /**
  * Created by Guo Shaobing on 2016/10/17.

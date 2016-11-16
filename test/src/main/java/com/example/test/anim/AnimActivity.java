@@ -1,4 +1,4 @@
-package com.example.test;
+package com.example.test.anim;
 
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 import android.widget.Toast;
+
+import com.example.test.R;
 
 public class AnimActivity extends AppCompatActivity implements View.OnClickListener {
     private View view;

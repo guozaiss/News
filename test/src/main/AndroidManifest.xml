@@ -14,14 +14,19 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity" />
-        <activity android:name=".CameraActivity" />
+        <activity android:name=".main.MainActivity" />
+        <activity android:name=".gpucamera.CameraActivity" />
         <activity android:name=".UberActivity" />
-        <activity android:name=".PopuWebViewActivity" />
-        <activity android:name=".HelloChartsActivity" />
+        <activity android:name=".charts.HelloChartsActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".VideoActivity" />
-        <activity android:name=".AnimActivity" />
-        <activity android:name=".BezierActivity" />
+        <activity android:name=".anim.AnimActivity" />
+        <activity android:name=".anim.BezierActivity" />
         <activity android:name=".NormalActivity" />
         <activity android:name=".SlideDeleteActivity" />
         <activity android:name=".WaveLineActivity" />
@@ -34,14 +39,9 @@
             android:launchMode="singleTop"
             android:theme="@android:style/Theme.NoTitleBar"
             android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity android:name=".HtmlActivity"></activity>
-        <activity android:name=".NDKActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".HtmlActivity" />
+        <activity android:name=".ndk.NDKActivity" />
+        <activity android:name=".RecyclerViewActivity"></activity>
     </application>
 
 </manifest>

@@ -1,4 +1,4 @@
-package com.example.test.weight;
+package com.example.test.anim.weight;
 
 import android.annotation.TargetApi;
 import android.content.Context;

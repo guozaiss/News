@@ -24,4 +24,8 @@
     <item type="id" name="glide_tag" />
 
     <item name="refresh_listview" type="id"/>
+
+
+    <item name="de_ui_friend_message" type="id" />
+    <item name="de_ui_friend_list" type="id" />
 </resources>
