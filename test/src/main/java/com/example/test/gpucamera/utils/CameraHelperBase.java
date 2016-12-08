@@ -14,60 +14,61 @@
  * limitations under the License.
  */
 
-package com.example.test.utils;
+package com.example.test.gpucamera.utils;
 
-import android.annotation.TargetApi;
+import com.example.test.gpucamera.utils.CameraHelper.CameraHelperImpl;
+import com.example.test.gpucamera.utils.CameraHelper.CameraInfo2;
+import android.content.Context;
+import android.content.pm.PackageManager;
 import android.hardware.Camera;
 import android.hardware.Camera.CameraInfo;
 
-import com.example.test.utils.CameraHelper.CameraHelperImpl;
-import com.example.test.utils.CameraHelper.CameraInfo2;
+public class CameraHelperBase implements CameraHelperImpl {
 
-@TargetApi(9)
-public class CameraHelperGB implements CameraHelperImpl {
+    private final Context mContext;
+
+    public CameraHelperBase(final Context context) {
+        mContext = context;
+    }
 
     @Override
     public int getNumberOfCameras() {
-        return Camera.getNumberOfCameras();
+        return hasCameraSupport() ? 1 : 0;
     }
 
     @Override
     public Camera openCamera(final int id) {
-        return Camera.open(id);
+        return Camera.open();
     }
 
     @Override
     public Camera openDefaultCamera() {
-        return Camera.open(0);
+        return Camera.open();
     }
 
     @Override
     public boolean hasCamera(final int facing) {
-        return getCameraId(facing) != -1;
+        if (facing == CameraInfo.CAMERA_FACING_BACK) {
+            return hasCameraSupport();
+        }
+        return false;
     }
 
     @Override
     public Camera openCameraFacing(final int facing) {
-        return Camera.open(getCameraId(facing));
+        if (facing == CameraInfo.CAMERA_FACING_BACK) {
+            return Camera.open();
+        }
+        return null;
     }
 
     @Override
     public void getCameraInfo(final int cameraId, final CameraInfo2 cameraInfo) {
-        CameraInfo info = new CameraInfo();
-        Camera.getCameraInfo(cameraId, info);
-        cameraInfo.facing = info.facing;
-        cameraInfo.orientation = info.orientation;
+        cameraInfo.facing = Camera.CameraInfo.CAMERA_FACING_BACK;
+        cameraInfo.orientation = 90;
     }
 
-    private int getCameraId(final int facing) {
-        int numberOfCameras = Camera.getNumberOfCameras();
-        CameraInfo info = new CameraInfo();
-        for (int id = 0; id < numberOfCameras; id++) {
-            Camera.getCameraInfo(id, info);
-            if (info.facing == facing) {
-                return id;
-            }
-        }
-        return -1;
+    private boolean hasCameraSupport() {
+        return mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA);
     }
 }

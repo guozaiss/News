@@ -48,7 +48,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         ActivityManagerE.getInstance().pushActivity(this);//push Activity
         //改变主题
         boolean night = SPUtils.getBoolean(this, "night", true);
-        if (night) {
+        if (!night) {
             getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         } else {
             getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);

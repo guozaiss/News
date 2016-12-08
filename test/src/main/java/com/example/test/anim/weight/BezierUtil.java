@@ -1,4 +1,4 @@
-package com.example.test.weight;
+package com.example.test.anim.weight;
 
 /**
  * Created by Guo Shaobing on 2016/8/29.

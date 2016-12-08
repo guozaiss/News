@@ -1,4 +1,4 @@
-package com.example.test;
+package com.example.test.gpucamera;
 
 import android.hardware.Camera;
 import android.hardware.Camera.CameraInfo;
@@ -7,8 +7,9 @@ import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.example.test.utils.CameraHelper;
-import com.example.test.utils.CameraHelper.CameraInfo2;
+import com.example.test.R;
+import com.example.test.gpucamera.utils.CameraHelper;
+import com.example.test.gpucamera.utils.CameraHelper.CameraInfo2;
 
 import jp.co.cyberagent.android.gpuimage.GPUImage;
 import jp.co.cyberagent.android.gpuimage.GPUImageWhiteBalanceFilter;

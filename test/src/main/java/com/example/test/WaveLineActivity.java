@@ -6,7 +6,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 
-import com.example.test.weight.WavyLineView;
+import com.example.test.anim.weight.WavyLineView;
 
 public class WaveLineActivity extends AppCompatActivity {
 

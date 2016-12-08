@@ -1,4 +1,4 @@
-package com.example.test;
+package com.example.test.main;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -7,6 +7,8 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.ListView;
+
+import com.example.test.R;
 
 import java.util.ArrayList;
 

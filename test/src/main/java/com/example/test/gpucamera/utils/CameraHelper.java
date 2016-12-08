@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.test.utils;
+package com.example.test.gpucamera.utils;
 
 import android.app.Activity;
 import android.content.Context;
