@@ -1,7 +1,5 @@
 package com.example.test.blooth;
 
-import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -26,10 +24,7 @@ public class BloothDevicesActivity extends AppCompatActivity implements View.OnC
     private BroadcastReceiver bluetoothReconnectReceiver = new BroadcastReceiver() {
         public void onReceive(Context context, Intent intent) {
             if ("com.readyidu.eshw.connect.ble.DEVICES_CHANGE".equals(intent.getAction())) {
-                Log.e("AAA", intent.getStringExtra("deviceName") + " " + intent.getStringExtra("deviceAddress"));
-                short rssi = intent.getExtras().getShort(
-                        BluetoothDevice.EXTRA_RSSI);
-                Log.e("AAAAAAA", String.valueOf(rssi));
+                Log.e("AAA", intent.getStringExtra("deviceName") + " " + intent.getStringExtra("deviceAddress")+ " " + intent.getStringExtra("deviceRssi"));
             }
         }
     };
@@ -55,31 +50,10 @@ public class BloothDevicesActivity extends AppCompatActivity implements View.OnC
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.scan:
-                scanBloothDevices();
-                break;
             case R.id.start:
                 connectDevices();
                 break;
         }
-    }
-
-    private void scanBloothDevices() {
-        BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
-        if (adapter == null) {
-            // 设备不支持蓝牙
-        }
-        // 打开蓝牙
-        if (adapter.isEnabled()) {
-            Intent intent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-            // 设置蓝牙可见性，最多300秒
-            intent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 300);
-            startActivity(intent);
-        }
-    }
-
-    private void scanDevices() {
-        ESHWBluetoothApi.scanBluetoothDevice();
     }
 
     //TODO:链接蓝牙设备
@@ -92,81 +66,6 @@ public class BloothDevicesActivity extends AppCompatActivity implements View.OnC
     private BongHeartRate mBongHeartRate;
 
     private void connectDevices() {
-        //血压，心率
-        mBloodPressureBluetoothApi = new ESHWBluetoothApi();
-        mBloodPressureBluetoothApi.setBluetoothListener(new ESHWBluetoothListener() {
-            @Override
-            public void bluetoothConnect() {
-                Log.d("AAA", "连接血压计");
-            }
-
-            @Override
-            public void bluetoothDisconnect() {
-                Log.d("AAA", "断开血压计");
-            }
-
-            @Override
-            public void dataReceive(String data) {
-                try {
-                    BloodPressure result = BloodPressureInstrument.getResult(data);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-        //体温
-        mThermometerBluetoothApi = new ESHWBluetoothApi();
-        mThermometerBluetoothApi.setBluetoothListener(new ESHWBluetoothListener() {
-            @Override
-            public void bluetoothConnect() {
-                Log.d("AAA", "连接体温计");
-            }
-
-            @Override
-            public void bluetoothDisconnect() {
-                Log.d("AAA", "断开体温计");
-            }
-
-            @Override
-            public void dataReceive(String data) {
-                try {
-                    float result = ThermometerInstrument.getResult(data);
-                    Log.d("AAA", result + "Temperature");
-                    if (result > 0) {
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-        //血糖
-        mBloodSugarBluetoothApi = new ESHWBluetoothApi();
-        mBloodSugarBluetoothApi.setBluetoothListener(new ESHWBluetoothListener() {
-
-            @Override
-            public void bluetoothConnect() {
-                Log.d("AAA", "连接血糖计");
-            }
-
-            @Override
-            public void bluetoothDisconnect() {
-                Log.d("AAA", "断开血糖计");
-            }
-
-            @Override
-            public void dataReceive(String data) {
-                try {
-                    float result = BloodSugarInstrument.getResult(data);
-                    if (result > 0) {
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
         mBongSport = new BongSport();
         mBongHeartRate = new BongHeartRate();
         bangBluetoothApi = new ESHWBluetoothApi();
@@ -199,12 +98,40 @@ public class BloothDevicesActivity extends AppCompatActivity implements View.OnC
                 Log.d("AAA", "断开bong手环");
             }
         });
+        mBongSport = new BongSport();
+        mBongHeartRate = new BongHeartRate();
+        bangBluetoothApi = new ESHWBluetoothApi();
+        bangBluetoothApi.setBluetoothListener(new ESHWBluetoothListener() {
+            @Override
+            public void dataReceive(String data) {//只上传心率数据
+                // TODO Auto-generated method stub
+                BongSport.Sport sport = mBongSport.getResult(data);
+                if (sport != null) {
+                    Log.e("AAA", "Energy-----"+sport.getEnergy() + "");
+                    Log.e("AAA", "distance-----"+sport.getDistance() + "");
+                    Log.e("AAA", "Step-----"+sport.getStep() + "");
+                }
+                int rate = mBongHeartRate.getResult(data);
+                if (rate > 0) {
+                    Log.e("AAA", "rate------"+rate + "");
+                }
+            }
 
+            @Override
+            public void bluetoothDisconnect() {
+                Log.e("AAAA","连接bong手环");
+            }
+
+            @Override
+            public void bluetoothConnect() {
+                Log.e("AAAA","断开bong手环");
+            }
+        });
         ESHWBluetoothApi.startBluetooth(this, new Block() {
                     @Override
                     public void block(String... strings) {
                         Log.d("AAA", "startBluetooth");
-//                        try {
+                        try {
 //                            mBloodSugarBluetoothApi.bluetoothDeviceConnect(
 //                                    "MKXueTangYi001", "E0:E5:CF:91:3A:00",
 //                                    "0000fc00-0000-1000-8000-00805f9b34fb",
@@ -223,16 +150,16 @@ public class BloothDevicesActivity extends AppCompatActivity implements View.OnC
 //                                    "00002af0-0000-1000-8000-00805f9b34fb",
 //                                    "00002af1-0000-1000-8000-00805f9b34fb", true);
 //
-//                            bangBluetoothApi.bluetoothDeviceConnect(
-//                                    "bong3HR", "C9:D4:F2:04:6A:DC",
-//                                    "6e400001-b5a3-f393-e0a9-e50e24dcca1e",
-//                                    "6e400003-b5a3-f393-e0a9-e50e24dcca1e",
-//                                    "6e400002-b5a3-f393-e0a9-e50e24dcca1e", false, true);
-//                            mTimer = new Timer();
-//                            mTimer.schedule(new BoneTimerTask(), 1000, 1000);
-//                        } catch (Exception e) {
-//                            e.printStackTrace();
-//                        }
+                            bangBluetoothApi.bluetoothDeviceConnect(
+                                    "bong3HR", "F0:5B:8D:C5:3B:2D",
+                                    "6e400001-b5a3-f393-e0a9-e50e24dcca1e",
+                                    "6e400003-b5a3-f393-e0a9-e50e24dcca1e",
+                                    "6e400002-b5a3-f393-e0a9-e50e24dcca1e", false, true);
+                            mTimer = new Timer();
+                            mTimer.schedule(new BoneTimerTask(), 1000, 1000);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
         );

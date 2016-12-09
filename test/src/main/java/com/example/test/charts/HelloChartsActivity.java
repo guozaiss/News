@@ -71,7 +71,7 @@ public class HelloChartsActivity extends AppCompatActivity {
         axisValues.add(new AxisValue(6).setLabel("六"));
         axisValues.add(new AxisValue(7).setLabel("七"));
         //In most cased you can call data model methods in builder-pattern-like manner.
-        Line line = new Line(values).setColor(Color.BLUE).setStrokeWidth(2).setFilled(true).setHasPoints(false).setCubic(true);
+        Line line = new Line(values).setSquare(true).setColor(Color.BLUE).setStrokeWidth(2).setFilled(true).setHasPoints(true).setPointRadius(2).setCubic(false);
         Line line2 = new Line(values2).setColor(Color.BLACK).setStrokeWidth(2).setHasPoints(false).setCubic(true);
         Line line3 = new Line(values3).setColor(Color.GREEN).setStrokeWidth(2).setHasPoints(false).setCubic(true);
         List<Line> lines = new ArrayList<>();
@@ -102,9 +102,9 @@ public class HelloChartsActivity extends AppCompatActivity {
         viewport = new Viewport(left, top,right, bottom);
         chart.setMaximumViewport(new Viewport(0,110,110,0));
         chart.setCurrentViewport(viewport);
-        chart.setZoomType(ZoomType.VERTICAL);
+        chart.setZoomType(ZoomType.HORIZONTAL);
         chart.setLineChartData(data);
-        chart.setInteractive(false);//能否互动
+        chart.setInteractive(true);//能否互动
         chart.setOnValueTouchListener(new LineChartOnValueSelectListener() {
             @Override
             public void onValueSelected(int lineIndex, int pointIndex, PointValue value) {
