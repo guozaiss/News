@@ -9,6 +9,7 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.guozaiss.news.BuildConfig;
@@ -49,6 +50,8 @@ public class MainActivity extends BaseActivity {
         }
         tab_layout = (TabLayout) findViewById(R.id.tab_layout);
         view_pager = (ViewPager) findViewById(R.id.view_pager);
+        RelativeLayout banner = (RelativeLayout) findViewById(R.id.banner);
+        AdUtils.showBanner(this, banner);
         List<NewsFragment> newsFragments = new ArrayList<>();
         for (int i = 0; i < Constants.type.length; i++) {
             NewsFragment newsFragment = new NewsFragment();
@@ -80,7 +83,7 @@ public class MainActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_settings:
-                AdUtils.showInterstitial(this);
+//                AdUtils.showInterstitial(this);
                 return true;
             case R.id.action_switch:
                 boolean night = SPUtils.getBoolean(this, "night", true);

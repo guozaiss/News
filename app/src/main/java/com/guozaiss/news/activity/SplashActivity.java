@@ -11,10 +11,8 @@ import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.guozaiss.news.R;
 import com.guozaiss.news.core.base.view.BaseActivity;
-import com.guozaiss.news.utils.AdEventListener;
 import com.guozaiss.news.utils.SPUtils;
 import com.guozaiss.news.utils.ToastUtil;
-import com.keymob.networks.AdManager;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -60,15 +58,15 @@ public class SplashActivity extends BaseActivity implements AMapLocationListener
         requestPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE);
         boolean open = SPUtils.getBoolean(this, "open", false);
         if (!open) {
-            try {
-                AdManager.setEnableLog(true);
-                AdManager.getInstance().pluginFile.put("qq", "qq.jpng");
-                AdManager.getInstance().pluginFile.put("baidu", "baidu.jpng");
-            } catch (Exception e) {
-                Timber.e(e.getMessage() + "");
-            } finally {
-                AdManager.getInstance().initFromKeymobService(this, "10667", new AdEventListener(), true);
-            }
+//            try {
+//                AdManager.setEnableLog(true);
+//                AdManager.getInstance().pluginFile.put("qq", "qq.jpng");
+//                AdManager.getInstance().pluginFile.put("baidu", "baidu.jpng");
+//            } catch (Exception e) {
+//                Timber.e(e.getMessage() + "");
+//            } finally {
+//                AdManager.getInstance().initFromKeymobService(this, "10667", new AdEventListener(), true);
+//            }
         }
     }
 
