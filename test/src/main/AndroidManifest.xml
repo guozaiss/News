@@ -13,7 +13,10 @@
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
+    <uses-permission android:name="com.readyidu.eshw.connect.ble.DEVICE_DISCOVER"></uses-permission>
     <uses-feature
         android:name="android.hardware.bluetooth_le"
         android:required="true" />
@@ -57,6 +60,16 @@
             </intent-filter></activity>
         <!--蓝牙-->
         <service android:name="com.readyidu.eshw.connect.ble.BleConnectService"></service>
+
+        <service android:name="com.readyidu.eshw.connect.wifi.WifiConnectService"></service>
+
+        <receiver
+            android:name="com.readyidu.eshw.api.receiver.ESHWBluetoothReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.readyidu.eshw.connect.ble.DEVICE_DISCOVER" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

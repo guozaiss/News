@@ -22,7 +22,6 @@ import android.widget.Toast;
 
 import com.guozaiss.news.R;
 import com.guozaiss.news.utils.ActivityManagerE;
-import com.guozaiss.news.utils.AdUtils;
 import com.guozaiss.news.utils.EventUtils;
 import com.guozaiss.news.utils.SPUtils;
 
@@ -110,7 +109,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     @Override
     protected void onStop() {
         super.onStop();
-        AdUtils.hide();
+//        AdUtils.hide();
     }
 
     @Override

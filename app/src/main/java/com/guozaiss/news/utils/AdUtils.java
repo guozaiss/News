@@ -7,6 +7,8 @@ import android.widget.RelativeLayout;
 import com.qq.e.ads.banner.ADSize;
 import com.qq.e.ads.banner.AbstractBannerADListener;
 import com.qq.e.ads.banner.BannerView;
+import com.qq.e.ads.interstitial.AbstractInterstitialADListener;
+import com.qq.e.ads.interstitial.InterstitialAD;
 
 /**
  * Created by Lenovo on 2016/6/8.
@@ -29,28 +31,26 @@ public class AdUtils {
                 Log.i("AD_DEMO", "ONBannerReceive");
             }
         });
+        bv.loadAD();
         relativeLayout.addView(bv);
     }
+    public static void showInterstitialAD(Activity activity) {
+        final InterstitialAD iad = new InterstitialAD(activity, "1105359035","3000014371206870");
+        iad.setADListener(new AbstractInterstitialADListener() {
+            @Override
+            public void onADReceive() {
+                iad.showAsPopupWindow();
 
-//    public static void showBanner(final Activity activity) {
-//        new Handler().postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                AdManager.getInstance().showRelationBanner(BannerSizeType.BANNER, BannerPositions.BOTTOM_CENTER, 0, activity);
-//            }
-//        }, 1000);
-//    }
-//
-//    public static void showInterstitial(final Activity activity) {
-//        if (AdManager.getInstance().isInterstitialReady()) {
-//            AdManager.getInstance().showInterstitial(activity);
-//        } else {
-//            AdManager.getInstance().loadInterstitial(activity);
-//        }
-//    }
-//
-//    public static void  hide() {
-//        AdManager.getInstance().removeBanner();
-//    }
+            }
+
+            @Override
+            public void onNoAD(int arg0) {
+                Log.i("AD_DEMO", "LoadInterstitialAd Fail:" + arg0);
+            }
+
+        });
+        //请求插屏广告，每次重新请求都可以调用此方法。
+        iad.loadAD();
+    }
 
 }

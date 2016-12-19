@@ -11,6 +11,7 @@ import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.guozaiss.news.R;
 import com.guozaiss.news.core.base.view.BaseActivity;
+import com.guozaiss.news.utils.AdUtils;
 import com.guozaiss.news.utils.SPUtils;
 import com.guozaiss.news.utils.ToastUtil;
 
@@ -29,7 +30,6 @@ public class SplashActivity extends BaseActivity implements AMapLocationListener
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-
         //初始化定位
         mLocationClient = new AMapLocationClient(getApplicationContext());
         //设置定位回调监听

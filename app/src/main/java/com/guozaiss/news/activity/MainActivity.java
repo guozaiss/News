@@ -37,6 +37,7 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
+        AdUtils.showInterstitialAD(this);
         boolean isFirst = SPUtils.getBoolean(this, "isFirst", false);
         //当是release版本并且是第一次运行时弹出对话框
         if (!BuildConfig.debug && !isFirst) {
