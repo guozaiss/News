@@ -16,23 +16,28 @@ import com.qq.e.ads.interstitial.InterstitialAD;
 public class AdUtils {
 
     public static void showBanner(Activity activity,RelativeLayout relativeLayout) {
-        // 创建Banner广告AdView对象
-        BannerView bv = new BannerView(activity, ADSize.BANNER, "1105359035","6060119311509788");
-        bv.setRefresh(30);
-        bv.setADListener(new AbstractBannerADListener() {
+        try {
+            // 创建Banner广告AdView对象
+            BannerView bv = new BannerView(activity, ADSize.BANNER, "1105359035","6060119311509788");
+            bv.setRefresh(30);
+            bv.setADListener(new AbstractBannerADListener() {
 
-            @Override
-            public void onNoAD(int arg0) {
-                Log.i("AD_DEMO", "BannerNoAD，eCode=" + arg0);
-            }
+                @Override
+                public void onNoAD(int arg0) {
+                    Log.i("AD_DEMO", "BannerNoAD，eCode=" + arg0);
+                }
 
-            @Override
-            public void onADReceiv() {
-                Log.i("AD_DEMO", "ONBannerReceive");
-            }
-        });
-        bv.loadAD();
-        relativeLayout.addView(bv);
+                @Override
+                public void onADReceiv() {
+                    Log.i("AD_DEMO", "ONBannerReceive");
+                }
+            });
+            bv.loadAD();
+            relativeLayout.addView(bv);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
     public static void showInterstitialAD(Activity activity) {
         final InterstitialAD iad = new InterstitialAD(activity, "1105359035","3000014371206870");

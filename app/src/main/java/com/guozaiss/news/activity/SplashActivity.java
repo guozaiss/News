@@ -11,7 +11,6 @@ import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.guozaiss.news.R;
 import com.guozaiss.news.core.base.view.BaseActivity;
-import com.guozaiss.news.utils.AdUtils;
 import com.guozaiss.news.utils.SPUtils;
 import com.guozaiss.news.utils.ToastUtil;
 
@@ -56,6 +55,7 @@ public class SplashActivity extends BaseActivity implements AMapLocationListener
         requestPermission(Manifest.permission.ACCESS_FINE_LOCATION);//请求定位权限
         requestPermission(Manifest.permission.READ_EXTERNAL_STORAGE);
         requestPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        requestPermission(Manifest.permission.READ_PHONE_STATE);
         boolean open = SPUtils.getBoolean(this, "open", false);
         if (!open) {
 //            try {

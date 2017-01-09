@@ -69,14 +69,15 @@ public class BloothDevicesActivity extends AppCompatActivity implements View.OnC
         }
     }
 
-    private ESHWBluetoothApi bangBluetoothApi;
+    private ESHWBluetoothApi mThermometerBluetoothApi;
 
     private void connectDevices() {
-        bangBluetoothApi = new ESHWBluetoothApi();
-        bangBluetoothApi.setBluetoothListener(new ESHWBluetoothListener() {
+        mThermometerBluetoothApi = new ESHWBluetoothApi();
+        mThermometerBluetoothApi.setBluetoothListener(new ESHWBluetoothListener() {
             @Override
             public void dataReceive(String data) {//只上传心率数据
-
+                float result = ThermometerInstrument.getResult(data);
+                Log.e("AA", result + "");
             }
 
             @Override
@@ -94,11 +95,11 @@ public class BloothDevicesActivity extends AppCompatActivity implements View.OnC
                     public void block(String... strings) {
                         Log.d("AAA", "startBluetooth");
                         try {
-                            bangBluetoothApi.bluetoothConnect(
-                                    "shouji", "10:C4:07:2F:51:A2:AE",
-                                    "00001101-0000-1000-8000-00805F9B34FB",
-                                    "00001101-0000-1000-8000-00805F9B34FB",
-                                    "00001101-0000-1000-8000-00805F9B34FB", false, true);
+                            mThermometerBluetoothApi.bluetoothConnect(//C6:05:04:03:5A:C7 C6:05:04:03:5B:28
+                                    "MKErWenJi001", "C6:05:04:03:5A:C7",
+                                    "00005970-6d75-4753-5053-676e6f6c7553",
+                                    "02005970-6d75-4753-5053-676e6f6c7553",
+                                    "02005970-6d75-4753-5053-676e6f6c7553", true, true);
 
                         } catch (Exception e) {
                             e.printStackTrace();
