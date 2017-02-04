@@ -31,7 +31,7 @@
         <activity android:name=".main.MainActivity" />
         <activity android:name=".gpucamera.CameraActivity" />
         <activity android:name=".UberActivity" />
-        <activity android:name=".charts.HelloChartsActivity"></activity>
+        <activity android:name=".charts.HelloChartsActivity" />
         <activity android:name=".VideoActivity" />
         <activity android:name=".AnimActivity" />
         <activity android:name=".BezierActivity" />
@@ -51,11 +51,6 @@
         <activity android:name=".ndk.NDKActivity" />
         <activity android:name=".RecyclerViewActivity" />
         <activity android:name=".blooth.BloothDevicesActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <!-- 蓝牙 -->
         <service android:name="com.readyidu.eshw.connect.ble.BleConnectService" />
@@ -69,6 +64,12 @@
             </intent-filter>
         </receiver>
 
+        <activity android:name=".blooth.BongActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter></activity>
     </application>
 
 </manifest>
