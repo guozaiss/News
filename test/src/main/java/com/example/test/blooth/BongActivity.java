@@ -57,7 +57,7 @@ public class BongActivity extends Activity {
 //                        Log.d("Heart Rate->", String.valueOf(rate));
                         Sport sport = getResult(s);
                         if (sport != null) {
-                            Log.d("BongSport ->", sport.getDistance() + " " + sport.getEnergy() + " " + sport.getStep());
+                            Log.d("BongSport ->", sport.toString());
                         }
 //                        bongBluetoothApi.sendData("end");
 //                        mUpdateBongStateHandler.removeCallbacks(mUpdateBongStateRunnable);
@@ -119,25 +119,10 @@ public class BongActivity extends Activity {
         return "00";
     }
 
-    public String aL() {
-        return "29000000200";
-    }
-
     public String getSportCommand() {
         return "2000000013"
                 + getStrTimeForHex(System.currentTimeMillis() - TimeUnit.MINUTES.toMillis(1))
                 + getStrTimeForHex(System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(2));
-    }
-
-    public static Date weeHours(Date date) {//weeHours(new Date(System.currentTimeMillis())).getTime()
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(date);
-        int hour = cal.get(Calendar.HOUR_OF_DAY);
-        int minute = cal.get(Calendar.MINUTE);
-        int second = cal.get(Calendar.SECOND);
-        long millisecond = hour * 60 * 60 * 1000 + minute * 60 * 1000 + second * 1000;
-        cal.setTimeInMillis(cal.getTimeInMillis() - millisecond);
-        return cal.getTime();
     }
 
     public Sport getResult(String data) {

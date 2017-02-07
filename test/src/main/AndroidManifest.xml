@@ -50,8 +50,7 @@
         <activity android:name=".HtmlActivity" />
         <activity android:name=".ndk.NDKActivity" />
         <activity android:name=".RecyclerViewActivity" />
-        <activity android:name=".blooth.BloothDevicesActivity">
-        </activity>
+        <activity android:name=".blooth.BloothDevicesActivity" />
         <!-- 蓝牙 -->
         <service android:name="com.readyidu.eshw.connect.ble.BleConnectService" />
         <service android:name="com.readyidu.eshw.connect.wifi.WifiConnectService" />
@@ -64,12 +63,14 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".blooth.BongActivity">
+        <activity android:name=".blooth.BongActivity"></activity>
+        <activity android:name=".ScreenCaptureActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter></activity>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
