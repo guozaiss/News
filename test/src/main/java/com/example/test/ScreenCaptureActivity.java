@@ -72,7 +72,7 @@ public class ScreenCaptureActivity extends Activity {
                 getWindowManager().getDefaultDisplay().getMetrics(metrics);
                 int mScreenDensity = metrics.densityDpi;
 
-                MediaProjection mProjection = projectionManager.getMediaProjection(-1, data);
+                final MediaProjection mProjection = projectionManager.getMediaProjection(-1, data);
                 final VirtualDisplay virtualDisplay = mProjection.createVirtualDisplay("screen-mirror",
                         mWidth, mHeight, mScreenDensity, DisplayManager.VIRTUAL_DISPLAY_FLAG_AUTO_MIRROR,
                         mImageReader.getSurface(), null, null);
@@ -80,6 +80,7 @@ public class ScreenCaptureActivity extends Activity {
                     @Override
                     public void onImageAvailable(ImageReader reader) {
                         try {
+                            mProjection.stop();
                             Image image = mImageReader.acquireLatestImage();
                             final Image.Plane[] planes = image.getPlanes();
                             final ByteBuffer buffer = planes[0].getBuffer();

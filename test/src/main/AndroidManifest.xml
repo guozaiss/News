@@ -36,7 +36,7 @@
         <activity android:name=".AnimActivity" />
         <activity android:name=".BezierActivity" />
         <activity android:name=".NormalActivity" />
-        <activity android:name=".SlideDeleteActivity" />
+        <activity android:name=".slidedelete.SlideDeleteActivity" />
         <activity android:name=".WaveLineActivity" />
         <activity
             android:name=".SurfaceActivity"
@@ -63,8 +63,9 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".blooth.BongActivity"></activity>
-        <activity android:name=".ScreenCaptureActivity">
+        <activity android:name=".blooth.BongActivity" />
+        <activity android:name=".ScreenCaptureActivity"></activity>
+        <activity android:name=".slidedelete.SlideDelete2Activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

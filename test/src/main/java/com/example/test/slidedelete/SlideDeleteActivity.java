@@ -1,4 +1,4 @@
-package com.example.test;
+package com.example.test.slidedelete;
 
 import android.content.ComponentName;
 import android.content.Intent;
@@ -22,6 +22,7 @@ import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
+import com.example.test.R;
 
 import java.util.List;
 
