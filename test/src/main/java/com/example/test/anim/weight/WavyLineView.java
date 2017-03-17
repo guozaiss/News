@@ -14,7 +14,7 @@ import android.view.View;
 import com.example.test.R;
 
 /**
- * Created by Guo Shaobing on 2016/9/11.
+ * Created by Guo on 2016/9/11.
  */
 public class WavyLineView extends View {
 

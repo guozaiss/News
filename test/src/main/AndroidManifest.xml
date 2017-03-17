@@ -29,15 +29,24 @@
         android:theme="@style/AppTheme"
         tools:replace="android:icon,android:theme">
         <activity android:name=".main.MainActivity" />
-        <activity android:name=".gpucamera.CameraActivity" />
+        <activity android:name=".gpucamera.CameraActivity">
+
+
+        </activity>
         <activity android:name=".UberActivity" />
         <activity android:name=".charts.HelloChartsActivity" />
-        <activity android:name=".VideoActivity" />
+        <activity android:name=".VideoActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".AnimActivity" />
         <activity android:name=".BezierActivity" />
         <activity android:name=".NormalActivity" />
         <activity android:name=".slidedelete.SlideDeleteActivity" />
-        <activity android:name=".WaveLineActivity" />
+        <activity android:name=".WaveLineActivity"></activity>
         <activity
             android:name=".SurfaceActivity"
             android:screenOrientation="landscape" />
@@ -65,13 +74,7 @@
 
         <activity android:name=".blooth.BongActivity" />
         <activity android:name=".ScreenCaptureActivity"></activity>
-        <activity android:name=".slidedelete.SlideDelete2Activity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".slidedelete.SlideDelete2Activity"></activity>
     </application>
 
 </manifest>

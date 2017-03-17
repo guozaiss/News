@@ -26,9 +26,9 @@ public class NewsApplication extends Application {
     public void onCreate() {
         super.onCreate();
         instance = this;
-        //监听异常崩溃
-        Thread.setDefaultUncaughtExceptionHandler(AppException
-                .getAppExceptionHandler());
+//        //监听异常崩溃
+//        Thread.setDefaultUncaughtExceptionHandler(AppException
+//                .getAppExceptionHandler());
         //init Http
         HttpHelper.initialize();
         //Glide BUG 修复

@@ -15,7 +15,7 @@ public class Size {
         sbForWidth.append("<resources>\n");
         float cellw = max * 1.0f;
 
-        for (int i = 1; i < cellw; i++) {
+        for (float i = -10; i < cellw; i += 0.5) {
             sbForWidth.append("<dimen name=\"size_" + i + "\">" + (float) i / bei + "dp</dimen>\n");
         }
         sbForWidth.append("</resources>");
@@ -34,6 +34,7 @@ public class Size {
     }
 
     public static void main(String[] args) {
-        new Size().generateXmlFile(1.5f, 3000);
+        new Size().generateXmlFile(1.502347337122063f, 1500);
+        new Size().generateXmlFile(1f, 1500);
     }
 }
