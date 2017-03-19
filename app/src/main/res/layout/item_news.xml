@@ -1,53 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.zhy.android.percent.support.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="10dp">
 
     <TextView
         android:id="@+id/title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginBottom="5dp"
-        android:textColor="?android:attr/textColorPrimary"
-        android:maxLines="2"
-        android:text="普京露面破外媒失踪谣言"
-        android:textSize="20sp" />
+        style="@style/default_txt_title_style"
+        android:maxLines="2" />
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="320dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="5dp"
-        android:scaleType="fitCenter"
-        android:layout_below="@+id/title"
-        android:layout_height="150dp" />
-
-    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/title"
-        android:layout_alignRight="@+id/title"
-        android:layout_marginBottom="5dp"
-        android:layout_below="@+id/imageView">
+        android:layout_height="170dp"
+        android:layout_marginTop="@dimen/size_5"
+        android:layout_below="@+id/title" />
 
-        <TextView
-            android:id="@+id/author"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="作者:光明网"
-            android:textColor="?android:attr/textColorSecondary"
-            android:textSize="14sp" />
+    <TextView
+        android:id="@+id/author"
+        style="@style/default_txt_less_style"
+        android:layout_below="@+id/imageView" />
 
-        <TextView
-            android:id="@+id/date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:textColor="?android:attr/textColorSecondary"
-            android:text="更新时间:2015-03-17 10:55:00"
-            android:textSize="14sp" />
-    </RelativeLayout>
-</com.zhy.android.percent.support.PercentRelativeLayout>
+    <TextView
+        android:id="@+id/date"
+        style="@style/default_txt_less_style"
+        android:layout_below="@+id/imageView"
+        android:layout_alignParentRight="true" />
+</RelativeLayout>

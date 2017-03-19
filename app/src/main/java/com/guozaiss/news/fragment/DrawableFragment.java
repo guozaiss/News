@@ -8,9 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.guozaiss.news.R;
 import com.guozaiss.news.core.base.view.BaseFragment;
@@ -40,18 +38,22 @@ public class DrawableFragment extends BaseFragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View inflate = inflater.inflate(R.layout.fragment_drawable, container, false);
-        initView(inflate);
-        return inflate;
-    }
-
-    private void initView(View inflate) {
+    protected int getLayoutId() {
+        return R.layout.fragment_drawable;
     }
 
     @Override
-    public void onNoFastClick(View view) {
+    protected void initView() {
+
+    }
+
+    @Override
+    protected void initData() {
+
+    }
+
+    @Override
+    protected void onNoFastClick(View view) {
         switch (view.getId()) {
         }
     }

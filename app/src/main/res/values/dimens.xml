@@ -9,5 +9,8 @@
     <dimen name="appbar_top_padding">0dp</dimen>
     <dimen name="text_margin">16dp</dimen>
 
+    <dimen name="font_size_12">12sp</dimen>
+    <dimen name="font_size_15">15sp</dimen>
+
 
 </resources>

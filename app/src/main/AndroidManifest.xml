@@ -15,16 +15,8 @@
     <uses-permission android:name="android.permission.GET_TASKS" />
     <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <!-- base permission -->
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <!-- base permission for location -->
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <!-- base permission  required by chartboost and baidu -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <!-- permission required by mmedia -->
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
@@ -35,7 +27,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_UPDATES" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
-
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <permission
         android:name="android.permission.BLUETOOTH"
         android:label="BLUETOOTH" />
@@ -56,6 +48,15 @@
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="b6559d61985a4392534dc74aa830aabb" />
+        <!--分析-->
+        <!-- 请将MTA_APPKEY改为MTA分配的appkey  -->
+        <meta-data
+            android:name="TA_APPKEY"
+            android:value="Aqc1105359035" />
+        <!-- 请将CHANNAL改为app的发布渠道  -->
+        <meta-data
+            android:name="InstallChannel"
+            android:value="${UMENG_CHANNEL_VALUE}" />
 
         <!-- 广点通广告平台配置信息 -->
         <service
@@ -67,10 +68,6 @@
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
         <!-- 自带配置 -->
 
-        <activity
-            android:name=".activity.SimpleBackActivity"
-            android:screenOrientation="landscape"
-            android:theme="@style/TranslucentTheme" />
         <activity
             android:name=".activity.SplashActivity"
             android:theme="@style/Theme.AppStartLoadTranslucent">

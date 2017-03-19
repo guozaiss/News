@@ -1,7 +1,5 @@
 package com.guozaiss.news.reptile;
 
-import com.guozaiss.news.beans.SinaGoldNew;
-
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -13,14 +11,15 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import rx.Observable;
-import rx.functions.Action1;
-import rx.functions.Func1;
 
 /**
  * Created by Guo on 2017/3/1.
@@ -38,15 +37,15 @@ public class SinaGoldReptile {
      *
      * @return List<SinaGoldNew>
      */
-    public static void getSinaGoldNews() {
+    public static void getSinaGoldNews(CallBack callBack) {
         String url = "http://roll.finance.sina.com.cn/finance/gjs/hjfx/index.shtml";
-        pickData(url);
+        pickData(url,callBack);
     }
 
     /**
      * 爬取网页信息
      */
-    private static void pickData(String url) {
+    private static void pickData(String url,CallBack callBack) {
         OkHttpClient client = new OkHttpClient();
         final Request request = new Request.Builder()
                 .url(url)
@@ -72,16 +71,17 @@ public class SinaGoldReptile {
         final List<SinaGoldNew> sinaGoldNews = new ArrayList<>();
         Document document = Jsoup.parse(html);
         Elements list_009 = document.getElementsByClass("list_009");
-        Observable.from(list_009)
-                .flatMap(new Func1<Element, Observable<Element>>() {
+        Observable.fromIterable(list_009)
+                .flatMap(new Function<Element, ObservableSource<?>>() {
                     @Override
-                    public Observable<Element> call(Element element) {
-                        return Observable.from(element.children());
+                    public ObservableSource<?> apply(Element element) throws Exception {
+                        return Observable.fromArray(element.children());
                     }
                 })
-                .map(new Func1<Element, SinaGoldNew>() {
+                .map(new Function<Element, SinaGoldNew>() {
                     @Override
-                    public SinaGoldNew call(Element element) {
+                    public SinaGoldNew apply(Element element) throws Exception {
+
                         Element a = element.select("a").first();
                         String link = a.attr("abs:href");
                         String title = a.html();
@@ -95,14 +95,17 @@ public class SinaGoldReptile {
                         }
                         return new SinaGoldNew(0, time, new Date(), title, link);
                     }
-                })
-                .subscribe(new Action1<SinaGoldNew>() {
-                    @Override
-                    public void call(SinaGoldNew sinaGoldNew) {
-                        sinaGoldNews.add(sinaGoldNew);
-                    }
-                });
+                }).subscribe(new Consumer<SinaGoldNew>() {
+            @Override
+            public void accept(SinaGoldNew sinaGoldNew) throws Exception {
+                sinaGoldNews.add(sinaGoldNew);
+            }
+        });
         return sinaGoldNews;
+    }
+
+    interface CallBack{
+        void pickData(List<SinaGoldNew> sinaGoldNews);
     }
 
 }

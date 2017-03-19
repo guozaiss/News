@@ -57,17 +57,6 @@ public class SplashActivity extends BaseActivity implements AMapLocationListener
         requestPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE);
         requestPermission(Manifest.permission.READ_PHONE_STATE);
         boolean open = SPUtils.getBoolean(this, "open", false);
-        if (!open) {
-//            try {
-//                AdManager.setEnableLog(true);
-//                AdManager.getInstance().pluginFile.put("qq", "qq.jpng");
-//                AdManager.getInstance().pluginFile.put("baidu", "baidu.jpng");
-//            } catch (Exception e) {
-//                Timber.e(e.getMessage() + "");
-//            } finally {
-//                AdManager.getInstance().initFromKeymobService(this, "10667", new AdEventListener(), true);
-//            }
-        }
     }
 
     @Override

@@ -49,7 +49,12 @@ public class NewsFragment extends BaseFragment {
         }
     }
 
-    private void initData() {
+    @Override
+    protected int getLayoutId() {
+        return R.layout.fragment_news;
+    }
+
+    protected void initData() {
         type = getArguments().getString("type");
         DataServiceImpl.getNews(type, Constants.topAppKey, newsSubscriber);
     }
@@ -84,7 +89,7 @@ public class NewsFragment extends BaseFragment {
         }
     };
 
-    private void initView() {
+    protected void initView() {
         swipeRefreshLayout = (SwipeRefreshLayout) this.inflate.findViewById(R.id.swipeRefreshLayout);
         swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorAccent), getResources().getColor(R.color.colorPrimary), getResources().getColor(R.color.colorMenu));
         listView = (ListView) this.inflate.findViewById(R.id.listView);
@@ -120,7 +125,7 @@ public class NewsFragment extends BaseFragment {
     }
 
     @Override
-    public void onNoFastClick(View view) {
+    protected void onNoFastClick(View view) {
 
     }
 }

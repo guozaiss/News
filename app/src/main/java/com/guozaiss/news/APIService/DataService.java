@@ -5,10 +5,9 @@ import com.guozaiss.news.beans.Data;
 import com.guozaiss.news.beans.HotWord;
 import com.guozaiss.news.beans.News;
 
+import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
-import rx.Observable;
-
 
 /**
  * Created by guozaiss on 16/3/29.

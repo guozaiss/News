@@ -1,4 +1,4 @@
-package com.guozaiss.news.beans;
+package com.guozaiss.news.reptile;
 
 import java.util.Date;
 

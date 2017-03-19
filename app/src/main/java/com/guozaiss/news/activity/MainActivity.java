@@ -27,17 +27,45 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class MainActivity extends BaseActivity {
-    private TabLayout tab_layout;
-    private ViewPager view_pager;
+    @BindView(R.id.tab_layout)
+    TabLayout tabLayout;
+    @BindView(R.id.view_pager)
+    ViewPager viewPager;
+    @BindView(R.id.banner)
+    RelativeLayout banner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
+        tip();
+        List<NewsFragment> newsFragments = new ArrayList<>();
+        for (int i = 0; i < Constants.type.length; i++) {
+            NewsFragment newsFragment = new NewsFragment();
+            Bundle bundle = new Bundle();
+            bundle.putString("type", Constants.type[i]);
+            newsFragment.setArguments(bundle);
+            newsFragments.add(newsFragment);
+        }
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager(), newsFragments);
+        viewPager.setAdapter(adapter);
+        tabLayout.setupWithViewPager(viewPager);
+        if (BuildConfig.DEBUG) {
+            ToastUtil.showToast("当前处于DEBUG模式");
+        }
+
         AdUtils.showInterstitialAD(this);
+        AdUtils.showBanner(this, banner);
+    }
+
+    private void tip() {
         boolean isFirst = SPUtils.getBoolean(this, "isFirst", false);
         //当是release版本并且是第一次运行时弹出对话框
         if (!BuildConfig.debug && !isFirst) {
@@ -48,24 +76,6 @@ public class MainActivity extends BaseActivity {
             builder.setNegativeButton("关闭", null);
             builder.create().show();
             SPUtils.putBoolean(this, "isFirst", true);
-        }
-        tab_layout = (TabLayout) findViewById(R.id.tab_layout);
-        view_pager = (ViewPager) findViewById(R.id.view_pager);
-        RelativeLayout banner = (RelativeLayout) findViewById(R.id.banner);
-        AdUtils.showBanner(this, banner);
-        List<NewsFragment> newsFragments = new ArrayList<>();
-        for (int i = 0; i < Constants.type.length; i++) {
-            NewsFragment newsFragment = new NewsFragment();
-            Bundle bundle = new Bundle();
-            bundle.putString("type", Constants.type[i]);
-            newsFragment.setArguments(bundle);
-            newsFragments.add(newsFragment);
-        }
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager(), newsFragments);
-        view_pager.setAdapter(adapter);
-        tab_layout.setupWithViewPager(view_pager);
-        if (BuildConfig.DEBUG) {
-            ToastUtil.showToast("当前处于DEBUG模式，请谨慎操作！");
         }
     }
 
@@ -130,7 +140,7 @@ public class MainActivity extends BaseActivity {
 
     private void exitBy2Click() {
         Timer tExit = null;
-        if (isExit == false) {
+        if (!isExit) {
             isExit = true; // 准备退出
             Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
             tExit = new Timer();

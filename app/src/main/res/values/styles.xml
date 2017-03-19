@@ -50,58 +50,17 @@
         <item name="android:layout_height">match_parent</item>
     </style>
 
-    <style name="wrap_match.vertical">
+    <style name="wrap_match.vertical" parent="wrap_match">
         <item name="android:orientation">vertical</item>
     </style>
-
-    <style name="width_weight">
-        <item name="android:layout_width">0dip</item>
-        <item name="android:layout_height">match_parent</item>
-        <item name="android:layout_weight">1</item>
+    <style name="default_txt_title_style" parent="wrap_wrap">
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:textSize">@dimen/font_size_15</item>
+    </style>
+    <style name="default_txt_less_style" parent="wrap_wrap">
+        <item name="android:textColor">?android:attr/textColorSecondary</item>
+        <item name="android:textSize">@dimen/font_size_12</item>
     </style>
 
-    <style name="height_weight">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">0dip</item>
-        <item name="android:layout_weight">1</item>
-    </style>
-
-    <style name="width_weight_wrap">
-        <item name="android:layout_width">0dip</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_weight">1</item>
-    </style>
-
-    <style name="wrap_wrap.horizontal" parent="wrap_wrap">
-        <item name="android:orientation">horizontal</item>
-    </style>
-
-    <style name="match_match.horizontal" parent="match_match">
-        <item name="android:orientation">horizontal</item>
-    </style>
-
-    <style name="match_wrap.horizontal" parent="match_wrap">
-        <item name="android:orientation">horizontal</item>
-    </style>
-
-    <style name="match_wrap.vertical" parent="match_wrap">
-        <item name="android:orientation">vertical</item>
-    </style>
-
-    <style name="match_match.vertical" parent="match_match">
-        <item name="android:orientation">vertical</item>
-    </style>
-
-    <style name="width_weight.orientation" parent="width_weight">
-        <item name="android:orientation">horizontal</item>
-    </style>
-
-    <style name="width_weight.vertical" parent="width_weight">
-        <item name="android:orientation">vertical</item>
-    </style>
-
-    <style name="height_weight.orientation" parent="height_weight">
-        <item name="android:orientation">vertical</item>
-    </style>
 
 </resources>

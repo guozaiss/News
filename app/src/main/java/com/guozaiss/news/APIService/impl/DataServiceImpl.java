@@ -4,10 +4,9 @@ import com.guozaiss.news.APIService.DataService;
 import com.guozaiss.news.beans.Data;
 import com.guozaiss.news.beans.News;
 
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
-
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by guozaiss on 16/3/29.
@@ -21,7 +20,7 @@ public class DataServiceImpl {
      * @param q
      * @param subscriber
      */
-    public static void getData(String key, String q, Subscriber<Data> subscriber) {
+    public static void getData(String key, String q, Observer<Data> subscriber) {
         dataService.getData(key, q)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -35,7 +34,7 @@ public class DataServiceImpl {
      * @param key
      * @param subscriber
      */
-    public static void getNews(String type, String key, Subscriber<News> subscriber) {
+    public static void getNews(String type, String key, Observer<News> subscriber) {
         dataService.getNews(type,key)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
