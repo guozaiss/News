@@ -162,6 +162,13 @@
   **[] $VALUES;
   public *;
 }
+#GDT
+-keep class com.qq.e.** {
+    public protected *;
+}
+-keep class android.support.v4.app.NotificationCompat**{
+    public *;
+}
 
 # 项目定制混淆
 ## 实体类混淆

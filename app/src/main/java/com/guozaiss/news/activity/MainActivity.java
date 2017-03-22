@@ -5,6 +5,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatDelegate;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,15 +13,19 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.google.gson.reflect.TypeToken;
 import com.guozaiss.news.BuildConfig;
 import com.guozaiss.news.Constants;
 import com.guozaiss.news.R;
 import com.guozaiss.news.adapters.ViewPagerAdapter;
 import com.guozaiss.news.core.base.view.BaseActivity;
 import com.guozaiss.news.fragment.NewsFragment;
+import com.guozaiss.news.reptile.SinaGoldNew;
+import com.guozaiss.news.reptile.SinaGoldReptile;
 import com.guozaiss.news.utils.AdUtils;
 import com.guozaiss.news.utils.SPUtils;
 import com.guozaiss.news.utils.ToastUtil;
+import com.guozaiss.news.utils.gson.GsonBuilderUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +33,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class MainActivity extends BaseActivity {
     @BindView(R.id.tab_layout)
@@ -42,7 +46,6 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
         tip();
@@ -63,6 +66,14 @@ public class MainActivity extends BaseActivity {
 
         AdUtils.showInterstitialAD(this);
         AdUtils.showBanner(this, banner);
+        SinaGoldReptile.getSinaGoldNews(new SinaGoldReptile.CallBack() {
+            @Override
+            public void pickData(List<SinaGoldNew> sinaGoldNews) {
+                String s = GsonBuilderUtil.create().toJson(sinaGoldNews, new TypeToken<List<SinaGoldNew>>() {
+                }.getType());
+                Log.e("AAAAAAAA", s);
+            }
+        });
     }
 
     private void tip() {

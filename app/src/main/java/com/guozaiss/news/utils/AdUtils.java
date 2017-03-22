@@ -32,7 +32,7 @@ public class AdUtils {
                     Log.i("AD_DEMO", "ONBannerReceive");
                 }
             });
-            bv.loadAD();
+//            bv.loadAD();
             relativeLayout.addView(bv);
         } catch (Exception e) {
             e.printStackTrace();
@@ -55,7 +55,7 @@ public class AdUtils {
 
         });
         //请求插屏广告，每次重新请求都可以调用此方法。
-        iad.loadAD();
+//        iad.loadAD();
     }
 
 }

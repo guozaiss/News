@@ -25,6 +25,7 @@ import com.guozaiss.news.utils.ActivityManagerE;
 import com.guozaiss.news.utils.EventUtils;
 import com.guozaiss.news.utils.SPUtils;
 
+import butterknife.ButterKnife;
 import timber.log.Timber;
 
 /**
@@ -52,8 +53,6 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         } else {
             getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
-//        LogUtils.e("回退栈数量" + ActivityManagerE.getApplicationInstance().size() + "");
-//        ButterKnife.bind(this);//注解方式
     }
 
 
@@ -70,6 +69,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     @Override
     public void setContentView(@LayoutRes int layoutResID) {
         super.setContentView(layoutResID);
+        ButterKnife.bind(this);
         initView();
     }
 
@@ -200,13 +200,17 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
             case REQUEST_CODE_ASK_PERMISSIONS:
-                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    // Permission Granted
-                    execute(permissions[0]);
-                } else {
-                    // Permission Denied
-                    Toast.makeText(this, "权限：" + permissions[0].substring(permissions[0].lastIndexOf(".") + 1) + " 被拒绝！\n操作已限制。", Toast.LENGTH_SHORT)
-                            .show();
+                try {
+                    if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                        // Permission Granted
+                        execute(permissions[0]);
+                    } else {
+                        // Permission Denied
+                        Toast.makeText(this, "权限：" + permissions[0].substring(permissions[0].lastIndexOf(".") + 1) + " 被拒绝！\n操作已限制。", Toast.LENGTH_SHORT)
+                                .show();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
                 break;
             default:
