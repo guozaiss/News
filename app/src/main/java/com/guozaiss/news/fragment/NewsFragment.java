@@ -2,7 +2,6 @@ package com.guozaiss.news.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,32 +20,26 @@ import com.guozaiss.news.core.base.view.BaseFragment;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import timber.log.Timber;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class NewsFragment extends BaseFragment {
-    private View inflate;
-    private SwipeRefreshLayout swipeRefreshLayout;
-    private ListView listView;
+    @BindView(R.id.listView)
+    ListView listView;
+    @BindView(R.id.swipeRefreshLayout)
+    SwipeRefreshLayout swipeRefreshLayout;
     private NewTopAdapter adapter;
     private String type;
-    private View load_empty;
-    private View loading;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        if (this.inflate != null) {
-            container.removeView(inflate);
-            return inflate;
-        } else {
-            inflate = inflater.inflate(R.layout.fragment_news, container, false);
-            initView();
-            initData();
-            return inflate;
-        }
+        View inflate = inflater.inflate(R.layout.fragment_news, container, false);
+        ButterKnife.bind(this, inflate);
+        initView();
+        initData();
+        return inflate;
     }
 
     @Override
@@ -90,12 +83,7 @@ public class NewsFragment extends BaseFragment {
     };
 
     protected void initView() {
-        swipeRefreshLayout = (SwipeRefreshLayout) this.inflate.findViewById(R.id.swipeRefreshLayout);
         swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorAccent), getResources().getColor(R.color.colorPrimary), getResources().getColor(R.color.colorMenu));
-        listView = (ListView) this.inflate.findViewById(R.id.listView);
-        load_empty = this.inflate.findViewById(R.id.load_empty);
-        loading = this.inflate.findViewById(R.id.loading);
-        listView.setEmptyView(loading);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -119,13 +107,6 @@ public class NewsFragment extends BaseFragment {
      * 加载结束操作
      */
     private void loaded() {
-        listView.setEmptyView(load_empty);
-        loading.setVisibility(View.INVISIBLE);
         swipeRefreshLayout.setRefreshing(false);
-    }
-
-    @Override
-    protected void onNoFastClick(View view) {
-
     }
 }

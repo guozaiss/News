@@ -5,7 +5,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.guozaiss.news.Constants;
-import com.guozaiss.news.fragment.NewsFragment;
 
 import java.util.List;
 
@@ -13,9 +12,9 @@ import java.util.List;
  * Created by Lenovo on 2016/7/10.
  */
 public class ViewPagerAdapter extends FragmentPagerAdapter {
-    private List<NewsFragment> newsFragments;
+    private List<Fragment> newsFragments;
 
-    public ViewPagerAdapter(FragmentManager fm, List<NewsFragment> newsFragments) {
+    public ViewPagerAdapter(FragmentManager fm, List<Fragment> newsFragments) {
         super(fm);
         this.newsFragments = newsFragments;
     }

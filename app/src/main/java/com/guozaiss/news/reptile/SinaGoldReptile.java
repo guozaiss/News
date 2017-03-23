@@ -86,8 +86,8 @@ public class SinaGoldReptile {
                         String title = a.html();
                         String time = element.select("span").html();
                         try {
-                            title = new String(title.getBytes("ISO8859-1"), "utf-8");
-                            time = new String(time.getBytes());
+                            title = new String(title.getBytes("utf-8"), "gb2312");
+                            time = new String(time.getBytes("utf-8"), "gbk");
                             time = time.substring(time.indexOf("(") + 1, time.indexOf(")"));
                         } catch (UnsupportedEncodingException e1) {
                             e1.printStackTrace();

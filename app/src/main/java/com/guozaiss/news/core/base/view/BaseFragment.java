@@ -6,12 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.guozaiss.news.utils.EventUtils;
-
 /**
  * Created by guozaiss on 16/6/16.
  */
-public abstract class BaseFragment extends Fragment implements View.OnClickListener {
+public abstract class BaseFragment extends Fragment {
     private View inflate;
 
     @Override
@@ -29,15 +27,9 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
     }
 
     protected abstract int getLayoutId();
+
     protected abstract void initView();
+
     protected abstract void initData();
 
-    @Override
-    public void onClick(View view) {
-        if (!EventUtils.isFastDoubleClick(view.getId())) {
-            onNoFastClick(view);
-        }
-    }
-
-    protected abstract void onNoFastClick(View view);
 }

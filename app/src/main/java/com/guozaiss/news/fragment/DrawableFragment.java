@@ -52,12 +52,6 @@ public class DrawableFragment extends BaseFragment {
 
     }
 
-    @Override
-    protected void onNoFastClick(View view) {
-        switch (view.getId()) {
-        }
-    }
-
     public void setUp(int resId, DrawerLayout drawerLayout, final Toolbar toolbar) {
         conventView = getActivity().findViewById(resId);
         mDrawerLayout = drawerLayout;

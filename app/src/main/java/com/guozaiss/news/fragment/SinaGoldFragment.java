@@ -1,10 +1,11 @@
 package com.guozaiss.news.fragment;
 
-
-import android.view.View;
-
 import com.guozaiss.news.R;
 import com.guozaiss.news.core.base.view.BaseFragment;
+import com.guozaiss.news.reptile.SinaGoldNew;
+import com.guozaiss.news.reptile.SinaGoldReptile;
+
+import java.util.List;
 
 /**
  * 新浪黄金
@@ -18,17 +19,16 @@ public class SinaGoldFragment extends BaseFragment {
 
     @Override
     protected void initView() {
+        SinaGoldReptile.getSinaGoldNews(new SinaGoldReptile.CallBack() {
+            @Override
+            public void pickData(List<SinaGoldNew> sinaGoldNews) {
 
+            }
+        });
     }
 
     @Override
     protected void initData() {
-
-    }
-
-
-    @Override
-    protected void onNoFastClick(View view) {
 
     }
 }

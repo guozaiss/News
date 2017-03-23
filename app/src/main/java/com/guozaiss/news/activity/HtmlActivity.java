@@ -8,7 +8,6 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.JsResult;
 import android.webkit.WebChromeClient;
@@ -106,11 +105,6 @@ public class HtmlActivity extends BaseActivity implements SwipeRefreshLayout.OnR
         swipeRefreshLayout.setOnRefreshListener(this);
 //        AdView mAdView = (AdView) findViewById(R.id.adView);
 //        AdUtils.init(mAdView, getApplicationContext());
-    }
-
-    @Override
-    public void onNoFastClick(View view) {
-
     }
 
     @Override

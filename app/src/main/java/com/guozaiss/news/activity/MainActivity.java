@@ -2,6 +2,7 @@ package com.guozaiss.news.activity;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatDelegate;
@@ -9,7 +10,6 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -20,6 +20,7 @@ import com.guozaiss.news.R;
 import com.guozaiss.news.adapters.ViewPagerAdapter;
 import com.guozaiss.news.core.base.view.BaseActivity;
 import com.guozaiss.news.fragment.NewsFragment;
+import com.guozaiss.news.fragment.SinaGoldFragment;
 import com.guozaiss.news.reptile.SinaGoldNew;
 import com.guozaiss.news.reptile.SinaGoldReptile;
 import com.guozaiss.news.utils.AdUtils;
@@ -49,7 +50,7 @@ public class MainActivity extends BaseActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
         tip();
-        List<NewsFragment> newsFragments = new ArrayList<>();
+        List<Fragment> newsFragments = new ArrayList<>();
         for (int i = 0; i < Constants.type.length; i++) {
             NewsFragment newsFragment = new NewsFragment();
             Bundle bundle = new Bundle();
@@ -57,6 +58,8 @@ public class MainActivity extends BaseActivity {
             newsFragment.setArguments(bundle);
             newsFragments.add(newsFragment);
         }
+        newsFragments.add(new SinaGoldFragment());
+
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager(), newsFragments);
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
@@ -88,11 +91,6 @@ public class MainActivity extends BaseActivity {
             builder.create().show();
             SPUtils.putBoolean(this, "isFirst", true);
         }
-    }
-
-    @Override
-    public void onNoFastClick(View view) {
-
     }
 
     @Override

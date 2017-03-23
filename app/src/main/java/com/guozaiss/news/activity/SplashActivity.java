@@ -3,7 +3,6 @@ package com.guozaiss.news.activity;
 import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
@@ -57,11 +56,6 @@ public class SplashActivity extends BaseActivity implements AMapLocationListener
         requestPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE);
         requestPermission(Manifest.permission.READ_PHONE_STATE);
         boolean open = SPUtils.getBoolean(this, "open", false);
-    }
-
-    @Override
-    public void onNoFastClick(View view) {
-
     }
 
     @Override
@@ -123,5 +117,4 @@ public class SplashActivity extends BaseActivity implements AMapLocationListener
         mLocationClient.stopLocation();//停止定位
         mLocationClient.onDestroy();//销毁定位客户端。
     }
-
 }
