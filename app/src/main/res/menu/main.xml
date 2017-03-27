@@ -11,9 +11,9 @@
         android:orderInCategory="100"
         android:title="@string/action_switch"
         app:showAsAction="never" />
-    <item
-        android:id="@+id/action_open_or_close"
-        android:orderInCategory="100"
-        android:title="@string/action_open_or_close"
-        app:showAsAction="never" />
+    <!--<item-->
+        <!--android:id="@+id/action_open_or_close"-->
+        <!--android:orderInCategory="100"-->
+        <!--android:title="@string/action_open_or_close"-->
+        <!--app:showAsAction="never" />-->
 </menu>

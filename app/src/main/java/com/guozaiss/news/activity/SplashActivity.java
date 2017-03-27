@@ -19,12 +19,17 @@ import com.amap.api.location.AMapLocationListener;
 import com.guozaiss.news.Constants;
 import com.guozaiss.news.R;
 import com.guozaiss.news.core.base.view.BaseActivity;
-import com.guozaiss.news.utils.SPUtils;
 import com.qq.e.ads.splash.SplashAD;
 import com.qq.e.ads.splash.SplashADListener;
+import com.tbruyelle.rxpermissions2.RxPermissions;
+
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.Flowable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
 
 public class SplashActivity extends BaseActivity implements AMapLocationListener, SplashADListener {
     //声明AMapLocationClient类对象
@@ -63,14 +68,18 @@ public class SplashActivity extends BaseActivity implements AMapLocationListener
         mLocationOption.setInterval(2000);
         //给定位客户端对象设置定位参数
         mLocationClient.setLocationOption(mLocationOption);
-
-        requestPermission(Manifest.permission.ACCESS_FINE_LOCATION);//请求定位权限
-        requestPermission(Manifest.permission.READ_EXTERNAL_STORAGE);
-        requestPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        requestPermission(Manifest.permission.READ_PHONE_STATE);
-        boolean open = SPUtils.getBoolean(this, "open", false);
-
-        fetchSplashAD(this, container, txt, Constants.APPID, Constants.SplashPosID, this, 2000);
+        new RxPermissions(this)
+                .request(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_PHONE_STATE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION)
+                .subscribe(new Consumer<Boolean>() {
+                    @Override
+                    public void accept(Boolean aBoolean) throws Exception {
+                        if (aBoolean) {
+                            fetchSplashAD(SplashActivity.this, container, txt, Constants.APPID, Constants.SplashPosID, SplashActivity.this, 2000);
+                        } else {
+                            next();
+                        }
+                    }
+                });
     }
 
     @Override
@@ -146,7 +155,7 @@ public class SplashActivity extends BaseActivity implements AMapLocationListener
      */
     private void fetchSplashAD(Activity activity, ViewGroup adContainer, View skipContainer,
                                String appId, String posId, SplashADListener adListener, int fetchDelay) {
-        SplashAD splashAD = new SplashAD(activity, adContainer, skipContainer, appId, posId, adListener, fetchDelay);
+        new SplashAD(activity, adContainer, skipContainer, appId, posId, adListener, fetchDelay);
     }
 
     @Override
@@ -155,10 +164,17 @@ public class SplashActivity extends BaseActivity implements AMapLocationListener
         img.setVisibility(View.INVISIBLE); // 广告展示后一定要把预设的开屏图片隐藏起来
     }
 
-
     private void next() {
-        startActivity(new Intent(SplashActivity.this, MainActivity.class));
-        finish();
+        Flowable
+                .timer(2, TimeUnit.SECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<Long>() {
+                    @Override
+                    public void accept(Long aLong) throws Exception {
+                        startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                        finish();
+                    }
+                });
     }
 
     @Override

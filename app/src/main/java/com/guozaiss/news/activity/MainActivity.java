@@ -103,15 +103,15 @@ public class MainActivity extends BaseActivity {
                 SPUtils.putBoolean(this, "night", !night);
                 recreate();
                 return true;
-            case R.id.action_open_or_close:
-                boolean open = SPUtils.getBoolean(this, "open", false);
-                if (!open) {
-                    ToastUtil.showToast("已关闭，将在下次启动生效！");
-                } else {
-                    ToastUtil.showToast("已开启，将在下次启动生效!");
-                }
-                SPUtils.putBoolean(this, "open", !open);
-                return true;
+//            case R.id.action_open_or_close:
+//                boolean open = SPUtils.getBoolean(this, "open", false);
+//                if (!open) {
+//                    ToastUtil.showToast("已关闭，将在下次启动生效！");
+//                } else {
+//                    ToastUtil.showToast("已开启，将在下次启动生效!");
+//                }
+//                SPUtils.putBoolean(this, "open", !open);
+//                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
