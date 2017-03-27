@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.guozaiss.news">
+
     <!-- SDK 相关声明 -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -10,7 +11,6 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_UPDATES" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.GET_TASKS" />
     <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
@@ -28,6 +28,11 @@
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_LOGS" />
 
     <permission
         android:name="android.permission.BLUETOOTH"
@@ -42,6 +47,24 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:label">
+        <!--BUGLY-->
+        <!-- 配置APP ID -->
+        <meta-data
+            android:name="BUGLY_APPID"
+            android:value="9153dd7242" />
+        <!-- 配置APP版本号 -->
+        <meta-data
+            android:name="BUGLY_APP_VERSION"
+            android:value="1" />
+        <!-- 配置APP渠道号 -->
+        <meta-data
+            android:name="BUGLY_APP_CHANNEL"
+            android:value="${UMENG_CHANNEL_VALUE}" />
+        <!-- 配置Bugly调试模式（true或者false）-->
+        <meta-data
+            android:name="BUGLY_ENABLE_DEBUG"
+            android:value="true" />
+        <!--Glide-->
         <meta-data
             android:name="com.guozaiss.news.utils.GlideConfiguration"
             android:value="GlideModule" />
@@ -49,12 +72,12 @@
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="b6559d61985a4392534dc74aa830aabb" />
-        <!--分析-->
-        <!-- 请将MTA_APPKEY改为MTA分配的appkey  -->
+        <!-- 分析 -->
+        <!-- 请将MTA_APPKEY改为MTA分配的appkey -->
         <meta-data
             android:name="TA_APPKEY"
             android:value="Aqc1105359035" />
-        <!-- 请将CHANNAL改为app的发布渠道  -->
+        <!-- 请将CHANNAL改为app的发布渠道 -->
         <meta-data
             android:name="InstallChannel"
             android:value="${UMENG_CHANNEL_VALUE}" />
@@ -63,6 +86,7 @@
         <service
             android:name="com.qq.e.comm.DownloadService"
             android:exported="false" />
+
         <activity
             android:name="com.qq.e.ads.ADActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
@@ -73,11 +97,9 @@
             android:theme="@style/Theme.AppStartLoadTranslucent">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".activity.MainActivity"
             android:label="@string/app_name" />
@@ -87,6 +109,9 @@
 
         <service android:name="com.amap.api.location.APSService" />
 
+        <activity
+            android:name=".activity.PictureActivity"
+            android:theme="@style/Theme.Design.NoActionBar" />
     </application>
 
 </manifest>

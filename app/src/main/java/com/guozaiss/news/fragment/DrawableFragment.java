@@ -43,12 +43,7 @@ public class DrawableFragment extends BaseFragment {
     }
 
     @Override
-    protected void initView() {
-
-    }
-
-    @Override
-    protected void initData() {
+    protected void init() {
 
     }
 

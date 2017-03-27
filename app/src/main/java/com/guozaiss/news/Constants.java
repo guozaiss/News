@@ -15,4 +15,9 @@ public interface Constants {
     String[] type = {"shehui", "top", "guonei", "guoji", "yule", "tiyu", "junshi", "keji", "caijing", "shishang"};
     String[] nameOfType = {"社会", "头条", "国内", "国际", "娱乐", "体育", "军事", "科技", "财经", "时尚", "新浪"};
 
+    String APPID = "1105359035";
+    String SplashPosID = "1060929134039542";
+    String Interstitial = "3000014371206870";
+    String BannerID = "6060119311509788";
+    String BUGLYAPPID = "9153dd7242";
 }

@@ -13,20 +13,25 @@
         <!--customer-->
         <item name="customer_text_color_selected">@color/customer_text_color_selected</item>
     </style>
+
     <style name="AppTheme" parent="AppTheme.base">
         <!-- Customize your theme here. -->
     </style>
+
     <style name="Theme.AppStartLoadTranslucent" parent="AppTheme">
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowNoTitle">true</item>
     </style>
+
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
     <style name="TranslucentTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowIsTranslucent">true</item>
     </style>
 
-    <style name="match_match" >
+    <style name="match_match">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
     </style>
@@ -53,10 +58,12 @@
     <style name="wrap_match.vertical" parent="wrap_match">
         <item name="android:orientation">vertical</item>
     </style>
+
     <style name="default_txt_title_style" parent="wrap_wrap">
         <item name="android:textColor">?android:attr/textColorPrimary</item>
-        <item name="android:textSize">@dimen/font_size_15</item>
+        <item name="android:textSize">@dimen/font_size_17</item>
     </style>
+
     <style name="default_txt_less_style" parent="wrap_wrap">
         <item name="android:textColor">?android:attr/textColorSecondary</item>
         <item name="android:textSize">@dimen/font_size_12</item>

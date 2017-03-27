@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import butterknife.ButterKnife;
+
 /**
  * Created by guozaiss on 16/6/16.
  */
@@ -20,16 +22,13 @@ public abstract class BaseFragment extends Fragment {
             return inflate;
         } else {
             inflate = inflater.inflate(getLayoutId(), container, false);
-            initView();
-            initData();
+            ButterKnife.bind(this, inflate);
+            init();
             return inflate;
         }
     }
 
     protected abstract int getLayoutId();
 
-    protected abstract void initView();
-
-    protected abstract void initData();
-
+    protected abstract void init();
 }

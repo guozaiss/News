@@ -11,6 +11,7 @@
 
     <dimen name="font_size_12">12sp</dimen>
     <dimen name="font_size_15">15sp</dimen>
+    <dimen name="font_size_17">17sp</dimen>
 
 
 </resources>

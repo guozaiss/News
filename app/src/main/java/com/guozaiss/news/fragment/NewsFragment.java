@@ -1,11 +1,8 @@
 package com.guozaiss.news.fragment;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
@@ -21,7 +18,6 @@ import com.guozaiss.news.core.base.view.BaseFragment;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import timber.log.Timber;
 
 public class NewsFragment extends BaseFragment {
@@ -33,23 +29,8 @@ public class NewsFragment extends BaseFragment {
     private String type;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View inflate = inflater.inflate(R.layout.fragment_news, container, false);
-        ButterKnife.bind(this, inflate);
-        initView();
-        initData();
-        return inflate;
-    }
-
-    @Override
     protected int getLayoutId() {
         return R.layout.fragment_news;
-    }
-
-    protected void initData() {
-        type = getArguments().getString("type");
-        DataServiceImpl.getNews(type, Constants.topAppKey, newsSubscriber);
     }
 
     NetworkSubscriber newsSubscriber = new NetworkSubscriber<News>() {
@@ -82,7 +63,9 @@ public class NewsFragment extends BaseFragment {
         }
     };
 
-    protected void initView() {
+    protected void init() {
+        type = getArguments().getString("type");
+        DataServiceImpl.getNews(type, Constants.topAppKey, newsSubscriber);
         swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorAccent), getResources().getColor(R.color.colorPrimary), getResources().getColor(R.color.colorMenu));
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override

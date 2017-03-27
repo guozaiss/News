@@ -1,11 +1,15 @@
 package com.guozaiss.news.utils;
 
 import android.content.Context;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.guozaiss.news.R;
 
 /**
@@ -41,10 +45,29 @@ public class GlideUtils {
     public static void loadRoundedImage(Context context, String imageUrl, int radius, ImageView imageView) {
         Glide.with(context)
                 .load(imageUrl)
-//                .placeholder(R.color.grey_c5c5c5)
+                .placeholder(R.color.grey_c5c5c5)
                 .error(R.color.grey_c5c5c5)
                 .bitmapTransform(new CenterCrop(context), new RoundedCornersTransformation(context, radius, 0, RoundedCornersTransformation.CornerType.ALL))
                 .dontAnimate()
                 .into(imageView);
+    }
+
+    public static void loadImageGif(Context context, String imageUrl, final ImageView imageView) {
+        Glide.with(context)
+                .load(imageUrl)
+                .placeholder(R.color.grey_c5c5c5)
+                .error(R.color.grey_c5c5c5)
+                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                .into(new SimpleTarget<GlideDrawable>() {
+                    @Override
+                    public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> glideAnimation) {
+                        if (resource != null) {
+                            ViewGroup.LayoutParams layoutParams = imageView.getLayoutParams();
+                            layoutParams.height = (int) (layoutParams.width * 1f * resource.getIntrinsicHeight() / resource.getIntrinsicWidth());
+                            imageView.setLayoutParams(layoutParams);
+                            imageView.setImageDrawable(resource);
+                        }
+                    }
+                });
     }
 }

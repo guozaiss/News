@@ -169,6 +169,9 @@
 -keep class android.support.v4.app.NotificationCompat**{
     public *;
 }
+#Bugly
+-dontwarn com.tencent.bugly.**
+-keep public class com.tencent.bugly.**{*;}
 
 # 项目定制混淆
 ## 实体类混淆

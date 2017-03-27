@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingTop="@dimen/appbar_top_padding"
-    app:titleTextColor="?attr/colorAccent"
+    app:titleTextColor="@android:color/white"
     app:theme="@style/AppTheme.AppBarOverlay"
     android:background="?attr/colorPrimary">
 

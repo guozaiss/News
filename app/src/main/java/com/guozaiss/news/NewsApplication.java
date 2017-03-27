@@ -7,6 +7,7 @@ import android.util.Log;
 import com.bumptech.glide.request.target.ViewTarget;
 import com.guozaiss.news.APIService.HttpHelper;
 import com.guozaiss.news.core.FakeCrashLibrary;
+import com.tencent.bugly.crashreport.CrashReport;
 
 import timber.log.Timber;
 
@@ -29,6 +30,7 @@ public class NewsApplication extends Application {
 //                .getAppExceptionHandler());
         //init Http
         HttpHelper.initialize();
+        CrashReport.initCrashReport(getApplicationContext());
         //Glide BUG 修复
         ViewTarget.setTagId(R.id.glide_tag);
         //日志管理

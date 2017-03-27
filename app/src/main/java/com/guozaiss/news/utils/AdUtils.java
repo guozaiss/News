@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.util.Log;
 import android.widget.RelativeLayout;
 
+import com.guozaiss.news.Constants;
 import com.qq.e.ads.banner.ADSize;
 import com.qq.e.ads.banner.AbstractBannerADListener;
 import com.qq.e.ads.banner.BannerView;
@@ -15,10 +16,10 @@ import com.qq.e.ads.interstitial.InterstitialAD;
  */
 public class AdUtils {
 
-    public static void showBanner(Activity activity,RelativeLayout relativeLayout) {
+    public static void showBanner(Activity activity, RelativeLayout relativeLayout) {
         try {
             // 创建Banner广告AdView对象
-            BannerView bv = new BannerView(activity, ADSize.BANNER, "1105359035","6060119311509788");
+            BannerView bv = new BannerView(activity, ADSize.BANNER, Constants.APPID, Constants.BannerID);
             bv.setRefresh(30);
             bv.setADListener(new AbstractBannerADListener() {
 
@@ -39,8 +40,9 @@ public class AdUtils {
         }
 
     }
+
     public static void showInterstitialAD(Activity activity) {
-        final InterstitialAD iad = new InterstitialAD(activity, "1105359035","3000014371206870");
+        final InterstitialAD iad = new InterstitialAD(activity, Constants.APPID, Constants.Interstitial);
         iad.setADListener(new AbstractInterstitialADListener() {
             @Override
             public void onADReceive() {
