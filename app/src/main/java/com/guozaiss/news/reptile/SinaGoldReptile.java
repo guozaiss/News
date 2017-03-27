@@ -21,14 +21,14 @@ import io.reactivex.schedulers.Schedulers;
 /**
  * Created by Guo on 2017/3/1.
  */
-public class SinaGoldReptile extends BaseReptile<SinaGoldNew> {
+public class SinaGoldReptile extends BaseReptile<SinaGoldModel> {
     protected String getUrl() {
         return "http://roll.finance.sina.com.cn/finance/gjs/hjfx/index.shtml";
     }
 
     @Override
     protected void analyzeHTMLByString(String html, final CallBack callBack) {
-        final List<SinaGoldNew> sinaGoldNews = new ArrayList<>();
+        final List<SinaGoldModel> sinaGoldModels = new ArrayList<>();
         Document document = Jsoup.parse(html);
         Elements list_009 = document.getElementsByClass("list_009");
         Flowable.fromIterable(list_009)
@@ -40,9 +40,9 @@ public class SinaGoldReptile extends BaseReptile<SinaGoldNew> {
                     }
                 })
                 .subscribeOn(Schedulers.io())
-                .map(new Function<Element, SinaGoldNew>() {
+                .map(new Function<Element, SinaGoldModel>() {
                     @Override
-                    public SinaGoldNew apply(Element element) throws Exception {
+                    public SinaGoldModel apply(Element element) throws Exception {
                         Element a = element.select("a").first();
                         String link = a.attr("abs:href");
                         String title = a.html();
@@ -54,20 +54,20 @@ public class SinaGoldReptile extends BaseReptile<SinaGoldNew> {
                         } catch (UnsupportedEncodingException e1) {
                             e1.printStackTrace();
                         }
-                        return new SinaGoldNew(0, time, new Date(), title, link);
+                        return new SinaGoldModel(0, time, new Date(), title, link);
                     }
                 })
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnComplete(new Action() {
                     @Override
                     public void run() throws Exception {
-                        callBack.pickData(sinaGoldNews);
+                        callBack.pickData(sinaGoldModels);
                     }
                 })
-                .subscribe(new Consumer<SinaGoldNew>() {
+                .subscribe(new Consumer<SinaGoldModel>() {
                     @Override
-                    public void accept(SinaGoldNew sinaGoldNew) throws Exception {
-                        sinaGoldNews.add(sinaGoldNew);
+                    public void accept(SinaGoldModel sinaGoldModel) throws Exception {
+                        sinaGoldModels.add(sinaGoldModel);
                     }
                 })
         ;

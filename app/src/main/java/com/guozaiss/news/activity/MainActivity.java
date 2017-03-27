@@ -18,7 +18,8 @@ import com.guozaiss.news.R;
 import com.guozaiss.news.adapters.ViewPagerAdapter;
 import com.guozaiss.news.core.base.view.BaseActivity;
 import com.guozaiss.news.fragment.NewsFragment;
-import com.guozaiss.news.fragment.SinaGoldFragment;
+import com.guozaiss.news.fragment.reptile.SinaGoldFragment;
+import com.guozaiss.news.fragment.reptile.ZhiHuFragment;
 import com.guozaiss.news.utils.AdUtils;
 import com.guozaiss.news.utils.SPUtils;
 import com.guozaiss.news.utils.ToastUtil;
@@ -54,6 +55,7 @@ public class MainActivity extends BaseActivity {
             newsFragments.add(newsFragment);
         }
         newsFragments.add(new SinaGoldFragment());
+        newsFragments.add(new ZhiHuFragment());
 
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager(), newsFragments);
         viewPager.setAdapter(adapter);

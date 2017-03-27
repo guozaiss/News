@@ -19,7 +19,7 @@ import io.reactivex.schedulers.Schedulers;
 /**
  * Created by Admin on 2017/3/24.
  */
-public class PicReptile extends BaseReptile<PictureModel> {
+public class PictureReptile extends BaseReptile<PictureModel> {
     protected String getUrl() {
         return "http://www.zbjuran.com/mei/xinggan/";
     }

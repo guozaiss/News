@@ -17,7 +17,7 @@ public abstract class BaseReptile<T> {
     /**
      * 获取万年历信息
      *
-     * @return List<SinaGoldNew>
+     * @return List<SinaGoldModel>
      */
     public void getData(String url,CallBack callBack) {
         pickData(url, callBack);
@@ -35,7 +35,7 @@ public abstract class BaseReptile<T> {
         call.enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-
+                callBack.onErr();
             }
 
             @Override
@@ -51,5 +51,7 @@ public abstract class BaseReptile<T> {
 
     public interface CallBack<T> {
         void pickData(List<T> t);
+
+        void onErr();
     }
 }

@@ -2,7 +2,7 @@ package com.guozaiss.news.reptile;
 
 import java.util.Date;
 
-public class SinaGoldNew {
+public class SinaGoldModel {
     private Integer newId;
 
     private String publishTime;
@@ -13,7 +13,7 @@ public class SinaGoldNew {
 
     private String url;
 
-    public SinaGoldNew(Integer newId, String publishTime, Date createTime, String title, String url) {
+    public SinaGoldModel(Integer newId, String publishTime, Date createTime, String title, String url) {
         this.newId = newId;
         this.publishTime = publishTime;
         this.createTime = createTime;
@@ -21,7 +21,7 @@ public class SinaGoldNew {
         this.url = url;
     }
 
-    public SinaGoldNew() {
+    public SinaGoldModel() {
         super();
     }
 

@@ -103,6 +103,7 @@ dependencies {
     compile 'com.commit451:PhotoView:1.2.5'
     compile 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.3@aar'
     compile 'com.tencent.bugly:crashreport:2.5.0'
+    compile 'com.android.support:support-v4:25.2.0'
     testCompile 'junit:junit:4.12'
     testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta2'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'

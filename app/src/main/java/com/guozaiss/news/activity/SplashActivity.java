@@ -166,7 +166,7 @@ public class SplashActivity extends BaseActivity implements AMapLocationListener
 
     private void next() {
         Flowable
-                .timer(2, TimeUnit.SECONDS)
+                .timer(2000, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<Long>() {
                     @Override
