@@ -55,6 +55,6 @@ dependencies {
     compile 'com.alipay.euler:andfix:0.3.1@aar'
     compile 'com.czt.mp3recorder:library:1.0.4'
     compile 'com.junkchen.blelib:blelib:1.0.4'
-    testCompile 'junit:junit:4.12'
     compile 'com.github.bumptech.glide:glide:3.7.0'
+    testCompile 'junit:junit:4.12'
 }
