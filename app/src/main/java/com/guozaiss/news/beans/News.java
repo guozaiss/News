@@ -12,13 +12,6 @@ public class News extends JsonResult<News> {
     private ResultBean result;
     private int error_code;
 
-    public String getReason() {
-        return reason;
-    }
-
-    public void setReason(String reason) {
-        this.reason = reason;
-    }
 
     public ResultBean getResult() {
         return result;

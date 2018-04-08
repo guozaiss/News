@@ -6,7 +6,7 @@ import java.io.FileOutputStream;
 import java.io.PrintWriter;
 
 public class Size {
-    private String dirStr = "C:\\Users\\Lenovo\\Desktop";
+    private String dirStr = ".";
 
     private void generateXmlFile(float bei, int max) {
 
@@ -34,6 +34,9 @@ public class Size {
     }
 
     public static void main(String[] args) {
+        new Size().generateXmlFile(0.75f, 1500);
         new Size().generateXmlFile(1f, 1500);
+        new Size().generateXmlFile(1.5f, 1500);
+        new Size().generateXmlFile(2f, 1500);
     }
 }

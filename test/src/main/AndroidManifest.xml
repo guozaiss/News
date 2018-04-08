@@ -17,6 +17,12 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="com.readyidu.eshw.connect.ble.DEVICE_DISCOVER" />
 
+    <!-- if you want to load images from the internet -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- if you want to load images from a file OR from the internet -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <uses-feature
         android:name="android.hardware.bluetooth_le"
         android:required="true" />
@@ -33,20 +39,14 @@
         <activity android:name=".UberActivity" />
         <activity android:name=".charts.HelloChartsActivity" />
         <activity android:name=".VideoActivity" />
-        <activity android:name=".AnimActivity" />
-        <activity android:name=".BezierActivity" />
+        <activity android:name=".anim.AnimActivity" />
+        <activity android:name=".anim.BezierActivity" />
         <activity android:name=".NormalActivity" />
         <activity android:name=".slidedelete.SlideDeleteActivity" />
         <activity android:name=".WaveLineActivity" />
         <activity
             android:name=".SurfaceActivity"
             android:screenOrientation="landscape" />
-        <activity
-            android:name="io.vov.vitamio.activity.InitActivity"
-            android:configChanges="orientation|screenSize|smallestScreenSize|keyboard|keyboardHidden|navigation"
-            android:launchMode="singleTop"
-            android:theme="@android:style/Theme.NoTitleBar"
-            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity android:name=".HtmlActivity" />
         <activity android:name=".ndk.NDKActivity" />
         <activity android:name=".RecyclerViewActivity" />
@@ -66,15 +66,20 @@
         <activity android:name=".blooth.BongActivity" />
         <activity android:name=".ScreenCaptureActivity" />
         <activity android:name=".slidedelete.SlideDelete2Activity" />
-        <activity android:name=".ImageActivity"/>
-        <activity android:name=".ScrollActivity">
-        </activity>
-        <activity android:name=".MediaActivity">
+        <activity android:name=".ImageActivity" />
+        <activity android:name=".ScrollActivity" />
+        <activity android:name=".MediaActivity" />
+        <activity android:name=".WebViewActivity" />
+        <activity android:name=".gsontran.GsonTranActivity" />
+        <activity android:name=".hotfix.HotFixActivity" />
+        <activity android:name=".calculator.CalculatorActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter></activity>
+            </intent-filter>
+        </activity>
+        <activity android:name=".BannerActivity"></activity>
     </application>
 
 </manifest>

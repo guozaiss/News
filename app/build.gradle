@@ -17,20 +17,20 @@ android {
         versionName VERSIONNAME
         multiDexEnabled true
     }
-    signingConfigs {
-        debug {
-            //keystore
-            storeFile file(properties.getProperty('FILE_PATH'))
-            storePassword properties.getProperty('STOREPWD')
-            keyAlias properties.getProperty('KEYALIAS')
-            keyPassword properties.getProperty('KEYPWD')
-        }
-    }
+//    signingConfigs {
+//        debug {
+//            //keystore
+//            storeFile file(properties.getProperty('FILE_PATH'))
+//            storePassword properties.getProperty('STOREPWD')
+//            keyAlias properties.getProperty('KEYALIAS')
+//            keyPassword properties.getProperty('KEYPWD')
+//        }
+//    }
     buildTypes {
         debug {
 //            applicationIdSuffix ".debug"
             manifestPlaceholders = [APP_NAME: "新闻小站-\r\ndebug"]
-            signingConfig signingConfigs.debug
+//            signingConfig signingConfigs.debug
             buildConfigField "boolean", "debug", "true"
             minifyEnabled true
             //移除无用的resource文件
@@ -39,7 +39,7 @@ android {
             zipAlignEnabled false
         }
         release {
-            signingConfig signingConfigs.debug
+//            signingConfig signingConfigs.debug
             manifestPlaceholders = [APP_NAME: "新闻小站"]
             buildConfigField "boolean", "debug", "false"
             minifyEnabled true
